@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { X, Menu, ChevronDown } from "lucide-react";
 
 const servicesDropdownItems = [
-  { href: "/services/live-auctions", label: "Live Auctions" },
+  { href: "/services/live-auctions", label: "Fundraising Auctioneer" },
   { href: "/services/fund-a-need", label: "Fund-A-Need" },
   { href: "/services/event-planning-emcee", label: "Event Planning & Emcee" },
   { href: "https://www.myamoretravel.com/impact-auctions", label: "Live Auction Packages", external: true },

@@ -106,7 +106,7 @@ Open [http://localhost:3000](http://localhost:3000) to view in browser.
 | `/` | Home | Client |
 | `/about` | About Us | Client |
 | `/services` | Services Overview | Client |
-| `/services/live-auctions` | Live Auctions | Client |
+| `/services/live-auctions` | Fundraising Auctioneer | Client |
 | `/services/fund-a-need` | Fund-A-Need | Client |
 | `/services/event-planning-emcee` | Event Planning & Emcee | Client |
 | `/contact` | Contact Form | Client |

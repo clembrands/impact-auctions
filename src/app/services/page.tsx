@@ -15,7 +15,7 @@ import { Card } from "@/components/ui/card";
 
 const services = [
   {
-    title: "Live Auctions",
+    title: "Fundraising Auctioneer",
     description: "Licensed professional auctioneers who bring energy, expertise, and proven bid-calling techniques to keep your program moving and donors engaged all night.",
     icon: Megaphone,
     slug: "live-auctions",

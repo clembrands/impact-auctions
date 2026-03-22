@@ -28,7 +28,7 @@ export default function LiveAuctions() {
       <SiteHeader />
 
       <PageHero
-        title="Live Auctions"
+        title="Fundraising Auctioneer"
         subtitle="High-energy bidding that keeps donors engaged all night"
       />
 
@@ -61,7 +61,7 @@ export default function LiveAuctions() {
         <div className="container-tight">
           <div className="mx-auto max-w-4xl">
             <h2 className="display-font text-3xl font-extrabold text-center text-primary mb-12">
-              What You Get With Our Live Auction Services
+              What You Get With Our Fundraising Auctioneer Services
             </h2>
 
             <div className="flex flex-col md:flex-row justify-center gap-x-16 gap-y-8">

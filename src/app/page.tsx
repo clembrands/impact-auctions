@@ -24,7 +24,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 const services = [
   {
-    title: "Live Auctions",
+    title: "Fundraising Auctioneer",
     description: "High-energy, professional live auctioneering that keeps the room engaged and giving.",
     icon: Megaphone,
     slug: "live-auctions",

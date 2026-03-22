@@ -390,7 +390,7 @@ export default function EventPlanning() {
           <div className="grid gap-6 md:grid-cols-3 max-w-5xl mx-auto">
              {[
                {
-                 title: "Live Auctions",
+                 title: "Fundraising Auctioneer",
                  slug: "live-auctions",
                  icon: Megaphone,
                  desc: "High-energy bid calling."
