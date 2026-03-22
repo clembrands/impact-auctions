@@ -67,8 +67,8 @@ export default function Services() {
     <div className="min-h-dvh bg-background" data-testid="page-services">
       <SiteHeader />
 
-      {/* Hero with stats bar overlay */}
-      <section className="relative isolate overflow-visible bg-primary" data-testid="section-services-hero">
+      {/* Hero — no stats bar inside */}
+      <section className="relative isolate bg-primary" data-testid="section-services-hero">
         <div className="container-tight py-16 md:py-20 pb-24">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="display-font text-4xl font-extrabold tracking-tight text-white md:text-5xl" data-testid="text-services-hero-title">
@@ -79,9 +79,11 @@ export default function Services() {
             </p>
           </div>
         </div>
+      </section>
 
-        {/* Floating stats bar */}
-        <div className="container-tight relative z-10 -mt-16 mb-12" data-testid="section-services-stats">
+      {/* Floating stats bar — positioned to overlap hero and core services */}
+      <div className="relative z-10" style={{ marginTop: "-56px" }} data-testid="section-services-stats">
+        <div className="container-tight">
           <div className="rounded-2xl bg-white px-8 py-7 shadow-lg" style={{ border: "1px solid rgba(212,196,168,0.35)" }}>
             <div className="grid gap-6 text-center md:grid-cols-3 md:divide-x md:divide-[rgba(212,196,168,0.4)]">
               <div className="space-y-1">
@@ -99,10 +101,10 @@ export default function Services() {
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Core Services — white background */}
-      <section className="bg-background section-pad" data-testid="section-core-services">
+      {/* Core Services — white background, with top padding for overlapping stats */}
+      <section className="bg-background section-pad pt-20" data-testid="section-core-services">
         <div className="container-tight">
           <div className="mx-auto max-w-2xl text-center mb-12">
             <h2 className="display-font text-3xl font-extrabold tracking-tight text-primary" data-testid="text-core-services-title">
