@@ -2,12 +2,11 @@
 
 import Link from "next/link";
 import {
-  BadgeDollarSign,
   CalendarClock,
   Check,
+  Coins,
   HandHeart,
   Megaphone,
-  MonitorPlay,
   Plane,
 } from "lucide-react";
 import SiteHeader from "@/components/site-header";
@@ -17,16 +16,10 @@ import { Card } from "@/components/ui/card";
 
 const services = [
   {
-    title: "Live Auctions",
+    title: "Fundraising Auctioneer",
     description: "Licensed professional auctioneers who bring energy, expertise, and proven bid-calling techniques to keep your program moving and donors engaged all night.",
     icon: Megaphone,
     slug: "live-auctions",
-  },
-  {
-    title: "Silent Auctions",
-    description: "Strategic item display, bid sheet design, and pacing expertise to maximize participation and final bids—without the chaos.",
-    icon: BadgeDollarSign,
-    slug: "silent-auctions",
   },
   {
     title: "Fund-A-Need",
@@ -35,10 +28,10 @@ const services = [
     slug: "fund-a-need",
   },
   {
-    title: "Virtual Events",
-    description: "Confident hosting for livestream and hybrid events. We keep the energy high and donors engaged, whether they're in the room or watching from home.",
-    icon: MonitorPlay,
-    slug: "virtual-events",
+    title: "Heads or Tails",
+    description: "A crowd-favorite fundraising game that gets every guest on their feet, builds excitement, and generates meaningful revenue in just minutes.",
+    icon: Coins,
+    slug: "heads-or-tails",
   },
   {
     title: "Event Planning & Emcee",
@@ -47,10 +40,11 @@ const services = [
     slug: "event-planning-emcee",
   },
   {
-    title: "Auction Packages",
+    title: "Live Auction Packages",
     description: "Curated travel and experience packages that add excitement to your auction and increase overall proceeds—with no upfront cost to your organization.",
     icon: Plane,
     slug: "auction-packages",
+    externalHref: "https://www.myamoretravel.com/impact-auctions",
   },
 ];
 
@@ -89,7 +83,9 @@ export default function Services() {
               return (
                 <Link
                   key={s.slug}
-                  href={s.slug === "auction-packages" ? "/auction-packages" : `/services/${s.slug}`}
+                  href={s.externalHref ?? `/services/${s.slug}`}
+                  target={s.externalHref ? "_blank" : undefined}
+                  rel={s.externalHref ? "noopener noreferrer" : undefined}
                   data-testid={`link-services-${s.slug}`}
                 >
                   <Card

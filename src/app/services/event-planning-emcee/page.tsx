@@ -1,10 +1,11 @@
 "use client";
 
-import { Check, Clock, Users, Mic, Presentation, ShieldAlert, BadgeDollarSign, Megaphone, MonitorPlay } from "lucide-react";
+import { Check, Clock, Coins, Users, Mic, Presentation, ShieldAlert, BadgeDollarSign, Megaphone, MonitorPlay } from "lucide-react";
 import Link from "next/link";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import CtaBanner from "@/components/cta-banner";
+import TestimonialCarousel from "@/components/testimonial-carousel";
 import { Card } from "@/components/ui/card";
 import {
   Accordion,
@@ -174,11 +175,11 @@ export default function EventPlanning() {
               <div className="pt-4">
                 <h3 className="font-bold text-primary mb-3">What our emcees do:</h3>
                 <ul className="space-y-2 text-secondary">
-                  <li className="flex gap-2"><span className="text-accent">•</span> Welcome guests and set the tone for the evening</li>
-                  <li className="flex gap-2"><span className="text-accent">•</span> Introduce speakers, honorees, and special guests</li>
-                  <li className="flex gap-2"><span className="text-accent">•</span> Keep the program moving with energy and humor</li>
-                  <li className="flex gap-2"><span className="text-accent">•</span> Manage timing and transitions backstage</li>
-                  <li className="flex gap-2"><span className="text-accent">•</span> Build excitement leading into auction and Fund-A-Need</li>
+                  <li className="flex gap-2"><span className="text-primary font-bold">•</span> Welcome guests and set the tone for the evening</li>
+                  <li className="flex gap-2"><span className="text-primary font-bold">•</span> Introduce speakers, honorees, and special guests</li>
+                  <li className="flex gap-2"><span className="text-primary font-bold">•</span> Keep the program moving with energy and humor</li>
+                  <li className="flex gap-2"><span className="text-primary font-bold">•</span> Manage timing and transitions backstage</li>
+                  <li className="flex gap-2"><span className="text-primary font-bold">•</span> Build excitement leading into auction and Fund-A-Need</li>
                 </ul>
               </div>
             </div>
@@ -278,18 +279,9 @@ export default function EventPlanning() {
       </section>
 
       {/* Testimonial Section */}
-      <section className="section-pad bg-[#F5F5F1]" data-testid="section-testimonial">
+      <section className="section-pad bg-muted" data-testid="section-testimonial">
         <div className="container-tight">
-          <div className="mx-auto max-w-4xl text-center">
-            <blockquote className="space-y-6">
-              <p className="display-font text-2xl md:text-3xl font-medium text-primary italic leading-relaxed">
-                "From rehearsals to the final ask, they kept everything calm and on track. Our team felt supported and our guests felt inspired."
-              </p>
-              <footer className="text-base font-semibold text-secondary">
-                — Events Manager, Education Scholarship Organization
-              </footer>
-            </blockquote>
-          </div>
+          <TestimonialCarousel />
         </div>
       </section>
 
@@ -311,11 +303,11 @@ export default function EventPlanning() {
 
             {[
               {
-                step: "3-6 Months Out",
+                step: "12 Months Out",
                 description: "Initial consultation. We learn about your event, goals, and vision. We start building the run-of-show framework."
               },
               {
-                step: "4-6 Weeks Out",
+                step: "3-6 Months Out",
                 description: "Detailed planning. We finalize the run-of-show, coordinate with vendors, and prepare all speaker materials."
               },
               {
@@ -390,7 +382,7 @@ export default function EventPlanning() {
           <div className="grid gap-6 md:grid-cols-3 max-w-5xl mx-auto">
              {[
                {
-                 title: "Live Auctions",
+                 title: "Fundraising Auctioneer",
                  slug: "live-auctions",
                  icon: Megaphone,
                  desc: "High-energy bid calling."
@@ -402,10 +394,10 @@ export default function EventPlanning() {
                  desc: "Maximize giving moments."
                },
                {
-                 title: "Virtual Events",
-                 slug: "virtual-events",
-                 icon: MonitorPlay,
-                 desc: "Livestream coordination."
+                 title: "Heads or Tails",
+                 slug: "heads-or-tails",
+                 icon: Coins,
+                 desc: "Crowd-favorite fundraising game."
                }
              ].map((service, i) => {
                 const Icon = service.icon;

@@ -12,7 +12,7 @@ interface CtaBannerProps {
 export default function CtaBanner({
   title = "Ready to exceed your fundraising goals?",
   subtitle = "Get a free consultation for your next event.",
-  buttonText = "Book a Free Consultation",
+  buttonText = "Get a Quote",
   className
 }: CtaBannerProps) {
   return (

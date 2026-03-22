@@ -1,8 +1,9 @@
-import { Check, Megaphone, BadgeDollarSign, CalendarClock } from "lucide-react";
+import { Check, Coins, Megaphone, BadgeDollarSign, CalendarClock } from "lucide-react";
 import Link from "next/link";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import CtaBanner from "@/components/cta-banner";
+import TestimonialCarousel from "@/components/testimonial-carousel";
 import { Card } from "@/components/ui/card";
 
 function PageHero({ title, subtitle }: { title: string; subtitle: string }) {
@@ -28,7 +29,7 @@ export default function LiveAuctions() {
       <SiteHeader />
 
       <PageHero
-        title="Live Auctions"
+        title="Fundraising Auctioneer"
         subtitle="High-energy bidding that keeps donors engaged all night"
       />
 
@@ -61,7 +62,7 @@ export default function LiveAuctions() {
         <div className="container-tight">
           <div className="mx-auto max-w-4xl">
             <h2 className="display-font text-3xl font-extrabold text-center text-primary mb-12">
-              What You Get With Our Live Auction Services
+              What You Get With Our Fundraising Auctioneer Services
             </h2>
 
             <div className="flex flex-col md:flex-row justify-center gap-x-16 gap-y-8">
@@ -226,16 +227,7 @@ export default function LiveAuctions() {
       {/* Testimonial Section */}
       <section className="section-pad bg-background" data-testid="section-testimonial">
         <div className="container-tight">
-          <div className="mx-auto max-w-4xl text-center">
-            <blockquote className="space-y-6">
-              <p className="display-font text-2xl md:text-3xl font-medium text-primary italic leading-relaxed">
-                "Impact Auctions brought the perfect balance of professionalism and gala energy. Our supporters were engaged all night—and the results stunned us."
-              </p>
-              <footer className="text-base font-semibold text-secondary">
-                — Development Director, Regional Children's Nonprofit
-              </footer>
-            </blockquote>
-          </div>
+          <TestimonialCarousel />
         </div>
       </section>
 
@@ -254,10 +246,10 @@ export default function LiveAuctions() {
                  desc: "Maximize giving moments."
                },
                {
-                 title: "Silent Auctions",
-                 slug: "silent-auctions",
-                 icon: Megaphone,
-                 desc: "Strategic item displays."
+                 title: "Heads or Tails",
+                 slug: "heads-or-tails",
+                 icon: Coins,
+                 desc: "Crowd-favorite fundraising game."
                },
                {
                  title: "Event Planning",

@@ -4,9 +4,9 @@ import {
   Award,
   BadgeDollarSign,
   CalendarClock,
+  Coins,
   HandHeart,
   Megaphone,
-  MonitorPlay,
   Plane,
   Users,
 } from "lucide-react";
@@ -16,6 +16,7 @@ import { Card } from "@/components/ui/card";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import CtaBanner from "@/components/cta-banner";
+import TestimonialCarousel from "@/components/testimonial-carousel";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,16 +26,10 @@ import { Textarea } from "@/components/ui/textarea";
 
 const services = [
   {
-    title: "Live Auctions",
+    title: "Fundraising Auctioneer",
     description: "High-energy, professional live auctioneering that keeps the room engaged and giving.",
     icon: Megaphone,
     slug: "live-auctions",
-  },
-  {
-    title: "Silent Auctions",
-    description: "Strategic silent auction setup and pacing to drive more bids—without chaos.",
-    icon: BadgeDollarSign,
-    slug: "silent-auctions",
   },
   {
     title: "Fund-A-Need",
@@ -43,10 +38,10 @@ const services = [
     slug: "fund-a-need",
   },
   {
-    title: "Virtual Events",
-    description: "Keep momentum online with confident hosting, timing, and audience management.",
-    icon: MonitorPlay,
-    slug: "virtual-events",
+    title: "Heads or Tails",
+    description: "A crowd-favorite fundraising game that gets every guest on their feet and generates real revenue.",
+    icon: Coins,
+    slug: "heads-or-tails",
   },
   {
     title: "Event Planning & Emcee",
@@ -55,31 +50,11 @@ const services = [
     slug: "event-planning-emcee",
   },
   {
-    title: "Consignment Travel",
+    title: "Live Auction Packages",
     description: "Curated travel experiences that add excitement and raise more for your mission.",
     icon: Plane,
     slug: "consignment-travel",
-  },
-];
-
-const testimonials = [
-  {
-    quote:
-      "Impact Auctions brought the perfect mix of professionalism and warmth. Our donors stayed engaged all night.",
-    name: "Development Director",
-    org: "Regional Children's Nonprofit",
-  },
-  {
-    quote:
-      "They guided our team with clarity and confidence. The Fund-A-Need was our best ever.",
-    name: "Event Chair",
-    org: "Community Foundation",
-  },
-  {
-    quote:
-      "From planning to execution, they made the night feel seamless—and the results exceeded expectations.",
-    name: "Executive Director",
-    org: "Health & Wellness Charity",
+    externalHref: "https://www.myamoretravel.com/impact-auctions",
   },
 ];
 
@@ -310,7 +285,7 @@ export default function Home() {
                   className="rounded-lg bg-white px-6 text-primary hover:bg-white/90"
                   data-testid="button-hero-book"
                 >
-                  Book a Free Consultation
+                  Get a Quote
                 </Button>
               </Link>
               <Link href="/services" data-testid="link-hero-secondary">
@@ -388,7 +363,9 @@ export default function Home() {
               return (
                 <Link
                   key={s.slug}
-                  href={`/services/${s.slug}`}
+                  href={s.externalHref ?? `/services/${s.slug}`}
+                  target={s.externalHref ? "_blank" : undefined}
+                  rel={s.externalHref ? "noopener noreferrer" : undefined}
                   data-testid={`link-service-${s.slug}`}
                 >
                   <Card
@@ -460,53 +437,7 @@ export default function Home() {
       {/* Testimonials */}
       <section className="section-pad" data-testid="section-testimonials">
         <div className="container-tight">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="display-font text-3xl font-extrabold tracking-tight text-primary" data-testid="text-testimonials-title">
-              What Nonprofits Say
-            </h2>
-          </div>
-
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {testimonials.map((t, idx) => (
-              <Card
-                key={idx}
-                className="flex min-h-[220px] flex-col rounded-xl border border-card-border bg-card p-7"
-                data-testid={`card-testimonial-${idx}`}
-              >
-                <div className="flex-1">
-                  <div
-                    className="mb-4 flex items-start gap-4"
-                    data-testid={`wrap-testimonial-quote-${idx}`}
-                  >
-                    <div aria-hidden="true" data-testid={`icon-testimonial-quote-${idx}`}>
-                      <span className="display-font text-5xl font-extrabold leading-none text-primary/70">"</span>
-                    </div>
-                    <p
-                      className="text-base/7 text-secondary"
-                      data-testid={`text-testimonial-quote-${idx}`}
-                    >
-                      {t.quote}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-5 border-t border-card-border pt-4">
-                  <div
-                    className="text-sm font-semibold text-primary"
-                    data-testid={`text-testimonial-name-${idx}`}
-                  >
-                    {t.name}
-                  </div>
-                  <div
-                    className="text-sm text-secondary"
-                    data-testid={`text-testimonial-org-${idx}`}
-                  >
-                    {t.org}
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
+          <TestimonialCarousel />
         </div>
       </section>
 
@@ -515,10 +446,10 @@ export default function Home() {
         <div className="container-tight">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="display-font text-3xl font-extrabold tracking-tight text-primary" data-testid="text-team-title">
-              Your On-Stage Team
+              Your Impact Auctions Team
             </h2>
             <p className="mt-3 text-secondary" data-testid="text-team-subtitle">
-              Experienced auctioneers ready to energize your event.
+              Experienced fundraising event professionals
             </p>
           </div>
 

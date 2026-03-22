@@ -1,10 +1,11 @@
 "use client";
 
-import { Check, Users, Heart, TrendingUp, BadgeDollarSign, Megaphone, CalendarClock } from "lucide-react";
+import { Check, Users, Heart, TrendingUp, BadgeDollarSign, Coins, Megaphone, CalendarClock } from "lucide-react";
 import Link from "next/link";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import CtaBanner from "@/components/cta-banner";
+import TestimonialCarousel from "@/components/testimonial-carousel";
 import { Card } from "@/components/ui/card";
 import {
   Accordion,
@@ -278,18 +279,9 @@ export default function FundANeed() {
       </section>
 
       {/* Testimonial Section */}
-      <section className="section-pad bg-[#F5F5F1]" data-testid="section-testimonial">
+      <section className="section-pad bg-muted" data-testid="section-testimonial">
         <div className="container-tight">
-          <div className="mx-auto max-w-4xl text-center">
-            <blockquote className="space-y-6">
-              <p className="display-font text-2xl md:text-3xl font-medium text-primary italic leading-relaxed">
-                "From planning to execution, they made the night feel seamless—and the results exceeded expectations. Our Fund-A-Need alone raised more than our entire event did last year."
-              </p>
-              <footer className="text-base font-semibold text-secondary">
-                — Executive Director, Health & Wellness Charity
-              </footer>
-            </blockquote>
-          </div>
+          <TestimonialCarousel />
         </div>
       </section>
 
@@ -342,22 +334,22 @@ export default function FundANeed() {
           <div className="grid gap-6 md:grid-cols-3 max-w-5xl mx-auto">
              {[
                {
-                 title: "Live Auctions",
+                 title: "Fundraising Auctioneer",
                  slug: "live-auctions",
                  icon: Megaphone,
                  desc: "High-energy bid calling."
+               },
+               {
+                 title: "Heads or Tails",
+                 slug: "heads-or-tails",
+                 icon: Coins,
+                 desc: "Crowd-favorite fundraising game."
                },
                {
                  title: "Event Planning",
                  slug: "event-planning-emcee",
                  icon: CalendarClock,
                  desc: "Seamless run-of-show."
-               },
-               {
-                 title: "Silent Auctions",
-                 slug: "silent-auctions",
-                 icon: BadgeDollarSign,
-                 desc: "Strategic item displays."
                }
              ].map((service, i) => {
                 const Icon = service.icon;
@@ -379,9 +371,9 @@ export default function FundANeed() {
         </div>
       </section>
 
-      <CtaBanner 
-        title="Ready to add a Fund-A-Need to your event?" 
-        subtitle="Get a free consultation and let's discuss your goals." 
+      <CtaBanner
+        title="Ready to make your Fund-A-Need unforgettable?"
+        subtitle="Get a free consultation and let's discuss your event."
         buttonText="Contact Us"
         className="bg-primary"
       />

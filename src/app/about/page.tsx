@@ -3,16 +3,7 @@
 import Link from "next/link";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Users } from "lucide-react";
-
-const team = [
-  { name: "Ron Hitzel", title: "Founder/Auctioneer", image: "/images/headshot-ron.jpg" },
-  { name: "Debbie Hitzel", title: "Founder/Event Planning", image: "/images/headshot-debbie.jpg" },
-  { name: "Josh Loewensteiner", title: "CAI Auctioneer", image: "/images/headshot-josh.jpg" },
-  { name: "Stephen LaRaviere", title: "Auctioneer", image: "/images/headshot-stephen.jpg" },
-];
 
 function PageHero({ title, subtitle }: { title: string; subtitle: string }) {
   return (
@@ -38,7 +29,7 @@ export default function About() {
 
       <PageHero
         title="About Impact Auctions"
-        subtitle="Experience. Reliability. Expertise in Live and Silent Auctions."
+        subtitle="Experience. Reliability. Expertise in Professional Auctioneering."
       />
 
       {/* Founders Section */}
@@ -101,44 +92,82 @@ export default function About() {
         <div className="container-tight">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="display-font text-3xl font-extrabold tracking-tight text-primary" data-testid="text-team-title">
-              Your On-Stage Team
+              Your Impact Auctions Team
             </h2>
-            <p className="mt-3 text-secondary" data-testid="text-team-subtitle">
-              Experienced auctioneers ready to energize your event
-            </p>
           </div>
+        </div>
+      </section>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-4">
-            {team.map((m) => (
-              <Card
-                key={m.name}
-                className="rounded-xl border border-card-border bg-card p-6 text-center transition-all hover:-translate-y-1 hover:shadow-lg"
-                data-testid={`card-team-${m.name.replace(/\s+/g, "-").toLowerCase()}`}
-              >
-                <div
-                  className="mx-auto grid h-40 w-40 place-items-center overflow-hidden rounded-full border border-[var(--tan)] bg-muted"
-                  data-testid={`img-team-${m.name.replace(/\s+/g, "-").toLowerCase()}`}
-                >
-                  {m.image ? (
-                    <img
-                      src={m.image}
-                      alt={m.name}
-                      className={m.name.includes("Stephen") ? "h-full w-full object-cover object-top" : "h-full w-full object-cover"}
-                    />
-                  ) : (
-                    <Users className="h-8 w-8 text-primary" strokeWidth={1.8} />
-                  )}
+      {/* Josh Section */}
+      <section className="section-pad bg-background" data-testid="section-josh">
+        <div className="container-tight">
+          <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16">
+            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl border border-card-border bg-muted" data-testid="img-josh-wrapper">
+              <img
+                src="/images/headshot-josh.jpg"
+                alt="Josh Loewensteiner"
+                className="h-full w-full object-cover object-top"
+                data-testid="img-josh"
+              />
+            </div>
+            <div className="space-y-6">
+              <div className="space-y-2">
+                <h2 className="display-font text-3xl font-extrabold tracking-tight text-primary" data-testid="text-josh-title">
+                  Meet Josh Loewensteiner
+                </h2>
+                <div className="text-lg font-medium text-primary/60" data-testid="text-josh-subtitle">
+                  CAI Auctioneer
                 </div>
-                <div className="mt-4">
-                  <div className="display-font text-base font-semibold text-primary" data-testid={`text-team-name-${m.name.replace(/\s+/g, "-").toLowerCase()}`}>
-                    {m.name}
-                  </div>
-                  <div className="text-sm text-secondary" data-testid={`text-team-title-${m.name.replace(/\s+/g, "-").toLowerCase()}`}>
-                    {m.title}
-                  </div>
+              </div>
+              <div className="space-y-4 text-secondary/90 leading-relaxed text-base">
+                <p>
+                  Josh Loewensteiner is a Certified Auctioneers Institute (CAI) graduate and a passionate advocate for the nonprofit community. With years of experience on the auction floor, Josh brings a commanding yet approachable presence that keeps bidders engaged and dollars flowing.
+                </p>
+                <p>
+                  His background in live event fundraising means he understands the nuances of working with a crowd — reading the room, building momentum at the right moment, and turning a good auction into a great one. Josh is known for his quick wit, professional stage presence, and genuine commitment to every organization he serves.
+                </p>
+                <p>
+                  Whether running a paddle raise, a live auction, or a fund-a-need appeal, Josh consistently helps clients exceed their fundraising goals.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stephen Section */}
+      <section className="section-pad bg-muted" data-testid="section-stephen">
+        <div className="container-tight">
+          <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16">
+            <div className="space-y-6 md:order-2">
+              <div className="space-y-2">
+                <h2 className="display-font text-3xl font-extrabold tracking-tight text-primary" data-testid="text-stephen-title">
+                  Meet Stephen LaRaviere
+                </h2>
+                <div className="text-lg font-medium text-primary/60" data-testid="text-stephen-subtitle">
+                  Auctioneer
                 </div>
-              </Card>
-            ))}
+              </div>
+              <div className="space-y-4 text-secondary/90 leading-relaxed text-base">
+                <p>
+                  Stephen LaRaviere is an energetic and experienced auctioneer who brings enthusiasm and professionalism to every event he takes the stage. With a natural gift for connecting with audiences, Stephen has earned a reputation for driving competitive bidding and creating memorable fundraising moments.
+                </p>
+                <p>
+                  Stephen's background spans a wide range of nonprofit and charity events, giving him the versatility to adapt to any crowd size, cause, or format. His warm personality and ability to keep energy high throughout an event make him a favorite among both event organizers and bidders alike.
+                </p>
+                <p>
+                  From intimate galas to large-scale charity auctions, Stephen is dedicated to helping organizations maximize every dollar raised while making the experience fun and exciting for everyone in the room.
+                </p>
+              </div>
+            </div>
+            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl border border-card-border bg-muted md:order-1" data-testid="img-stephen-wrapper">
+              <img
+                src="/images/headshot-stephen.jpg"
+                alt="Stephen LaRaviere"
+                className="h-full w-full object-cover object-top"
+                data-testid="img-stephen"
+              />
+            </div>
           </div>
         </div>
       </section>

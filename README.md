@@ -16,11 +16,7 @@ impact-auctions-nextjs/
 │   │   │   ├── page.tsx            # Services overview
 │   │   │   ├── live-auctions/
 │   │   │   │   └── page.tsx
-│   │   │   ├── silent-auctions/
-│   │   │   │   └── page.tsx
 │   │   │   ├── fund-a-need/
-│   │   │   │   └── page.tsx
-│   │   │   ├── virtual-events/
 │   │   │   │   └── page.tsx
 │   │   │   └── event-planning-emcee/
 │   │   │       └── page.tsx
@@ -110,12 +106,9 @@ Open [http://localhost:3000](http://localhost:3000) to view in browser.
 | `/` | Home | Client |
 | `/about` | About Us | Client |
 | `/services` | Services Overview | Client |
-| `/services/live-auctions` | Live Auctions | Client |
-| `/services/silent-auctions` | Silent Auctions | Client |
+| `/services/live-auctions` | Fundraising Auctioneer | Client |
 | `/services/fund-a-need` | Fund-A-Need | Client |
-| `/services/virtual-events` | Virtual Events | Client |
 | `/services/event-planning-emcee` | Event Planning & Emcee | Client |
-| `/auction-packages` | Auction Packages | Client |
 | `/contact` | Contact Form | Client |
 | `/videos` | Event Highlights | Client |
 | `404` | Not Found | Static |
