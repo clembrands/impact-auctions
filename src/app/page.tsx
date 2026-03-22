@@ -100,8 +100,8 @@ function PhotoCard({
 export default function Home() {
   useEffect(() => {
     // Load Elfsight platform script
-    if (window.efsAPI) {
-      window.efsAPI.load();
+    if ((window as any).efsAPI) {
+      (window as any).efsAPI.load();
     }
   }, []);
   return (
