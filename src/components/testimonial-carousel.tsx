@@ -60,8 +60,7 @@ export default function TestimonialCarousel({
 
   return (
     <div
-      className={`w-full rounded-2xl py-12 px-4 md:px-10`}
-      style={{ backgroundColor: "rgba(212, 196, 168, 0.15)" }}
+      className={`w-full py-4 px-4 md:px-10 ${className}`}
       data-testid="testimonial-carousel"
     >
       {title && (

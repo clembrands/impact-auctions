@@ -279,7 +279,7 @@ export default function FundANeed() {
       </section>
 
       {/* Testimonial Section */}
-      <section className="section-pad bg-muted" data-testid="section-testimonial">
+      <section className="section-pad" style={{ backgroundColor: "rgba(212, 196, 168, 0.18)" }} data-testid="section-testimonial">
         <div className="container-tight">
           <TestimonialCarousel />
         </div>

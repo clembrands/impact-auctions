@@ -284,7 +284,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="section-pad" data-testid="section-testimonials">
+      <section className="section-pad" style={{ backgroundColor: "rgba(212, 196, 168, 0.18)" }} data-testid="section-testimonials">
         <div className="container-tight">
           <TestimonialCarousel />
         </div>

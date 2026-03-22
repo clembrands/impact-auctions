@@ -106,7 +106,7 @@ export default function Videos() {
       </section>
 
       {/* Testimonials */}
-      <section className="section-pad bg-muted" data-testid="section-testimonials">
+      <section className="section-pad" style={{ backgroundColor: "rgba(212, 196, 168, 0.18)" }} data-testid="section-testimonials">
         <div className="container-tight">
           <div className="mx-auto max-w-2xl text-center mb-10">
             <h2 className="display-font text-3xl font-extrabold tracking-tight text-primary" data-testid="text-testimonials-title">
