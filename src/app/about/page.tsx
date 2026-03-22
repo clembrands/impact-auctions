@@ -143,6 +143,80 @@ export default function About() {
         </div>
       </section>
 
+      {/* Josh Section */}
+      <section className="section-pad bg-background" data-testid="section-josh">
+        <div className="container-tight">
+          <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16">
+            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl border border-card-border bg-muted" data-testid="img-josh-wrapper">
+              <img
+                src="/images/headshot-josh.jpg"
+                alt="Josh Loewensteiner"
+                className="h-full w-full object-cover object-top"
+                data-testid="img-josh"
+              />
+            </div>
+            <div className="space-y-6">
+              <div className="space-y-2">
+                <h2 className="display-font text-3xl font-extrabold tracking-tight text-primary" data-testid="text-josh-title">
+                  Meet Josh Loewensteiner
+                </h2>
+                <div className="text-lg font-medium text-primary/60" data-testid="text-josh-subtitle">
+                  CAI Auctioneer
+                </div>
+              </div>
+              <div className="space-y-4 text-secondary/90 leading-relaxed text-base">
+                <p>
+                  Josh Loewensteiner is a Certified Auctioneers Institute (CAI) graduate and a passionate advocate for the nonprofit community. With years of experience on the auction floor, Josh brings a commanding yet approachable presence that keeps bidders engaged and dollars flowing.
+                </p>
+                <p>
+                  His background in live event fundraising means he understands the nuances of working with a crowd — reading the room, building momentum at the right moment, and turning a good auction into a great one. Josh is known for his quick wit, professional stage presence, and genuine commitment to every organization he serves.
+                </p>
+                <p>
+                  Whether running a paddle raise, a live auction, or a fund-a-need appeal, Josh consistently helps clients exceed their fundraising goals.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stephen Section */}
+      <section className="section-pad bg-muted" data-testid="section-stephen">
+        <div className="container-tight">
+          <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16">
+            <div className="space-y-6 md:order-2">
+              <div className="space-y-2">
+                <h2 className="display-font text-3xl font-extrabold tracking-tight text-primary" data-testid="text-stephen-title">
+                  Meet Stephen LaRaviere
+                </h2>
+                <div className="text-lg font-medium text-primary/60" data-testid="text-stephen-subtitle">
+                  Auctioneer
+                </div>
+              </div>
+              <div className="space-y-4 text-secondary/90 leading-relaxed text-base">
+                <p>
+                  Stephen LaRaviere is an energetic and experienced auctioneer who brings enthusiasm and professionalism to every event he takes the stage. With a natural gift for connecting with audiences, Stephen has earned a reputation for driving competitive bidding and creating memorable fundraising moments.
+                </p>
+                <p>
+                  Stephen's background spans a wide range of nonprofit and charity events, giving him the versatility to adapt to any crowd size, cause, or format. His warm personality and ability to keep energy high throughout an event make him a favorite among both event organizers and bidders alike.
+                </p>
+                <p>
+                  From intimate galas to large-scale charity auctions, Stephen is dedicated to helping organizations maximize every dollar raised while making the experience fun and exciting for everyone in the room.
+                </p>
+              </div>
+            </div>
+            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl border border-card-border bg-muted md:order-1" data-testid="img-stephen-wrapper">
+              <img
+                src="/images/headshot-stephen.jpg"
+                alt="Stephen LaRaviere"
+                className="h-full w-full object-cover object-top"
+                data-testid="img-stephen"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* About-specific CTA */}
       <section className="bg-primary section-pad" data-testid="section-about-cta">
         <div className="container-tight">
