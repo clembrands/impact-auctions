@@ -100,110 +100,100 @@ export default function Home() {
     <div className="min-h-dvh bg-background" data-testid="page-home">
       <SiteHeader />
 
-      {/* Hero */}
+      {/* Hero — with floating stats bar overlapping the bottom edge */}
       <section
-        className="relative isolate min-h-[78vh] overflow-hidden"
+        className="relative isolate overflow-visible"
         data-testid="section-hero"
       >
-        <img
-          src="/images/hero-auction.jpg"
-          alt="Live fundraising auction in a ballroom"
-          className="absolute inset-0 -z-20 h-full w-full object-cover"
-          loading="eager"
-          data-testid="img-hero-background"
-        />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-black/55"
-        />
+        <div className="relative min-h-[78vh] overflow-hidden">
+          <img
+            src="/images/hero-auction.jpg"
+            alt="Live fundraising auction in a ballroom"
+            className="absolute inset-0 -z-20 h-full w-full object-cover"
+            loading="eager"
+            data-testid="img-hero-background"
+          />
+          <div aria-hidden="true" className="absolute inset-0 -z-10 bg-black/55" />
 
-        <div className="container-tight flex min-h-[78vh] items-center py-16">
-          <div className="mx-auto w-full max-w-3xl text-center md:mx-0 md:text-left">
-            <h1
-              className="display-font text-balance text-4xl font-extrabold tracking-tight text-white md:text-6xl"
-              data-testid="text-hero-title"
-            >
-              Maximize Your Fundraising Impact
-            </h1>
-            <p
-              className="mt-5 max-w-2xl text-pretty text-base/7 text-white/85 md:text-lg"
-              data-testid="text-hero-subtitle"
-            >
-              Professional auctioneers helping nonprofits exceed their goals—with energy,
-              warmth, and 20+ years of experience.
-            </p>
-
-            <div
-              className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:items-center md:justify-start"
-              data-testid="group-hero-actions"
-            >
-              <Link href="/contact" data-testid="link-hero-primary">
-                <Button
-                  className="rounded-lg bg-white px-6 text-primary hover:bg-white/90"
-                  data-testid="button-hero-book"
-                >
-                  Get a Quote
-                </Button>
-              </Link>
-              <Link href="/services" data-testid="link-hero-secondary">
-                <Button
-                  variant="outline"
-                  className="rounded-lg border-white/45 bg-white/0 px-6 text-white hover:bg-white/10"
-                  data-testid="button-hero-services"
-                >
-                  Our Services
-                </Button>
-              </Link>
-            </div>
-
-            <div className="mt-7 flex items-center justify-center gap-3 text-sm text-white/80 md:justify-start">
-              <span
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/15"
-                data-testid="icon-hero-trust"
-                aria-hidden="true"
+          <div className="container-tight flex min-h-[78vh] items-center pb-28 pt-16">
+            <div className="mx-auto w-full max-w-3xl text-center md:mx-0 md:text-left">
+              <h1
+                className="display-font text-balance text-4xl font-extrabold tracking-tight text-white md:text-6xl"
+                data-testid="text-hero-title"
               >
-                <Award className="h-5 w-5 text-white" strokeWidth={1.8} />
-              </span>
-              <p data-testid="text-hero-trust">Trusted by nonprofits nationwide for high-touch events.</p>
+                Maximize Your Fundraising Impact
+              </h1>
+              <p
+                className="mt-5 max-w-2xl text-pretty text-base/7 text-white/85 md:text-lg"
+                data-testid="text-hero-subtitle"
+              >
+                Professional auctioneers helping nonprofits exceed their goals—with energy,
+                warmth, and 20+ years of experience.
+              </p>
+
+              <div
+                className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:items-center md:justify-start"
+                data-testid="group-hero-actions"
+              >
+                <Link href="/contact" data-testid="link-hero-primary">
+                  <Button
+                    className="rounded-lg bg-white px-6 text-primary hover:bg-white/90"
+                    data-testid="button-hero-book"
+                  >
+                    Get a Quote
+                  </Button>
+                </Link>
+                <Link href="/services" data-testid="link-hero-secondary">
+                  <Button
+                    variant="outline"
+                    className="rounded-lg border-white/45 bg-white/0 px-6 text-white hover:bg-white/10"
+                    data-testid="button-hero-services"
+                  >
+                    Our Services
+                  </Button>
+                </Link>
+              </div>
+
+              <div className="mt-7 flex items-center justify-center gap-3 text-sm text-white/80 md:justify-start">
+                <span
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/15"
+                  data-testid="icon-hero-trust"
+                  aria-hidden="true"
+                >
+                  <Award className="h-5 w-5 text-white" strokeWidth={1.8} />
+                </span>
+                <p data-testid="text-hero-trust">Trusted by nonprofits nationwide for high-touch events.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Floating stats bar — overlaps hero bottom and services top */}
+        <div className="container-tight relative z-10 -mt-14" data-testid="section-stats">
+          <div
+            className="rounded-2xl bg-white px-8 py-7 shadow-lg"
+            style={{ border: "1px solid rgba(212,196,168,0.35)" }}
+          >
+            <div className="grid gap-6 text-center md:grid-cols-3 md:divide-x md:divide-[rgba(212,196,168,0.4)]">
+              <div className="space-y-1">
+                <div className="display-font text-3xl font-extrabold text-primary" data-testid="stat-raised">$20M+</div>
+                <div className="text-sm text-secondary" data-testid="stat-raised-sub">For nonprofits nationwide</div>
+              </div>
+              <div className="space-y-1 md:pl-6">
+                <div className="display-font text-3xl font-extrabold text-primary" data-testid="stat-years">20+ Years</div>
+                <div className="text-sm text-secondary" data-testid="stat-years-sub">Fundraising experience</div>
+              </div>
+              <div className="space-y-1 md:pl-6">
+                <div className="display-font text-3xl font-extrabold text-primary" data-testid="stat-record">$3.2M</div>
+                <div className="text-sm text-secondary" data-testid="stat-record-sub">In one night — Joe DiMaggio Children&apos;s Hospital</div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="bg-[#E7E3DD]" data-testid="section-stats">
-        <div className="container-tight py-10">
-          <div className="grid gap-10 text-center md:grid-cols-3">
-            <div className="space-y-1">
-              <div className="display-font text-3xl font-extrabold text-primary" data-testid="stat-raised">
-                $20M+
-              </div>
-              <div className="text-sm text-secondary" data-testid="stat-raised-sub">
-                For nonprofits nationwide
-              </div>
-            </div>
-            <div className="space-y-1">
-              <div className="display-font text-3xl font-extrabold text-primary" data-testid="stat-years">
-                20+ Years
-              </div>
-              <div className="text-sm text-secondary" data-testid="stat-years-sub">
-                Fundraising experience
-              </div>
-            </div>
-            <div className="space-y-1">
-              <div className="display-font text-3xl font-extrabold text-primary" data-testid="stat-record">
-                $3.2M
-              </div>
-              <div className="text-sm text-secondary" data-testid="stat-record-sub">
-                in One Night / Joe DiMaggio Children's Hospital
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Services */}
-      <section className="section-pad" data-testid="section-services">
+      {/* Services — cream background */}
+      <section className="bg-muted section-pad pt-20" data-testid="section-services">
         <div className="container-tight">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="display-font text-3xl font-extrabold tracking-tight text-primary" data-testid="text-services-title">
@@ -226,7 +216,7 @@ export default function Home() {
                   data-testid={`link-service-${s.slug}`}
                 >
                   <Card
-                    className="h-full rounded-xl border border-card-border bg-card p-6 transition-colors hover:bg-muted"
+                    className="h-full rounded-xl border border-card-border bg-card p-6 transition-colors hover:bg-white"
                     data-testid={`card-service-${s.slug}`}
                   >
                     <div className="flex items-start gap-4">
@@ -260,47 +250,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About */}
-      <section className="bg-muted section-pad" data-testid="section-about">
-        <div className="container-tight">
-          <div className="grid items-center gap-10 md:grid-cols-2 md:gap-12">
-            <PhotoCard
-              src="/images/about-ron-debbie.jpg"
-              alt="Ron and Debbie at a gala"
-              testId="img-about-placeholder"
-            />
-            <div className="space-y-4">
-              <h2 className="display-font text-3xl font-extrabold tracking-tight text-primary" data-testid="text-about-title">
-                Meet Ron &amp; Debbie
-              </h2>
-              <p className="text-secondary" data-testid="text-about-body">
-                Debbie and Ron Hitzel bring over 20 years of dedicated fundraising experience to Impact Auctions, a full-service, licensed charity auctioneer brand based in North Carolina and Florida. As a dynamic husband-and-wife team, Ron leverages his unique background as a multilingual former US Navy Nuclear Submariner and global business manager, while Debbie draws on her nearly 30-year career as an educator to passionately support charitable causes. Together, they specialize in helping nonprofit organizations achieve record-breaking profits in a single night, seamlessly minimizing the workload for committee volunteers while maximizing the success of your next fundraising event.
-              </p>
-              <Link href="/about" data-testid="link-about-learn">
-                <Button
-                  variant="outline"
-                  className="rounded-lg border-primary/30 text-primary hover:bg-primary/5"
-                  data-testid="button-about-learn"
-                >
-                  Learn More
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
+      {/* Testimonials — tan/cream accent background */}
       <section className="section-pad" style={{ backgroundColor: "rgba(212, 196, 168, 0.18)" }} data-testid="section-testimonials">
         <div className="container-tight">
           <TestimonialCarousel />
         </div>
       </section>
 
-      {/* Team */}
-      <section className="bg-muted section-pad" data-testid="section-team">
+      {/* Team — white background, includes Ron & Debbie intro above the grid */}
+      <section className="bg-background section-pad" data-testid="section-team">
         <div className="container-tight">
-          <div className="mx-auto max-w-2xl text-center">
+          <div className="mx-auto max-w-2xl text-center mb-12">
             <h2 className="display-font text-3xl font-extrabold tracking-tight text-primary" data-testid="text-team-title">
               Your Impact Auctions Team
             </h2>
@@ -309,7 +269,34 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-4">
+          {/* Ron & Debbie founders intro */}
+          <div className="grid items-center gap-10 md:grid-cols-2 md:gap-12 mb-14 pb-14" style={{ borderBottom: "1px solid rgba(212,196,168,0.35)" }}>
+            <PhotoCard
+              src="/images/about-ron-debbie.jpg"
+              alt="Ron and Debbie at a gala"
+              testId="img-about-placeholder"
+            />
+            <div className="space-y-4">
+              <h3 className="display-font text-2xl font-extrabold tracking-tight text-primary" data-testid="text-about-title">
+                Meet Ron &amp; Debbie
+              </h3>
+              <p className="text-secondary" data-testid="text-about-body">
+                Debbie and Ron Hitzel bring over 20 years of dedicated fundraising experience to Impact Auctions, a full-service, licensed charity auctioneer brand based in North Carolina and Florida. As a dynamic husband-and-wife team, Ron leverages his unique background as a multilingual former US Navy Nuclear Submariner and global business manager, while Debbie draws on her nearly 30-year career as an educator to passionately support charitable causes. Together, they specialize in helping nonprofit organizations achieve record-breaking profits in a single night.
+              </p>
+              <Link href="/about" data-testid="link-about-learn">
+                <Button
+                  variant="outline"
+                  className="rounded-lg border-primary/30 text-primary hover:bg-primary/5"
+                  data-testid="button-about-learn"
+                >
+                  Learn More About Us
+                </Button>
+              </Link>
+            </div>
+          </div>
+
+          {/* Full team grid */}
+          <div className="grid gap-6 md:grid-cols-4">
             {team.map((m) => (
               <Card
                 key={m.name}
