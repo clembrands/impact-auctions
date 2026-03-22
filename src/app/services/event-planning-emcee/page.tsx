@@ -175,11 +175,11 @@ export default function EventPlanning() {
               <div className="pt-4">
                 <h3 className="font-bold text-primary mb-3">What our emcees do:</h3>
                 <ul className="space-y-2 text-secondary">
-                  <li className="flex gap-2"><span className="text-accent">•</span> Welcome guests and set the tone for the evening</li>
-                  <li className="flex gap-2"><span className="text-accent">•</span> Introduce speakers, honorees, and special guests</li>
-                  <li className="flex gap-2"><span className="text-accent">•</span> Keep the program moving with energy and humor</li>
-                  <li className="flex gap-2"><span className="text-accent">•</span> Manage timing and transitions backstage</li>
-                  <li className="flex gap-2"><span className="text-accent">•</span> Build excitement leading into auction and Fund-A-Need</li>
+                  <li className="flex gap-2"><span className="text-primary font-bold">•</span> Welcome guests and set the tone for the evening</li>
+                  <li className="flex gap-2"><span className="text-primary font-bold">•</span> Introduce speakers, honorees, and special guests</li>
+                  <li className="flex gap-2"><span className="text-primary font-bold">•</span> Keep the program moving with energy and humor</li>
+                  <li className="flex gap-2"><span className="text-primary font-bold">•</span> Manage timing and transitions backstage</li>
+                  <li className="flex gap-2"><span className="text-primary font-bold">•</span> Build excitement leading into auction and Fund-A-Need</li>
                 </ul>
               </div>
             </div>
