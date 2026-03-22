@@ -1,14 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
-import CtaBanner from "@/components/cta-banner";
 import { Card } from "@/components/ui/card";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -16,33 +17,14 @@ import { Button } from "@/components/ui/button";
 const schema = z.object({
   name: z.string().min(1, "Please enter your name"),
   organization: z.string().min(1, "Please enter your organization"),
-  address: z.string().min(1, "Please enter your address"),
   email: z.string().email("Please enter a valid email address"),
   telephone: z.string().min(1, "Please enter your telephone number"),
   eventDate: z.string().min(1, "Please enter your event date"),
-  howDidYouHear: z.string().optional(),
   message: z.string().min(10, "Please add a short message"),
   honeypot: z.string().optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
-
-function PageHero({ title, subtitle }: { title: string; subtitle: string }) {
-  return (
-    <section className="section-pad" data-testid="section-page-hero">
-      <div className="container-tight">
-        <div className="mx-auto max-w-3xl text-center">
-          <h1 className="display-font text-4xl font-extrabold tracking-tight text-primary md:text-5xl" data-testid="text-page-title">
-            {title}
-          </h1>
-          <p className="mt-4 text-secondary" data-testid="text-page-subtitle">
-            {subtitle}
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -53,11 +35,9 @@ export default function Contact() {
     defaultValues: {
       name: "",
       organization: "",
-      address: "",
       email: "",
       telephone: "",
       eventDate: "",
-      howDidYouHear: "",
       message: "",
       honeypot: "",
     },
@@ -98,18 +78,36 @@ export default function Contact() {
     <div className="min-h-dvh bg-background" data-testid="page-contact">
       <SiteHeader />
 
-      <PageHero
-        title="Get In Touch"
-        subtitle="Call Debbie at (407) 267-8988 or fill out the form below"
-      />
-
-      <section className="section-pad" data-testid="section-contact-form">
+      {/* Hero */}
+      <section
+        className="section-pad"
+        style={{ backgroundColor: "rgba(212, 196, 168, 0.15)" }}
+        data-testid="section-contact-hero"
+      >
         <div className="container-tight">
-          <div className="grid gap-6 md:grid-cols-3">
-            <Card className="rounded-xl border border-card-border bg-card p-6 md:col-span-2" data-testid="card-contact-form">
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4" data-testid="form-contact">
+          <div className="mx-auto max-w-3xl text-center">
+            <h1 className="display-font text-4xl font-extrabold tracking-tight text-primary md:text-5xl" data-testid="text-page-title">
+              Let's Plan Your Next Event
+            </h1>
+            <p className="mt-4 text-secondary text-lg" data-testid="text-page-subtitle">
+              Whether you're 6 months out or 6 weeks away, we'd love to hear about your fundraising goals.
+            </p>
+          </div>
+        </div>
+      </section>
 
+      {/* Form & Contact Info Section */}
+      <section className="bg-background section-pad" data-testid="section-contact-form">
+        <div className="container-tight">
+          <div className="grid gap-8 md:grid-cols-2">
+            {/* Contact Form Card */}
+            <Card
+              className="rounded-xl border border-card-border p-8 shadow-sm"
+              style={{ backgroundColor: "rgba(212, 196, 168, 0.08)" }}
+              data-testid="card-contact-form"
+            >
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5" data-testid="form-contact">
                   {submitMessage && (
                     <div
                       className={`rounded-lg p-4 ${
@@ -139,9 +137,13 @@ export default function Contact() {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel data-testid="label-name">Name *</FormLabel>
                         <FormControl>
-                          <Input {...field} data-testid="input-name" />
+                          <Input
+                            placeholder="Your Name"
+                            {...field}
+                            className="rounded-lg border border-card-border bg-white placeholder:text-secondary/60"
+                            data-testid="input-name"
+                          />
                         </FormControl>
                         <FormMessage data-testid="error-name" />
                       </FormItem>
@@ -153,25 +155,15 @@ export default function Contact() {
                     name="organization"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel data-testid="label-organization">Name of Organization *</FormLabel>
                         <FormControl>
-                          <Input {...field} data-testid="input-organization" />
+                          <Input
+                            placeholder="Organization Name"
+                            {...field}
+                            className="rounded-lg border border-card-border bg-white placeholder:text-secondary/60"
+                            data-testid="input-organization"
+                          />
                         </FormControl>
                         <FormMessage data-testid="error-organization" />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="address"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel data-testid="label-address">Address *</FormLabel>
-                        <FormControl>
-                          <Input {...field} data-testid="input-address" />
-                        </FormControl>
-                        <FormMessage data-testid="error-address" />
                       </FormItem>
                     )}
                   />
@@ -181,9 +173,14 @@ export default function Contact() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel data-testid="label-email">E-mail address *</FormLabel>
                         <FormControl>
-                          <Input type="email" {...field} data-testid="input-email" />
+                          <Input
+                            type="email"
+                            placeholder="Email Address"
+                            {...field}
+                            className="rounded-lg border border-card-border bg-white placeholder:text-secondary/60"
+                            data-testid="input-email"
+                          />
                         </FormControl>
                         <FormMessage data-testid="error-email" />
                       </FormItem>
@@ -195,9 +192,14 @@ export default function Contact() {
                     name="telephone"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel data-testid="label-telephone">Telephone *</FormLabel>
                         <FormControl>
-                          <Input type="tel" {...field} data-testid="input-telephone" />
+                          <Input
+                            type="tel"
+                            placeholder="Phone Number"
+                            {...field}
+                            className="rounded-lg border border-card-border bg-white placeholder:text-secondary/60"
+                            data-testid="input-telephone"
+                          />
                         </FormControl>
                         <FormMessage data-testid="error-telephone" />
                       </FormItem>
@@ -209,25 +211,15 @@ export default function Contact() {
                     name="eventDate"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel data-testid="label-event-date">Date of Event *</FormLabel>
                         <FormControl>
-                          <Input placeholder="MM/DD/YYYY" {...field} data-testid="input-event-date" />
+                          <Input
+                            placeholder="Event Date (MM/DD/YYYY)"
+                            {...field}
+                            className="rounded-lg border border-card-border bg-white placeholder:text-secondary/60"
+                            data-testid="input-event-date"
+                          />
                         </FormControl>
                         <FormMessage data-testid="error-event-date" />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="howDidYouHear"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel data-testid="label-how-did-you-hear">How did you hear about us?</FormLabel>
-                        <FormControl>
-                          <Input {...field} data-testid="input-how-did-you-hear" />
-                        </FormControl>
-                        <FormMessage data-testid="error-how-did-you-hear" />
                       </FormItem>
                     )}
                   />
@@ -237,44 +229,111 @@ export default function Contact() {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel data-testid="label-message">Message *</FormLabel>
                         <FormControl>
-                          <Textarea rows={6} {...field} data-testid="input-message" />
+                          <Textarea
+                            placeholder="Tell us about your event goals..."
+                            rows={5}
+                            {...field}
+                            className="rounded-lg border border-card-border bg-white placeholder:text-secondary/60"
+                            data-testid="input-message"
+                          />
                         </FormControl>
                         <FormMessage data-testid="error-message" />
                       </FormItem>
                     )}
                   />
 
-                  <div className="pt-2">
-                    <Button
-                      className="rounded-lg bg-primary px-6"
-                      type="submit"
-                      disabled={isSubmitting}
-                      data-testid="button-submit"
-                    >
-                      {isSubmitting ? "Sending..." : "Send Message"}
-                    </Button>
-                  </div>
+                  <Button
+                    className="w-full rounded-lg bg-primary px-6 py-3 text-base font-semibold text-white hover:bg-primary/90"
+                    type="submit"
+                    disabled={isSubmitting}
+                    data-testid="button-submit"
+                  >
+                    {isSubmitting ? "Sending..." : "Get a Free Consultation"}
+                  </Button>
                 </form>
               </Form>
             </Card>
 
-            <Card className="rounded-xl border border-card-border bg-muted p-6" data-testid="card-contact-info">
-              <h3 className="display-font text-lg font-semibold text-primary" data-testid="text-contact-info-title">
-                Contact Info
-              </h3>
-              <div className="mt-4 space-y-2 text-sm text-secondary">
-                <p data-testid="text-contact-phone">407-267-8988</p>
-                <p data-testid="text-contact-email">Debbie@ImpactAuctions.org</p>
-                <p data-testid="text-contact-location">Based in North Carolina • Serving nationwide</p>
-              </div>
-            </Card>
+            {/* Contact Info Card */}
+            <div className="space-y-6">
+              <Card
+                className="rounded-xl border border-card-border p-8 overflow-hidden"
+                style={{ backgroundColor: "rgba(212, 196, 168, 0.08)" }}
+                data-testid="card-contact-info"
+              >
+                {/* Debbie headshot at top */}
+                <div className="mb-6 aspect-[2/3] w-full overflow-hidden rounded-lg border border-card-border bg-muted -mx-8 -mt-8 w-[calc(100%+64px)]">
+                  <img
+                    src="/images/about-ron-debbie.jpg"
+                    alt="Debbie Hitzel"
+                    className="h-full w-full object-cover"
+                    data-testid="img-debbie-headshot"
+                  />
+                </div>
+
+                {/* Contact heading */}
+                <h2 className="display-font text-2xl font-extrabold text-primary mb-6" data-testid="text-contact-heading">
+                  Talk to Debbie
+                </h2>
+
+                {/* Contact details */}
+                <div className="space-y-4">
+                  <Link href="tel:+14072678988" data-testid="link-contact-phone">
+                    <div className="flex items-center gap-3 text-secondary hover:text-primary transition-colors">
+                      <Phone className="h-5 w-5 text-primary flex-shrink-0" />
+                      <span className="font-medium">(407) 267-8988</span>
+                    </div>
+                  </Link>
+
+                  <Link href="mailto:Debbie@ImpactAuctions.org" data-testid="link-contact-email">
+                    <div className="flex items-center gap-3 text-secondary hover:text-primary transition-colors">
+                      <Mail className="h-5 w-5 text-primary flex-shrink-0" />
+                      <span className="font-medium">Debbie@ImpactAuctions.org</span>
+                    </div>
+                  </Link>
+
+                  <div className="flex items-center gap-3 text-secondary pt-2">
+                    <MapPin className="h-5 w-5 text-primary flex-shrink-0" />
+                    <span className="font-medium text-sm">Based in North Carolina • Serving nationwide</span>
+                  </div>
+                </div>
+
+                {/* Divider */}
+                <div className="my-6 h-px bg-card-border" />
+
+                {/* Social links */}
+                <div className="flex items-center gap-4">
+                  <Link href="https://facebook.com/ImpactAuctions" target="_blank" rel="noopener noreferrer" data-testid="link-social-facebook">
+                    <Facebook className="h-5 w-5 text-primary hover:text-primary/70 transition-colors cursor-pointer" />
+                  </Link>
+                  <Link href="https://instagram.com/ImpactAuctions" target="_blank" rel="noopener noreferrer" data-testid="link-social-instagram">
+                    <Instagram className="h-5 w-5 text-primary hover:text-primary/70 transition-colors cursor-pointer" />
+                  </Link>
+                  <Link href="https://linkedin.com/company/ImpactAuctions" target="_blank" rel="noopener noreferrer" data-testid="link-social-linkedin">
+                    <Linkedin className="h-5 w-5 text-primary hover:text-primary/70 transition-colors cursor-pointer" />
+                  </Link>
+                </div>
+              </Card>
+
+              {/* What to Expect Card */}
+              <Card
+                className="rounded-xl border border-card-border p-6"
+                style={{ backgroundColor: "rgba(212, 196, 168, 0.08)" }}
+                data-testid="card-what-to-expect"
+              >
+                <h3 className="display-font font-semibold text-primary mb-3" data-testid="text-expect-title">
+                  What to Expect
+                </h3>
+                <p className="text-sm text-secondary leading-relaxed" data-testid="text-expect-content">
+                  We'll respond within 24 hours with a free consultation call to discuss your event goals and how we can help.
+                </p>
+              </Card>
+            </div>
           </div>
         </div>
       </section>
 
-      <CtaBanner />
       <SiteFooter />
     </div>
   );
