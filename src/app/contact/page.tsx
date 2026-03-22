@@ -13,12 +13,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
 const schema = z.object({
-  nameAndTitle: z.string().min(1, "Please enter your name and title"),
+  name: z.string().min(1, "Please enter your name"),
   organization: z.string().min(1, "Please enter your organization"),
   address: z.string().min(1, "Please enter your address"),
   email: z.string().email("Please enter a valid email address"),
   telephone: z.string().min(1, "Please enter your telephone number"),
-  goals: z.string().min(1, "Please describe your goals"),
   eventDate: z.string().min(1, "Please enter your event date"),
   howDidYouHear: z.string().optional(),
   message: z.string().min(10, "Please add a short message"),
@@ -47,12 +46,11 @@ export default function Contact() {
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
-      nameAndTitle: "",
+      name: "",
       organization: "",
       address: "",
       email: "",
       telephone: "",
-      goals: "",
       eventDate: "",
       howDidYouHear: "",
       message: "",
@@ -82,14 +80,14 @@ export default function Contact() {
 
                   <FormField
                     control={form.control}
-                    name="nameAndTitle"
+                    name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel data-testid="label-name-title">Name and Title *</FormLabel>
+                        <FormLabel data-testid="label-name">Name *</FormLabel>
                         <FormControl>
-                          <Input {...field} data-testid="input-name-title" />
+                          <Input {...field} data-testid="input-name" />
                         </FormControl>
-                        <FormMessage data-testid="error-name-title" />
+                        <FormMessage data-testid="error-name" />
                       </FormItem>
                     )}
                   />
@@ -146,20 +144,6 @@ export default function Contact() {
                           <Input type="tel" {...field} data-testid="input-telephone" />
                         </FormControl>
                         <FormMessage data-testid="error-telephone" />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="goals"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel data-testid="label-goals">Goals *</FormLabel>
-                        <FormControl>
-                          <Input {...field} data-testid="input-goals" />
-                        </FormControl>
-                        <FormMessage data-testid="error-goals" />
                       </FormItem>
                     )}
                   />
