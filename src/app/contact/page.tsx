@@ -13,11 +13,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
 const schema = z.object({
-  name: z.string().min(1, "Please enter your name"),
-  email: z.string().email("Please enter a valid email"),
-  phone: z.string().optional(),
-  organization: z.string().optional(),
-  eventDate: z.string().optional(),
+  nameAndTitle: z.string().min(1, "Please enter your name and title"),
+  organization: z.string().min(1, "Please enter your organization"),
+  address: z.string().min(1, "Please enter your address"),
+  email: z.string().email("Please enter a valid email address"),
+  telephone: z.string().min(1, "Please enter your telephone number"),
+  goals: z.string().min(1, "Please describe your goals"),
+  eventDate: z.string().min(1, "Please enter your event date"),
+  howDidYouHear: z.string().optional(),
   message: z.string().min(10, "Please add a short message"),
 });
 
@@ -44,11 +47,14 @@ export default function Contact() {
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
-      name: "",
-      email: "",
-      phone: "",
+      nameAndTitle: "",
       organization: "",
+      address: "",
+      email: "",
+      telephone: "",
+      goals: "",
       eventDate: "",
+      howDidYouHear: "",
       message: "",
     },
   });
@@ -63,8 +69,8 @@ export default function Contact() {
       <SiteHeader />
 
       <PageHero
-        title="Contact"
-        subtitle="Tell us about your event and we'll follow up with next steps."
+        title="Call Debbie at (407) 267-8988 or fill out the form below"
+        subtitle="Let's Get Started"
       />
 
       <section className="section-pad" data-testid="section-contact-form">
@@ -73,70 +79,97 @@ export default function Contact() {
             <Card className="rounded-xl border border-card-border bg-card p-6 md:col-span-2" data-testid="card-contact-form">
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4" data-testid="form-contact">
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <FormField
-                      control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel data-testid="label-name">Name</FormLabel>
-                          <FormControl>
-                            <Input {...field} data-testid="input-name" />
-                          </FormControl>
-                          <FormMessage data-testid="error-name" />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel data-testid="label-email">Email</FormLabel>
-                          <FormControl>
-                            <Input {...field} data-testid="input-email" />
-                          </FormControl>
-                          <FormMessage data-testid="error-email" />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
 
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <FormField
-                      control={form.control}
-                      name="phone"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel data-testid="label-phone">Phone</FormLabel>
-                          <FormControl>
-                            <Input {...field} data-testid="input-phone" />
-                          </FormControl>
-                          <FormMessage data-testid="error-phone" />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="organization"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel data-testid="label-organization">Organization</FormLabel>
-                          <FormControl>
-                            <Input {...field} data-testid="input-organization" />
-                          </FormControl>
-                          <FormMessage data-testid="error-organization" />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
+                  <FormField
+                    control={form.control}
+                    name="nameAndTitle"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel data-testid="label-name-title">Name and Title *</FormLabel>
+                        <FormControl>
+                          <Input {...field} data-testid="input-name-title" />
+                        </FormControl>
+                        <FormMessage data-testid="error-name-title" />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="organization"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel data-testid="label-organization">Name of Organization *</FormLabel>
+                        <FormControl>
+                          <Input {...field} data-testid="input-organization" />
+                        </FormControl>
+                        <FormMessage data-testid="error-organization" />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="address"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel data-testid="label-address">Address *</FormLabel>
+                        <FormControl>
+                          <Input {...field} data-testid="input-address" />
+                        </FormControl>
+                        <FormMessage data-testid="error-address" />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel data-testid="label-email">E-mail address *</FormLabel>
+                        <FormControl>
+                          <Input type="email" {...field} data-testid="input-email" />
+                        </FormControl>
+                        <FormMessage data-testid="error-email" />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="telephone"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel data-testid="label-telephone">Telephone *</FormLabel>
+                        <FormControl>
+                          <Input type="tel" {...field} data-testid="input-telephone" />
+                        </FormControl>
+                        <FormMessage data-testid="error-telephone" />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="goals"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel data-testid="label-goals">Goals *</FormLabel>
+                        <FormControl>
+                          <Input {...field} data-testid="input-goals" />
+                        </FormControl>
+                        <FormMessage data-testid="error-goals" />
+                      </FormItem>
+                    )}
+                  />
 
                   <FormField
                     control={form.control}
                     name="eventDate"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel data-testid="label-event-date">Event Date</FormLabel>
+                        <FormLabel data-testid="label-event-date">Date of Event *</FormLabel>
                         <FormControl>
                           <Input placeholder="MM/DD/YYYY" {...field} data-testid="input-event-date" />
                         </FormControl>
@@ -147,10 +180,24 @@ export default function Contact() {
 
                   <FormField
                     control={form.control}
+                    name="howDidYouHear"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel data-testid="label-how-did-you-hear">How did you hear about us?</FormLabel>
+                        <FormControl>
+                          <Input {...field} data-testid="input-how-did-you-hear" />
+                        </FormControl>
+                        <FormMessage data-testid="error-how-did-you-hear" />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel data-testid="label-message">Message</FormLabel>
+                        <FormLabel data-testid="label-message">Message *</FormLabel>
                         <FormControl>
                           <Textarea rows={6} {...field} data-testid="input-message" />
                         </FormControl>
