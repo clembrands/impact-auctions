@@ -141,45 +141,47 @@ export default function TestimonialCarousel({
               animate="center"
               exit="exit"
               transition={{ duration: 0.35, ease: "easeInOut" }}
-              className="absolute inset-0 rounded-2xl bg-white p-10 md:p-14 flex flex-col justify-between"
+              className="absolute inset-0 rounded-xl bg-white pt-8 pb-8 pr-8 pl-10 flex flex-col justify-between"
               style={{
-                border: "1.5px solid rgba(212, 196, 168, 0.55)",
-                boxShadow: "0 8px 40px rgba(33, 45, 72, 0.10), 0 1px 4px rgba(212,196,168,0.18)",
+                borderTop: "1px solid rgba(212, 196, 168, 0.35)",
+                borderRight: "1px solid rgba(212, 196, 168, 0.35)",
+                borderBottom: "1px solid rgba(212, 196, 168, 0.35)",
+                borderLeft: "4px solid #D4C4A8",
+                boxShadow: "0 6px 32px rgba(33, 45, 72, 0.08)",
               }}
               data-testid={`card-testimonial-${current}`}
             >
               {/* Quote content */}
-              <div className="flex flex-col gap-4">
-                {/* Decorative quotation mark */}
-                <div
-                  aria-hidden="true"
-                  className="display-font leading-none select-none"
-                  style={{ fontSize: "6rem", lineHeight: "0.8", color: "#D4C4A8", fontWeight: 900 }}
-                >
-                  &ldquo;
-                </div>
-
+              <div className="flex flex-col gap-5">
+                {/* Inline quote mark + text */}
                 <p
-                  className="text-base/8 text-secondary md:text-lg/9"
+                  className="text-lg md:text-xl italic leading-relaxed text-primary"
                   data-testid={`text-testimonial-quote-${current}`}
                 >
+                  <span
+                    aria-hidden="true"
+                    className="display-font not-italic select-none mr-1 align-bottom"
+                    style={{ fontSize: "2.5rem", lineHeight: "1", color: "#D4C4A8", fontWeight: 900 }}
+                  >
+                    &ldquo;
+                  </span>
                   {t.quote}
                 </p>
               </div>
 
               {/* Attribution — always pinned to the bottom */}
               <div
-                className="mt-8 pt-6 shrink-0"
+                className="mt-6 pt-5 shrink-0"
                 style={{ borderTop: "1.5px solid rgba(212, 196, 168, 0.4)" }}
               >
                 <div
-                  className="display-font text-lg font-extrabold text-primary"
+                  className="display-font text-xl font-extrabold text-primary"
                   data-testid={`text-testimonial-name-${current}`}
                 >
                   {t.name}
                 </div>
                 <div
-                  className="text-sm font-medium mt-0.5"
+                  className="text-xs font-medium mt-1 uppercase tracking-wide"
                   style={{ color: "#B5A48A" }}
                   data-testid={`text-testimonial-org-${current}`}
                 >
