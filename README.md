@@ -113,9 +113,7 @@ Open [http://localhost:3000](http://localhost:3000) to view in browser.
 | `/services/live-auctions` | Live Auctions | Client |
 | `/services/silent-auctions` | Silent Auctions | Client |
 | `/services/fund-a-need` | Fund-A-Need | Client |
-| `/services/virtual-events` | Virtual Events | Client |
 | `/services/event-planning-emcee` | Event Planning & Emcee | Client |
-| `/auction-packages` | Auction Packages | Client |
 | `/contact` | Contact Form | Client |
 | `/videos` | Event Highlights | Client |
 | `404` | Not Found | Static |

@@ -7,7 +7,6 @@ import {
   Check,
   HandHeart,
   Megaphone,
-  MonitorPlay,
   Plane,
 } from "lucide-react";
 import SiteHeader from "@/components/site-header";
@@ -33,12 +32,6 @@ const services = [
     description: "The most powerful fundraising moment of your night. We craft compelling appeals that inspire donors to give at meaningful levels for your mission.",
     icon: HandHeart,
     slug: "fund-a-need",
-  },
-  {
-    title: "Virtual Events",
-    description: "Confident hosting for livestream and hybrid events. We keep the energy high and donors engaged, whether they're in the room or watching from home.",
-    icon: MonitorPlay,
-    slug: "virtual-events",
   },
   {
     title: "Event Planning & Emcee",

@@ -6,7 +6,6 @@ import {
   CalendarClock,
   HandHeart,
   Megaphone,
-  MonitorPlay,
   Plane,
   Users,
 } from "lucide-react";
@@ -41,12 +40,6 @@ const services = [
     description: "A compelling moment that inspires donors to give at meaningful levels.",
     icon: HandHeart,
     slug: "fund-a-need",
-  },
-  {
-    title: "Virtual Events",
-    description: "Keep momentum online with confident hosting, timing, and audience management.",
-    icon: MonitorPlay,
-    slug: "virtual-events",
   },
   {
     title: "Event Planning & Emcee",

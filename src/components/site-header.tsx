@@ -11,7 +11,6 @@ const servicesDropdownItems = [
   { href: "/services/live-auctions", label: "Live Auctions" },
   { href: "/services/silent-auctions", label: "Silent Auctions" },
   { href: "/services/fund-a-need", label: "Fund-A-Need" },
-  { href: "/services/virtual-events", label: "Virtual Events" },
   { href: "/services/event-planning-emcee", label: "Event Planning & Emcee" },
   { href: "https://www.myamoretravel.com/impact-auctions", label: "Live Auction Packages", external: true },
 ] as const;

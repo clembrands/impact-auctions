@@ -400,12 +400,6 @@ export default function EventPlanning() {
                  slug: "fund-a-need",
                  icon: BadgeDollarSign,
                  desc: "Maximize giving moments."
-               },
-               {
-                 title: "Virtual Events",
-                 slug: "virtual-events",
-                 icon: MonitorPlay,
-                 desc: "Livestream coordination."
                }
              ].map((service, i) => {
                 const Icon = service.icon;
