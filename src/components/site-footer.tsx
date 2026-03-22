@@ -64,6 +64,17 @@ export default function SiteFooter() {
           </div>
 
           <div className="space-y-3">
+            <h3 className="display-font text-sm font-semibold" data-testid="text-footer-resources">
+              Resources
+            </h3>
+            <ul className="space-y-2 text-sm text-white/85">
+              <li>
+                <FooterLink href="/blog" label="Blog" testId="link-footer-blog" />
+              </li>
+            </ul>
+          </div>
+
+          <div className="space-y-3">
             <h3 className="display-font text-sm font-semibold" data-testid="text-footer-contact">
               Contact
             </h3>
