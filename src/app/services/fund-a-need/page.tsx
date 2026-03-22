@@ -352,3 +352,32 @@ export default function FundANeed() {
                  desc: "Seamless run-of-show."
                }
              ].map((service, i) => {
+                const Icon = service.icon;
+                return (
+                  <Link key={i} href={`/services/${service.slug}`}>
+                    <Card className="p-6 hover:shadow-md transition-shadow cursor-pointer border-none shadow-sm flex items-center gap-4">
+                      <div className="h-10 w-10 rounded-full bg-primary/5 grid place-items-center text-primary">
+                         <Icon className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-primary">{service.title}</h3>
+                        <p className="text-sm text-secondary">{service.desc}</p>
+                      </div>
+                    </Card>
+                  </Link>
+                )
+             })}
+          </div>
+        </div>
+      </section>
+
+      <CtaBanner
+        title="Ready to make your Fund-A-Need unforgettable?"
+        subtitle="Get a free consultation and let's discuss your event."
+        buttonText="Contact Us"
+        className="bg-primary"
+      />
+      <SiteFooter />
+    </div>
+  );
+}
