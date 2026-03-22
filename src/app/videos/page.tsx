@@ -5,6 +5,7 @@ import Image from "next/image";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import CtaBanner from "@/components/cta-banner";
+import TestimonialCarousel from "@/components/testimonial-carousel";
 
 const videos = [
   { id: 1, title: "Impact Auctions Overview", youtubeId: "nCZ2Q8G_c68" },
@@ -101,6 +102,18 @@ export default function Videos() {
               <VideoCard key={video.id} video={video} />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="section-pad bg-muted" data-testid="section-testimonials">
+        <div className="container-tight">
+          <div className="mx-auto max-w-2xl text-center mb-10">
+            <h2 className="display-font text-3xl font-extrabold tracking-tight text-primary" data-testid="text-testimonials-title">
+              Testimonials
+            </h2>
+          </div>
+          <TestimonialCarousel />
         </div>
       </section>
 
