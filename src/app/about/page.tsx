@@ -55,9 +55,20 @@ export default function About() {
                 </div>
               </div>
 
-              <p className="text-secondary/90 leading-relaxed text-base">
-                Debbie and Ron Hitzel bring over 20 years of dedicated fundraising experience to Impact Auctions, a full-service, licensed charity auctioneer brand based in North Carolina and Florida. As a dynamic husband-and-wife team, Ron leverages his unique background as a multilingual former US Navy Nuclear Submariner and global business manager, while Debbie draws on her nearly 30-year career as an educator to passionately support charitable causes. Together, they specialize in helping nonprofit organizations achieve record-breaking profits in a single night, seamlessly minimizing the workload for committee volunteers while maximizing the success of your next fundraising event.
-              </p>
+              <div className="space-y-4 text-secondary/90 leading-relaxed text-base">
+                <p>
+                  Ron and Debbie Hitzel are a husband and wife team with over 20 years of experience raising money for charitable causes close to their hearts.
+                </p>
+                <p>
+                  Ron is a former US Navy Nuclear Submariner who upgraded electrical power plants around the world. With a master's degree in business management and experience working in over 56 countries, he speaks several languages and brings his world travels—and boundless energy—to the stage.
+                </p>
+                <p>
+                  Debbie is a former teacher of nearly 30 years who now dedicates her expertise to helping nonprofits run successful fundraising events.
+                </p>
+                <p>
+                  Based in North Carolina and Florida, Impact Auctions is a licensed charity auctioneer helping thousands of organizations set record-breaking profits in one night—with less work for volunteers and committee members.
+                </p>
+              </div>
 
               <div className="flex flex-col gap-3 sm:flex-row pt-2">
                 <Link href="/testimonials" data-testid="link-founders-testimonials">
