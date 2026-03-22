@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Clock, Users, Mic, Presentation, ShieldAlert, BadgeDollarSign, Megaphone, MonitorPlay } from "lucide-react";
+import { Check, Clock, Coins, Users, Mic, Presentation, ShieldAlert, BadgeDollarSign, Megaphone, MonitorPlay } from "lucide-react";
 import Link from "next/link";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
@@ -392,6 +392,12 @@ export default function EventPlanning() {
                  slug: "fund-a-need",
                  icon: BadgeDollarSign,
                  desc: "Maximize giving moments."
+               },
+               {
+                 title: "Heads or Tails",
+                 slug: "heads-or-tails",
+                 icon: Coins,
+                 desc: "Crowd-favorite fundraising game."
                }
              ].map((service, i) => {
                 const Icon = service.icon;

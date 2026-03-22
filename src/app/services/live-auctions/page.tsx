@@ -1,4 +1,4 @@
-import { Check, Megaphone, BadgeDollarSign, CalendarClock } from "lucide-react";
+import { Check, Coins, Megaphone, BadgeDollarSign, CalendarClock } from "lucide-react";
 import Link from "next/link";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
@@ -246,10 +246,10 @@ export default function LiveAuctions() {
                  desc: "Maximize giving moments."
                },
                {
-                 title: "Fund-A-Need",
-                 slug: "fund-a-need",
-                 icon: BadgeDollarSign,
-                 desc: "Maximize giving moments."
+                 title: "Heads or Tails",
+                 slug: "heads-or-tails",
+                 icon: Coins,
+                 desc: "Crowd-favorite fundraising game."
                },
                {
                  title: "Event Planning",

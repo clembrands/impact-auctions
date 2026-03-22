@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Users, Heart, TrendingUp, BadgeDollarSign, Megaphone, CalendarClock } from "lucide-react";
+import { Check, Users, Heart, TrendingUp, BadgeDollarSign, Coins, Megaphone, CalendarClock } from "lucide-react";
 import Link from "next/link";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
@@ -338,6 +338,12 @@ export default function FundANeed() {
                  slug: "live-auctions",
                  icon: Megaphone,
                  desc: "High-energy bid calling."
+               },
+               {
+                 title: "Heads or Tails",
+                 slug: "heads-or-tails",
+                 icon: Coins,
+                 desc: "Crowd-favorite fundraising game."
                },
                {
                  title: "Event Planning",

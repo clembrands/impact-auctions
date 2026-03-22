@@ -4,6 +4,7 @@ import Link from "next/link";
 import {
   CalendarClock,
   Check,
+  Coins,
   HandHeart,
   Megaphone,
   Plane,
@@ -25,6 +26,12 @@ const services = [
     description: "The most powerful fundraising moment of your night. We craft compelling appeals that inspire donors to give at meaningful levels for your mission.",
     icon: HandHeart,
     slug: "fund-a-need",
+  },
+  {
+    title: "Heads or Tails",
+    description: "A crowd-favorite fundraising game that gets every guest on their feet, builds excitement, and generates meaningful revenue in just minutes.",
+    icon: Coins,
+    slug: "heads-or-tails",
   },
   {
     title: "Event Planning & Emcee",

@@ -4,6 +4,7 @@ import {
   Award,
   BadgeDollarSign,
   CalendarClock,
+  Coins,
   HandHeart,
   Megaphone,
   Plane,
@@ -34,6 +35,12 @@ const services = [
     description: "A compelling moment that inspires donors to give at meaningful levels.",
     icon: HandHeart,
     slug: "fund-a-need",
+  },
+  {
+    title: "Heads or Tails",
+    description: "A crowd-favorite fundraising game that gets every guest on their feet and generates real revenue.",
+    icon: Coins,
+    slug: "heads-or-tails",
   },
   {
     title: "Event Planning & Emcee",
