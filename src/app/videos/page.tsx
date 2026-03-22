@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import CtaBanner from "@/components/cta-banner";
-import TestimonialCarousel from "@/components/testimonial-carousel";
+
 
 const videos = [
   { id: 1, title: "Impact Auctions Overview", youtubeId: "nCZ2Q8G_c68" },
@@ -87,6 +87,12 @@ function PageHero({ title, subtitle }: { title: string; subtitle: string }) {
 }
 
 export default function Videos() {
+  useEffect(() => {
+    if ((window as any).efsAPI) {
+      (window as any).efsAPI.load();
+    }
+  }, []);
+
   return (
     <div className="min-h-dvh bg-background" data-testid="page-videos">
       <SiteHeader />
@@ -105,15 +111,25 @@ export default function Videos() {
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* Testimonials — Google Business Profile Reviews via Elfsight */}
       <section className="section-pad" style={{ backgroundColor: "rgba(212, 196, 168, 0.18)" }} data-testid="section-testimonials">
         <div className="container-tight">
-          <div className="mx-auto max-w-2xl text-center mb-10">
+          <div className="mx-auto max-w-2xl text-center mb-12">
             <h2 className="display-font text-3xl font-extrabold tracking-tight text-primary" data-testid="text-testimonials-title">
-              Testimonials
+              What Nonprofits Say
             </h2>
+            <p className="mt-3 text-secondary" data-testid="text-testimonials-subtitle">
+              Real feedback from organizations we've helped
+            </p>
           </div>
-          <TestimonialCarousel />
+          
+          {/* Elfsight Google Reviews Embed */}
+          <script src="https://elfsightcdn.com/platform.js" async></script>
+          <div 
+            className="elfsight-app-56714005-6595-4b9c-b595-6c4575ba3a0d" 
+            data-elfsight-app-lazy
+            data-testid="elfsight-google-reviews"
+          ></div>
         </div>
       </section>
 
