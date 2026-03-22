@@ -3,16 +3,7 @@
 import Link from "next/link";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Users } from "lucide-react";
-
-const team = [
-  { name: "Ron Hitzel", title: "Founder/Auctioneer", image: "/images/headshot-ron.jpg" },
-  { name: "Debbie Hitzel", title: "Founder/Event Planning", image: "/images/headshot-debbie.jpg" },
-  { name: "Josh Loewensteiner", title: "CAI Auctioneer", image: "/images/headshot-josh.jpg" },
-  { name: "Stephen LaRaviere", title: "Auctioneer", image: "/images/headshot-stephen.jpg" },
-];
 
 function PageHero({ title, subtitle }: { title: string; subtitle: string }) {
   return (
@@ -101,44 +92,8 @@ export default function About() {
         <div className="container-tight">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="display-font text-3xl font-extrabold tracking-tight text-primary" data-testid="text-team-title">
-              Your On-Stage Team
+              Your Impact Auctions Team
             </h2>
-            <p className="mt-3 text-secondary" data-testid="text-team-subtitle">
-              Experienced auctioneers ready to energize your event
-            </p>
-          </div>
-
-          <div className="mt-10 grid gap-6 md:grid-cols-4">
-            {team.map((m) => (
-              <Card
-                key={m.name}
-                className="rounded-xl border border-card-border bg-card p-6 text-center transition-all hover:-translate-y-1 hover:shadow-lg"
-                data-testid={`card-team-${m.name.replace(/\s+/g, "-").toLowerCase()}`}
-              >
-                <div
-                  className="mx-auto grid h-40 w-40 place-items-center overflow-hidden rounded-full border border-[var(--tan)] bg-muted"
-                  data-testid={`img-team-${m.name.replace(/\s+/g, "-").toLowerCase()}`}
-                >
-                  {m.image ? (
-                    <img
-                      src={m.image}
-                      alt={m.name}
-                      className={m.name.includes("Stephen") ? "h-full w-full object-cover object-top" : "h-full w-full object-cover"}
-                    />
-                  ) : (
-                    <Users className="h-8 w-8 text-primary" strokeWidth={1.8} />
-                  )}
-                </div>
-                <div className="mt-4">
-                  <div className="display-font text-base font-semibold text-primary" data-testid={`text-team-name-${m.name.replace(/\s+/g, "-").toLowerCase()}`}>
-                    {m.name}
-                  </div>
-                  <div className="text-sm text-secondary" data-testid={`text-team-title-${m.name.replace(/\s+/g, "-").toLowerCase()}`}>
-                    {m.title}
-                  </div>
-                </div>
-              </Card>
-            ))}
           </div>
         </div>
       </section>
