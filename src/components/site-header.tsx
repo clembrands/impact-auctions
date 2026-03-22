@@ -21,7 +21,6 @@ const navItems = [
   { href: "/about", label: "About", testId: "link-nav-about" },
   { href: "/services", label: "Services", testId: "link-nav-services", hasDropdown: true },
   { href: "/videos", label: "Videos", testId: "link-nav-videos" },
-  { href: "/blog", label: "Blog", testId: "link-nav-blog" },
   { href: "/contact", label: "Contact", testId: "link-nav-contact" },
 ];
 
