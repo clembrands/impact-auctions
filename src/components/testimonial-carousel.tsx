@@ -47,17 +47,8 @@ export default function TestimonialCarousel({
 }: TestimonialCarouselProps) {
   const [current, setCurrent]   = useState(0);
   const [direction, setDirection] = useState(1); // 1 = forward, -1 = backward
-  const [height, setHeight] = useState(0);
-  const contentRef = useRef<HTMLDivElement>(null);
   const pausedRef  = useRef(false);
   const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  // ── measure content height for smooth animation ─────────────────────────────
-  useEffect(() => {
-    if (contentRef.current) {
-      setHeight(contentRef.current.offsetHeight);
-    }
-  }, [current]);
 
   // ── pause helpers ──────────────────────────────────────────────────────────
   const pause = useCallback(() => {
@@ -136,24 +127,18 @@ export default function TestimonialCarousel({
       )}
 
       <div className="relative mx-auto max-w-3xl">
-        {/* Dynamic height container */}
-        <motion.div
-          className="relative rounded-xl"
-          animate={{ height: height > 0 ? height : "auto" }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-          style={{ overflow: "hidden" }}
-        >
+        {/* Fixed-height container — min-height fits the tallest testimonial */}
+        <div className="relative" style={{ minHeight: "450px" }}>
           <AnimatePresence initial={false} custom={direction} mode="wait">
             <motion.div
               key={current}
-              ref={contentRef}
               custom={direction}
               variants={variants}
               initial="enter"
               animate="center"
               exit="exit"
               transition={{ duration: 0.35, ease: "easeInOut" }}
-              className="rounded-xl bg-white pt-8 pb-8 pr-8 pl-10 flex flex-col justify-between"
+              className="absolute inset-0 rounded-xl bg-white pt-8 pb-8 pr-8 pl-10 flex flex-col justify-between"
               style={{
                 borderTop: "1px solid rgba(212, 196, 168, 0.35)",
                 borderRight: "1px solid rgba(212, 196, 168, 0.35)",
@@ -202,7 +187,7 @@ export default function TestimonialCarousel({
               </div>
             </motion.div>
           </AnimatePresence>
-        </motion.div>
+        </div>
 
         {/* Navigation */}
         <div className="flex items-center justify-center gap-5 mt-8">
