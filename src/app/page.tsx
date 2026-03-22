@@ -310,7 +310,7 @@ export default function Home() {
                   className="rounded-lg bg-white px-6 text-primary hover:bg-white/90"
                   data-testid="button-hero-book"
                 >
-                  Book a Free Consultation
+                  Get a Quote
                 </Button>
               </Link>
               <Link href="/services" data-testid="link-hero-secondary">
