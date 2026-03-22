@@ -55,10 +55,11 @@ const services = [
     slug: "event-planning-emcee",
   },
   {
-    title: "Consignment Travel",
+    title: "Live Auction Packages",
     description: "Curated travel experiences that add excitement and raise more for your mission.",
     icon: Plane,
     slug: "consignment-travel",
+    externalHref: "https://www.myamoretravel.com/impact-auctions",
   },
 ];
 
@@ -388,7 +389,9 @@ export default function Home() {
               return (
                 <Link
                   key={s.slug}
-                  href={`/services/${s.slug}`}
+                  href={s.externalHref ?? `/services/${s.slug}`}
+                  target={s.externalHref ? "_blank" : undefined}
+                  rel={s.externalHref ? "noopener noreferrer" : undefined}
                   data-testid={`link-service-${s.slug}`}
                 >
                   <Card

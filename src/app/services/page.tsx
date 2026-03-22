@@ -47,10 +47,11 @@ const services = [
     slug: "event-planning-emcee",
   },
   {
-    title: "Auction Packages",
+    title: "Live Auction Packages",
     description: "Curated travel and experience packages that add excitement to your auction and increase overall proceeds—with no upfront cost to your organization.",
     icon: Plane,
     slug: "auction-packages",
+    externalHref: "https://www.myamoretravel.com/impact-auctions",
   },
 ];
 
@@ -89,7 +90,9 @@ export default function Services() {
               return (
                 <Link
                   key={s.slug}
-                  href={s.slug === "auction-packages" ? "/auction-packages" : `/services/${s.slug}`}
+                  href={s.externalHref ?? `/services/${s.slug}`}
+                  target={s.externalHref ? "_blank" : undefined}
+                  rel={s.externalHref ? "noopener noreferrer" : undefined}
                   data-testid={`link-services-${s.slug}`}
                 >
                   <Card

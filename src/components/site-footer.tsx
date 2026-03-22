@@ -52,7 +52,15 @@ export default function SiteFooter() {
                 <FooterLink href="/services" label="Services" testId="link-footer-services" />
               </li>
               <li>
-                <FooterLink href="/auction-packages" label="Auction Packages" testId="link-footer-packages" />
+                <a
+                  href="https://www.myamoretravel.com/impact-auctions"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-testid="link-footer-packages"
+                  className="cursor-pointer hover:text-white"
+                >
+                  Live Auction Packages
+                </a>
               </li>
               <li>
                 <FooterLink href="/videos" label="Videos" testId="link-footer-videos" />

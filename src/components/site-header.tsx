@@ -13,7 +13,7 @@ const servicesDropdownItems = [
   { href: "/services/fund-a-need", label: "Fund-A-Need" },
   { href: "/services/virtual-events", label: "Virtual Events" },
   { href: "/services/event-planning-emcee", label: "Event Planning & Emcee" },
-  { href: "/auction-packages", label: "Auction Packages" },
+  { href: "https://www.myamoretravel.com/impact-auctions", label: "Live Auction Packages", external: true },
 ] as const;
 
 const navItems = [
@@ -88,7 +88,12 @@ function DesktopNavLink({
         >
           <div className="bg-white rounded-lg shadow-lg border border-white/10 overflow-hidden py-2">
             {servicesDropdownItems.map((item) => (
-              <Link key={item.href} href={item.href}>
+              <Link
+                key={item.href}
+                href={item.href}
+                target={"external" in item && item.external ? "_blank" : undefined}
+                rel={"external" in item && item.external ? "noopener noreferrer" : undefined}
+              >
                 <div
                   className={cn(
                     "block px-4 py-3 text-sm font-medium text-primary hover:bg-muted transition-colors cursor-pointer",
@@ -267,7 +272,12 @@ export default function SiteHeader() {
                       </Link>
                       <div className="pl-4 space-y-1 border-l-2 border-muted ml-4 my-2">
                         {servicesDropdownItems.map(subItem => (
-                          <Link key={subItem.href} href={subItem.href}>
+                          <Link
+                            key={subItem.href}
+                            href={subItem.href}
+                            target={"external" in subItem && subItem.external ? "_blank" : undefined}
+                            rel={"external" in subItem && subItem.external ? "noopener noreferrer" : undefined}
+                          >
                             <button
                               type="button"
                               onClick={() => setOpen(false)}
