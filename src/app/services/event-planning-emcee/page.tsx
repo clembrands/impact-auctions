@@ -303,11 +303,11 @@ export default function EventPlanning() {
 
             {[
               {
-                step: "3-6 Months Out",
+                step: "12 Months Out",
                 description: "Initial consultation. We learn about your event, goals, and vision. We start building the run-of-show framework."
               },
               {
-                step: "4-6 Weeks Out",
+                step: "3-6 Months Out",
                 description: "Detailed planning. We finalize the run-of-show, coordinate with vendors, and prepare all speaker materials."
               },
               {
