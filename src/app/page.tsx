@@ -105,7 +105,7 @@ export default function Home() {
         className="relative isolate overflow-visible"
         data-testid="section-hero"
       >
-        <div className="relative min-h-[78vh] overflow-hidden">
+        <div className="relative min-h-[78vh] md:min-h-[86vh] overflow-hidden">
           <img
             src="/images/hero-auction.jpg"
             alt="Live fundraising auction in a ballroom"
@@ -115,7 +115,7 @@ export default function Home() {
           />
           <div aria-hidden="true" className="absolute inset-0 -z-10 bg-black/55" />
 
-          <div className="container-tight flex min-h-[78vh] items-center pb-28 pt-16">
+          <div className="container-tight flex min-h-[78vh] md:min-h-[86vh] items-center pb-28 pt-16">
             <div className="mx-auto w-full max-w-3xl text-center md:mx-0 md:text-left">
               <h1
                 className="display-font text-balance text-4xl font-extrabold tracking-tight text-white md:text-6xl"
