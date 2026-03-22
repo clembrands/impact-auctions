@@ -438,10 +438,10 @@ export default function Home() {
         <div className="container-tight">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="display-font text-3xl font-extrabold tracking-tight text-primary" data-testid="text-team-title">
-              Your On-Stage Team
+              Your Impact Auctions Team
             </h2>
             <p className="mt-3 text-secondary" data-testid="text-team-subtitle">
-              Experienced auctioneers ready to energize your event.
+              Experienced fundraising event professionals
             </p>
           </div>
 
