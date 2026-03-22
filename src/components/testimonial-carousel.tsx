@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 
 export interface Testimonial {
   quote: string;
@@ -30,6 +31,9 @@ export const defaultTestimonials: Testimonial[] = [
   },
 ];
 
+const AUTO_PLAY_INTERVAL = 6000;   // advance every 6 s
+const RESUME_DELAY      = 10000;  // resume after 10 s of inactivity
+
 interface TestimonialCarouselProps {
   testimonials?: Testimonial[];
   title?: string;
@@ -41,26 +45,74 @@ export default function TestimonialCarousel({
   title = "What Nonprofits Say",
   className = "",
 }: TestimonialCarouselProps) {
-  const [current, setCurrent] = useState(0);
-  const [animating, setAnimating] = useState(false);
+  const [current, setCurrent]   = useState(0);
+  const [direction, setDirection] = useState(1); // 1 = forward, -1 = backward
+  const pausedRef  = useRef(false);
+  const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  function go(idx: number) {
-    if (idx === current || animating) return;
-    setAnimating(true);
-    setTimeout(() => {
-      setCurrent(idx);
-      setAnimating(false);
-    }, 180);
-  }
+  // ── pause helpers ──────────────────────────────────────────────────────────
+  const pause = useCallback(() => {
+    pausedRef.current = true;
+    if (resumeTimer.current) clearTimeout(resumeTimer.current);
+    resumeTimer.current = setTimeout(() => {
+      pausedRef.current = false;
+    }, RESUME_DELAY);
+  }, []);
 
-  const prev = () => go((current - 1 + testimonials.length) % testimonials.length);
-  const next = () => go((current + 1) % testimonials.length);
+  // ── navigation ─────────────────────────────────────────────────────────────
+  const go = useCallback((idx: number, dir?: number) => {
+    if (idx === current) return;
+    setDirection(dir ?? (idx > current ? 1 : -1));
+    setCurrent(idx);
+    pause();
+  }, [current, pause]);
+
+  const prev = useCallback(() => {
+    const idx = (current - 1 + testimonials.length) % testimonials.length;
+    go(idx, -1);
+  }, [current, testimonials.length, go]);
+
+  const next = useCallback(() => {
+    const idx = (current + 1) % testimonials.length;
+    go(idx, 1);
+  }, [current, testimonials.length, go]);
+
+  // ── auto-play ──────────────────────────────────────────────────────────────
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (!pausedRef.current) {
+        setCurrent((c) => {
+          setDirection(1);
+          return (c + 1) % testimonials.length;
+        });
+      }
+    }, AUTO_PLAY_INTERVAL);
+    return () => clearInterval(timer);
+  }, [testimonials.length]);
+
+  // ── framer motion variants ─────────────────────────────────────────────────
+  const variants = {
+    enter: (dir: number) => ({
+      x: dir > 0 ? 40 : -40,
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (dir: number) => ({
+      x: dir > 0 ? -40 : 40,
+      opacity: 0,
+    }),
+  };
 
   const t = testimonials[current];
 
   return (
     <div
       className={`w-full py-4 px-4 md:px-10 ${className}`}
+      onMouseEnter={() => { pausedRef.current = true; }}
+      onMouseLeave={() => { pausedRef.current = false; if (resumeTimer.current) clearTimeout(resumeTimer.current); }}
       data-testid="testimonial-carousel"
     >
       {title && (
@@ -75,57 +127,63 @@ export default function TestimonialCarousel({
       )}
 
       <div className="relative mx-auto max-w-3xl">
-        {/* Card */}
+        {/* Fixed-height card container — sized to the tallest testimonial */}
         <div
-          className="rounded-2xl bg-white p-10 md:p-14 flex flex-col"
-          style={{
-            border: "1.5px solid rgba(212, 196, 168, 0.55)",
-            boxShadow: "0 8px 40px rgba(33, 45, 72, 0.10), 0 1px 4px rgba(212,196,168,0.18)",
-            opacity: animating ? 0 : 1,
-            transform: animating ? "scale(0.98)" : "scale(1)",
-            transition: "opacity 180ms ease, transform 180ms ease",
-          }}
-          data-testid={`card-testimonial-${current}`}
+          className="relative overflow-hidden rounded-2xl"
+          style={{ minHeight: "420px" }}
         >
-          {/* Decorative quotation mark */}
-          <div
-            aria-hidden="true"
-            className="display-font leading-none select-none mb-4"
-            style={{
-              fontSize: "6rem",
-              lineHeight: "0.8",
-              color: "#D4C4A8",
-              fontWeight: 900,
-            }}
-          >
-            &ldquo;
-          </div>
-
-          <p
-            className="text-base/8 text-secondary md:text-lg/9 flex-1"
-            data-testid={`text-testimonial-quote-${current}`}
-          >
-            {t.quote}
-          </p>
-
-          <div
-            className="mt-8 pt-6"
-            style={{ borderTop: "1.5px solid rgba(212, 196, 168, 0.4)" }}
-          >
-            <div
-              className="display-font text-lg font-extrabold text-primary"
-              data-testid={`text-testimonial-name-${current}`}
+          <AnimatePresence initial={false} custom={direction} mode="wait">
+            <motion.div
+              key={current}
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.35, ease: "easeInOut" }}
+              className="absolute inset-0 rounded-2xl bg-white p-10 md:p-14 flex flex-col"
+              style={{
+                border: "1.5px solid rgba(212, 196, 168, 0.55)",
+                boxShadow: "0 8px 40px rgba(33, 45, 72, 0.10), 0 1px 4px rgba(212,196,168,0.18)",
+              }}
+              data-testid={`card-testimonial-${current}`}
             >
-              {t.name}
-            </div>
-            <div
-              className="text-sm font-medium mt-0.5"
-              style={{ color: "#B5A48A" }}
-              data-testid={`text-testimonial-org-${current}`}
-            >
-              {t.org}
-            </div>
-          </div>
+              {/* Decorative quotation mark */}
+              <div
+                aria-hidden="true"
+                className="display-font leading-none select-none mb-4"
+                style={{ fontSize: "6rem", lineHeight: "0.8", color: "#D4C4A8", fontWeight: 900 }}
+              >
+                &ldquo;
+              </div>
+
+              <p
+                className="text-base/8 text-secondary md:text-lg/9 flex-1"
+                data-testid={`text-testimonial-quote-${current}`}
+              >
+                {t.quote}
+              </p>
+
+              <div
+                className="mt-8 pt-6"
+                style={{ borderTop: "1.5px solid rgba(212, 196, 168, 0.4)" }}
+              >
+                <div
+                  className="display-font text-lg font-extrabold text-primary"
+                  data-testid={`text-testimonial-name-${current}`}
+                >
+                  {t.name}
+                </div>
+                <div
+                  className="text-sm font-medium mt-0.5"
+                  style={{ color: "#B5A48A" }}
+                  data-testid={`text-testimonial-org-${current}`}
+                >
+                  {t.org}
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         {/* Navigation */}
