@@ -1,4 +1,4 @@
-import { Check, Coins, Megaphone, BadgeDollarSign, CalendarClock } from "lucide-react";
+import { Check, Coins, Megaphone, BadgeDollarSign, CalendarClock, Mic } from "lucide-react";
 import Link from "next/link";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
@@ -305,8 +305,8 @@ export default function EventPlanning() {
               },
               {
                 title: "Emcee Services",
-                slug: "event-planning-emcee",
-                icon: CalendarClock,
+                slug: "emcee",
+                icon: Mic,
                 desc: "Energetic event hosting."
               }
             ].map((service, i) => {

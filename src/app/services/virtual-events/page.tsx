@@ -387,8 +387,13 @@ export default function VirtualEvents() {
                },
                {
                  title: "Event Planning",
-                 slug: "event-planning-emcee",
+                 slug: "event-planning",
                  desc: "Run-of-show coordination."
+               },
+               {
+                 title: "Emcee Services",
+                 slug: "emcee",
+                 desc: "Professional event hosting."
                }
              ].map((service, i) => {
                 return (

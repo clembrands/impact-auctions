@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Coins, Laugh, Users, Zap, CalendarClock, HandHeart, Megaphone } from "lucide-react";
+import { Check, Coins, Laugh, Users, Zap, CalendarClock, HandHeart, Megaphone, Mic } from "lucide-react";
 import Link from "next/link";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
@@ -300,9 +300,15 @@ export default function HeadsOrTails() {
               },
               {
                 title: "Event Planning",
-                slug: "event-planning-emcee",
+                slug: "event-planning",
                 icon: CalendarClock,
                 desc: "Seamless run-of-show."
+              },
+              {
+                title: "Emcee Services",
+                slug: "emcee",
+                icon: Mic,
+                desc: "Professional event hosting."
               }
             ].map((service, i) => {
               const Icon = service.icon;
