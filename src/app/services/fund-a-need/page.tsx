@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Users, Heart, TrendingUp, BadgeDollarSign, Coins, Megaphone, CalendarClock } from "lucide-react";
+import { Check, Users, Heart, TrendingUp, BadgeDollarSign, Coins, Megaphone, CalendarClock, Mic } from "lucide-react";
 import Link from "next/link";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
@@ -279,7 +279,7 @@ export default function FundANeed() {
       </section>
 
       {/* Testimonial Section */}
-      <section className="section-pad bg-muted" data-testid="section-testimonial">
+      <section className="section-pad" style={{ backgroundColor: "rgba(212, 196, 168, 0.18)" }} data-testid="section-testimonial">
         <div className="container-tight">
           <TestimonialCarousel />
         </div>
@@ -347,9 +347,15 @@ export default function FundANeed() {
                },
                {
                  title: "Event Planning",
-                 slug: "event-planning-emcee",
+                 slug: "event-planning",
                  icon: CalendarClock,
                  desc: "Seamless run-of-show."
+               },
+               {
+                 title: "Emcee Services",
+                 slug: "emcee",
+                 icon: Mic,
+                 desc: "Professional event hosting."
                }
              ].map((service, i) => {
                 const Icon = service.icon;

@@ -1,38 +1,46 @@
 "use client";
 
 import Link from "next/link";
+import { Card } from "@/components/ui/card";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import { Button } from "@/components/ui/button";
 
-function PageHero({ title, subtitle }: { title: string; subtitle: string }) {
-  return (
-    <section className="bg-muted section-pad" data-testid="section-page-hero">
-      <div className="container-tight">
-        <div className="mx-auto max-w-3xl text-center">
-          <h1 className="display-font text-4xl font-extrabold tracking-tight text-primary md:text-5xl" data-testid="text-page-title">
-            {title}
-          </h1>
-          <p className="mt-4 text-secondary" data-testid="text-page-subtitle">
-            {subtitle}
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
+const teamMembers = [
+  {
+    name: "Josh Loewensteiner",
+    title: "CAI Auctioneer",
+    image: "/images/headshot-josh.jpg",
+    bio: "A Certified Auctioneers Institute graduate with years of live fundraising experience. Josh brings a commanding yet approachable presence, reading the room and building momentum to turn good auctions into great ones.",
+  },
+  {
+    name: "Stephen LaRaviere",
+    title: "Auctioneer",
+    image: "/images/headshot-stephen.jpg",
+    bio: "An energetic and experienced auctioneer known for connecting with audiences and driving competitive bidding. Stephen adapts seamlessly to any crowd size or format.",
+  },
+];
 
 export default function About() {
   return (
     <div className="min-h-dvh bg-background" data-testid="page-about">
       <SiteHeader />
 
-      <PageHero
-        title="About Impact Auctions"
-        subtitle="Experience. Reliability. Expertise in Professional Auctioneering."
-      />
+      {/* Hero */}
+      <section className="bg-primary section-pad" data-testid="section-about-hero">
+        <div className="container-tight">
+          <div className="mx-auto max-w-3xl text-center">
+            <h1 className="display-font text-4xl font-extrabold tracking-tight text-white md:text-5xl" data-testid="text-page-title">
+              About Impact Auctions
+            </h1>
+            <p className="mt-4 text-white/90 text-lg" data-testid="text-page-subtitle">
+              A husband-and-wife team helping nonprofits raise more — with less stress.
+            </p>
+          </div>
+        </div>
+      </section>
 
-      {/* Founders Section */}
+      {/* Ron & Debbie Feature — white background */}
       <section className="section-pad bg-background" data-testid="section-founders">
         <div className="container-tight">
           <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16">
@@ -55,18 +63,12 @@ export default function About() {
                 </div>
               </div>
 
-              <div className="space-y-4 text-secondary/90 leading-relaxed text-base">
+              <div className="space-y-4 text-secondary leading-relaxed">
                 <p>
-                  Ron and Debbie Hitzel are a husband and wife team with over 20 years of experience raising money for charitable causes close to their hearts.
+                  Ron and Debbie bring over 20 years of experience raising record-breaking funds for nonprofits they believe in. Ron, a former US Navy Nuclear Submariner with a master's in business and multilingual skills honed across 56 countries, brings boundless energy and a global perspective to every event. Debbie, a former educator of nearly 30 years, brings her expertise in connecting people and advancing missions to create seamless, impactful fundraising experiences.
                 </p>
                 <p>
-                  Ron is a former US Navy Nuclear Submariner who upgraded electrical power plants around the world. With a master's degree in business management and experience working in over 56 countries, he speaks several languages and brings his world travels—and boundless energy—to the stage.
-                </p>
-                <p>
-                  Debbie is a former teacher of nearly 30 years who now dedicates her expertise to helping nonprofits run successful fundraising events.
-                </p>
-                <p>
-                  Based in North Carolina and Florida, Impact Auctions is a licensed charity auctioneer helping thousands of organizations set record-breaking profits in one night—with less work for volunteers and committee members.
+                  Based in North Carolina and Florida, they founded Impact Auctions as a licensed charity auctioneer brand dedicated to helping thousands of organizations maximize profits in a single night — while minimizing stress for volunteers.
                 </p>
               </div>
 
@@ -87,92 +89,95 @@ export default function About() {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="bg-muted section-pad" data-testid="section-team">
+      {/* Stats Bar — cream background */}
+      <section className="section-pad" style={{ backgroundColor: "rgba(212, 196, 168, 0.15)" }} data-testid="section-credibility-stats">
         <div className="container-tight">
-          <div className="mx-auto max-w-2xl text-center">
+          <div className="grid gap-8 text-center md:grid-cols-4 md:divide-x md:divide-[rgba(212,196,168,0.4)]">
+            <div className="space-y-1">
+              <div className="display-font text-3xl font-extrabold text-primary" data-testid="stat-raised">$20M+</div>
+              <div className="text-sm text-secondary" data-testid="stat-raised-sub">Raised for Nonprofits</div>
+            </div>
+            <div className="space-y-1 md:pl-8">
+              <div className="display-font text-3xl font-extrabold text-primary" data-testid="stat-experience">20+ Years</div>
+              <div className="text-sm text-secondary" data-testid="stat-experience-sub">Experience</div>
+            </div>
+            <div className="space-y-1 md:pl-8">
+              <div className="display-font text-3xl font-extrabold text-primary" data-testid="stat-events">Thousands</div>
+              <div className="text-sm text-secondary" data-testid="stat-events-sub">Of Events</div>
+            </div>
+            <div className="space-y-1 md:pl-8">
+              <div className="display-font text-3xl font-extrabold text-primary" data-testid="stat-licensed">Licensed</div>
+              <div className="text-sm text-secondary" data-testid="stat-licensed-sub">Charity Auctioneers</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Testimonial — white background */}
+      <section className="section-pad bg-background" data-testid="section-featured-testimonial">
+        <div className="container-tight">
+          <div className="mx-auto max-w-3xl">
+            <div className="rounded-xl border border-card-border bg-card p-10 text-center space-y-4">
+              <p className="text-lg italic leading-relaxed text-primary" data-testid="text-testimonial-quote">
+                <span className="display-font text-4xl font-extrabold text-primary/20 not-italic" aria-hidden="true">&ldquo;</span>
+                We love working with Debbie and Ron. Their professionalism, energy, and wit are extraordinary. Yet what we appreciate most is their authenticity — they're good people with a genuine heart for building relationships and serving the community.
+              </p>
+              <div className="pt-2">
+                <div className="display-font text-lg font-extrabold text-primary" data-testid="text-testimonial-name">Allen Starrett</div>
+                <div className="text-sm text-secondary" data-testid="text-testimonial-org">Founder/Chair, Ballantyne Ball</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Team Grid — cream background */}
+      <section className="section-pad" style={{ backgroundColor: "rgba(212, 196, 168, 0.15)" }} data-testid="section-team">
+        <div className="container-tight">
+          <div className="mx-auto max-w-2xl text-center mb-12">
             <h2 className="display-font text-3xl font-extrabold tracking-tight text-primary" data-testid="text-team-title">
-              Your Impact Auctions Team
+              The Team
             </h2>
+            <p className="mt-3 text-secondary" data-testid="text-team-subtitle">
+              Professional auctioneers and event experts
+            </p>
           </div>
-        </div>
-      </section>
 
-      {/* Josh Section */}
-      <section className="section-pad bg-background" data-testid="section-josh">
-        <div className="container-tight">
-          <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16">
-            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl border border-card-border bg-muted" data-testid="img-josh-wrapper">
-              <img
-                src="/images/headshot-josh.jpg"
-                alt="Josh Loewensteiner"
-                className="h-full w-full object-cover object-top"
-                data-testid="img-josh"
-              />
-            </div>
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <h2 className="display-font text-3xl font-extrabold tracking-tight text-primary" data-testid="text-josh-title">
-                  Meet Josh Loewensteiner
-                </h2>
-                <div className="text-lg font-medium text-primary/60" data-testid="text-josh-subtitle">
-                  CAI Auctioneer
+          <div className="grid gap-8 md:grid-cols-2">
+            {teamMembers.map((member) => (
+              <Card
+                key={member.name}
+                className="rounded-xl border border-card-border bg-card overflow-hidden"
+                data-testid={`card-team-${member.name.replace(/\s+/g, "-").toLowerCase()}`}
+              >
+                <div className="relative aspect-[3/2] w-full overflow-hidden bg-muted" data-testid={`img-team-wrapper-${member.name.replace(/\s+/g, "-").toLowerCase()}`}>
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="h-full w-full object-cover object-top"
+                    data-testid={`img-team-${member.name.replace(/\s+/g, "-").toLowerCase()}`}
+                  />
                 </div>
-              </div>
-              <div className="space-y-4 text-secondary/90 leading-relaxed text-base">
-                <p>
-                  Josh Loewensteiner is a Certified Auctioneers Institute (CAI) graduate and a passionate advocate for the nonprofit community. With years of experience on the auction floor, Josh brings a commanding yet approachable presence that keeps bidders engaged and dollars flowing.
-                </p>
-                <p>
-                  His background in live event fundraising means he understands the nuances of working with a crowd — reading the room, building momentum at the right moment, and turning a good auction into a great one. Josh is known for his quick wit, professional stage presence, and genuine commitment to every organization he serves.
-                </p>
-                <p>
-                  Whether running a paddle raise, a live auction, or a fund-a-need appeal, Josh consistently helps clients exceed their fundraising goals.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stephen Section */}
-      <section className="section-pad bg-muted" data-testid="section-stephen">
-        <div className="container-tight">
-          <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16">
-            <div className="space-y-6 md:order-2">
-              <div className="space-y-2">
-                <h2 className="display-font text-3xl font-extrabold tracking-tight text-primary" data-testid="text-stephen-title">
-                  Meet Stephen LaRaviere
-                </h2>
-                <div className="text-lg font-medium text-primary/60" data-testid="text-stephen-subtitle">
-                  Auctioneer
+                <div className="p-6 space-y-3">
+                  <div>
+                    <div className="display-font text-lg font-extrabold text-primary" data-testid={`text-team-name-${member.name.replace(/\s+/g, "-").toLowerCase()}`}>
+                      {member.name}
+                    </div>
+                    <div className="text-sm font-medium text-primary/60" data-testid={`text-team-title-${member.name.replace(/\s+/g, "-").toLowerCase()}`}>
+                      {member.title}
+                    </div>
+                  </div>
+                  <p className="text-sm leading-relaxed text-secondary" data-testid={`text-team-bio-${member.name.replace(/\s+/g, "-").toLowerCase()}`}>
+                    {member.bio}
+                  </p>
                 </div>
-              </div>
-              <div className="space-y-4 text-secondary/90 leading-relaxed text-base">
-                <p>
-                  Stephen LaRaviere is an energetic and experienced auctioneer who brings enthusiasm and professionalism to every event he takes the stage. With a natural gift for connecting with audiences, Stephen has earned a reputation for driving competitive bidding and creating memorable fundraising moments.
-                </p>
-                <p>
-                  Stephen's background spans a wide range of nonprofit and charity events, giving him the versatility to adapt to any crowd size, cause, or format. His warm personality and ability to keep energy high throughout an event make him a favorite among both event organizers and bidders alike.
-                </p>
-                <p>
-                  From intimate galas to large-scale charity auctions, Stephen is dedicated to helping organizations maximize every dollar raised while making the experience fun and exciting for everyone in the room.
-                </p>
-              </div>
-            </div>
-            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl border border-card-border bg-muted md:order-1" data-testid="img-stephen-wrapper">
-              <img
-                src="/images/headshot-stephen.jpg"
-                alt="Stephen LaRaviere"
-                className="h-full w-full object-cover object-top"
-                data-testid="img-stephen"
-              />
-            </div>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* About-specific CTA */}
+      {/* About-specific CTA — navy background */}
       <section className="bg-primary section-pad" data-testid="section-about-cta">
         <div className="container-tight">
           <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-6 md:flex-row text-center md:text-left">

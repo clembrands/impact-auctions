@@ -227,7 +227,7 @@ export default function SilentAuctions() {
       </section>
 
       {/* Testimonial Section */}
-      <section className="section-pad bg-background" data-testid="section-testimonial">
+      <section className="section-pad" style={{ backgroundColor: "rgba(212, 196, 168, 0.18)" }} data-testid="section-testimonial">
         <div className="container-tight">
           <div className="mx-auto max-w-4xl text-center">
             <blockquote className="space-y-6">

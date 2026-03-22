@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Plane, Compass, Ticket, Utensils, HeartPulse, Sparkles, MapPin, Search, CalendarCheck, BadgeDollarSign, HeadphonesIcon, Megaphone, Presentation, Image as ImageIcon } from "lucide-react";
+import { Check, Plane, Compass, Ticket, Utensils, HeartPulse, Sparkles, MapPin, Search, CalendarCheck, BadgeDollarSign, HeadphonesIcon, Megaphone, Presentation, CalendarClock, Mic, Image as ImageIcon } from "lucide-react";
 import Link from "next/link";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
@@ -375,7 +375,7 @@ export default function AuctionPackages() {
       </section>
 
       {/* Testimonial Section */}
-      <section className="section-pad bg-background" data-testid="section-testimonial">
+      <section className="section-pad" style={{ backgroundColor: "rgba(212, 196, 168, 0.18)" }} data-testid="section-testimonial">
         <div className="container-tight">
           <TestimonialCarousel />
         </div>
@@ -473,9 +473,15 @@ export default function AuctionPackages() {
                },
                {
                  title: "Event Planning",
-                 slug: "event-planning-emcee",
-                 icon: Presentation,
+                 slug: "event-planning",
+                 icon: CalendarClock,
                  desc: "Seamless run-of-show."
+               },
+               {
+                 title: "Emcee Services",
+                 slug: "emcee",
+                 icon: Mic,
+                 desc: "Professional event hosting."
                }
              ].map((service, i) => {
                 const Icon = service.icon;
