@@ -127,10 +127,10 @@ export default function TestimonialCarousel({
       )}
 
       <div className="relative mx-auto max-w-3xl">
-        {/* Fixed-height card container — sized to the tallest testimonial */}
+        {/* Fixed-height card container — sized to fit the tallest testimonial + attribution */}
         <div
-          className="relative overflow-hidden rounded-2xl"
-          style={{ minHeight: "420px" }}
+          className="relative rounded-2xl"
+          style={{ minHeight: "520px" }}
         >
           <AnimatePresence initial={false} custom={direction} mode="wait">
             <motion.div
@@ -141,31 +141,35 @@ export default function TestimonialCarousel({
               animate="center"
               exit="exit"
               transition={{ duration: 0.35, ease: "easeInOut" }}
-              className="absolute inset-0 rounded-2xl bg-white p-10 md:p-14 flex flex-col"
+              className="absolute inset-0 rounded-2xl bg-white p-10 md:p-14 flex flex-col justify-between"
               style={{
                 border: "1.5px solid rgba(212, 196, 168, 0.55)",
                 boxShadow: "0 8px 40px rgba(33, 45, 72, 0.10), 0 1px 4px rgba(212,196,168,0.18)",
               }}
               data-testid={`card-testimonial-${current}`}
             >
-              {/* Decorative quotation mark */}
-              <div
-                aria-hidden="true"
-                className="display-font leading-none select-none mb-4"
-                style={{ fontSize: "6rem", lineHeight: "0.8", color: "#D4C4A8", fontWeight: 900 }}
-              >
-                &ldquo;
+              {/* Quote content */}
+              <div className="flex flex-col gap-4">
+                {/* Decorative quotation mark */}
+                <div
+                  aria-hidden="true"
+                  className="display-font leading-none select-none"
+                  style={{ fontSize: "6rem", lineHeight: "0.8", color: "#D4C4A8", fontWeight: 900 }}
+                >
+                  &ldquo;
+                </div>
+
+                <p
+                  className="text-base/8 text-secondary md:text-lg/9"
+                  data-testid={`text-testimonial-quote-${current}`}
+                >
+                  {t.quote}
+                </p>
               </div>
 
-              <p
-                className="text-base/8 text-secondary md:text-lg/9 flex-1"
-                data-testid={`text-testimonial-quote-${current}`}
-              >
-                {t.quote}
-              </p>
-
+              {/* Attribution — always pinned to the bottom */}
               <div
-                className="mt-8 pt-6"
+                className="mt-8 pt-6 shrink-0"
                 style={{ borderTop: "1.5px solid rgba(212, 196, 168, 0.4)" }}
               >
                 <div
