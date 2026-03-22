@@ -249,85 +249,86 @@ export default function Contact() {
                     disabled={isSubmitting}
                     data-testid="button-submit"
                   >
-                    {isSubmitting ? "Sending..." : "Get a Free Consultation"}
+                    {isSubmitting ? "Sending..." : "Submit Info"}
                   </Button>
                 </form>
               </Form>
             </Card>
 
             {/* Contact Info Card */}
-            <div className="space-y-6">
+            <div className="self-start">
               <Card
-                className="rounded-xl border border-card-border p-8 overflow-hidden"
+                className="rounded-xl border border-card-border overflow-hidden"
                 style={{ backgroundColor: "rgba(212, 196, 168, 0.08)" }}
                 data-testid="card-contact-info"
               >
-                {/* Debbie headshot at top */}
-                <div className="mb-6 aspect-[2/3] w-full overflow-hidden rounded-lg border border-card-border bg-muted -mx-8 -mt-8 w-[calc(100%+64px)]">
+                {/* Photo — landscape 16:9 crop */}
+                <div className="aspect-[16/9] w-full overflow-hidden bg-muted">
                   <img
                     src="/images/about-ron-debbie.jpg"
-                    alt="Debbie Hitzel"
-                    className="h-full w-full object-cover"
+                    alt="Ron and Debbie Hitzel"
+                    className="h-full w-full object-cover object-center"
                     data-testid="img-debbie-headshot"
                   />
                 </div>
 
-                {/* Contact heading */}
-                <h2 className="display-font text-2xl font-extrabold text-primary mb-6" data-testid="text-contact-heading">
-                  Talk to Debbie
-                </h2>
+                <div className="p-8">
+                  {/* Contact heading */}
+                  <h2 className="display-font text-2xl font-extrabold text-primary mb-6" data-testid="text-contact-heading">
+                    Talk to Debbie
+                  </h2>
 
-                {/* Contact details */}
-                <div className="space-y-4">
-                  <Link href="tel:+14072678988" data-testid="link-contact-phone">
-                    <div className="flex items-center gap-3 text-secondary hover:text-primary transition-colors">
-                      <Phone className="h-5 w-5 text-primary flex-shrink-0" />
-                      <span className="font-medium">(407) 267-8988</span>
+                  {/* Contact details */}
+                  <div className="space-y-4">
+                    <Link href="tel:+14072678988" data-testid="link-contact-phone">
+                      <div className="flex items-center gap-3 text-secondary hover:text-primary transition-colors">
+                        <Phone className="h-5 w-5 text-primary flex-shrink-0" />
+                        <span className="font-medium">(407) 267-8988</span>
+                      </div>
+                    </Link>
+
+                    <Link href="mailto:Debbie@ImpactAuctions.org" data-testid="link-contact-email">
+                      <div className="flex items-center gap-3 text-secondary hover:text-primary transition-colors">
+                        <Mail className="h-5 w-5 text-primary flex-shrink-0" />
+                        <span className="font-medium">Debbie@ImpactAuctions.org</span>
+                      </div>
+                    </Link>
+
+                    <div className="flex items-center gap-3 text-secondary">
+                      <MapPin className="h-5 w-5 text-primary flex-shrink-0" />
+                      <span className="font-medium text-sm">Based in North Carolina • Serving nationwide</span>
                     </div>
-                  </Link>
+                  </div>
 
-                  <Link href="mailto:Debbie@ImpactAuctions.org" data-testid="link-contact-email">
-                    <div className="flex items-center gap-3 text-secondary hover:text-primary transition-colors">
-                      <Mail className="h-5 w-5 text-primary flex-shrink-0" />
-                      <span className="font-medium">Debbie@ImpactAuctions.org</span>
-                    </div>
-                  </Link>
+                  {/* Divider */}
+                  <div className="my-6 h-px" style={{ backgroundColor: "rgba(212,196,168,0.5)" }} />
 
-                  <div className="flex items-center gap-3 text-secondary pt-2">
-                    <MapPin className="h-5 w-5 text-primary flex-shrink-0" />
-                    <span className="font-medium text-sm">Based in North Carolina • Serving nationwide</span>
+                  {/* Social links */}
+                  <div className="flex items-center gap-4 mb-6">
+                    <Link href="https://facebook.com/ImpactAuctions" target="_blank" rel="noopener noreferrer" data-testid="link-social-facebook">
+                      <Facebook className="h-5 w-5 text-primary hover:text-primary/70 transition-colors cursor-pointer" />
+                    </Link>
+                    <Link href="https://instagram.com/ImpactAuctions" target="_blank" rel="noopener noreferrer" data-testid="link-social-instagram">
+                      <Instagram className="h-5 w-5 text-primary hover:text-primary/70 transition-colors cursor-pointer" />
+                    </Link>
+                    <Link href="https://linkedin.com/company/ImpactAuctions" target="_blank" rel="noopener noreferrer" data-testid="link-social-linkedin">
+                      <Linkedin className="h-5 w-5 text-primary hover:text-primary/70 transition-colors cursor-pointer" />
+                    </Link>
+                  </div>
+
+                  {/* Divider */}
+                  <div className="h-px mb-6" style={{ backgroundColor: "rgba(212,196,168,0.5)" }} />
+
+                  {/* What to Expect — merged into this card */}
+                  <div data-testid="card-what-to-expect">
+                    <h3 className="display-font font-semibold text-primary mb-2" data-testid="text-expect-title">
+                      What to Expect
+                    </h3>
+                    <p className="text-sm text-secondary leading-relaxed" data-testid="text-expect-content">
+                      We'll respond within 24 hours with a free consultation call to discuss your event goals and how we can help.
+                    </p>
                   </div>
                 </div>
-
-                {/* Divider */}
-                <div className="my-6 h-px bg-card-border" />
-
-                {/* Social links */}
-                <div className="flex items-center gap-4">
-                  <Link href="https://facebook.com/ImpactAuctions" target="_blank" rel="noopener noreferrer" data-testid="link-social-facebook">
-                    <Facebook className="h-5 w-5 text-primary hover:text-primary/70 transition-colors cursor-pointer" />
-                  </Link>
-                  <Link href="https://instagram.com/ImpactAuctions" target="_blank" rel="noopener noreferrer" data-testid="link-social-instagram">
-                    <Instagram className="h-5 w-5 text-primary hover:text-primary/70 transition-colors cursor-pointer" />
-                  </Link>
-                  <Link href="https://linkedin.com/company/ImpactAuctions" target="_blank" rel="noopener noreferrer" data-testid="link-social-linkedin">
-                    <Linkedin className="h-5 w-5 text-primary hover:text-primary/70 transition-colors cursor-pointer" />
-                  </Link>
-                </div>
-              </Card>
-
-              {/* What to Expect Card */}
-              <Card
-                className="rounded-xl border border-card-border p-6"
-                style={{ backgroundColor: "rgba(212, 196, 168, 0.08)" }}
-                data-testid="card-what-to-expect"
-              >
-                <h3 className="display-font font-semibold text-primary mb-3" data-testid="text-expect-title">
-                  What to Expect
-                </h3>
-                <p className="text-sm text-secondary leading-relaxed" data-testid="text-expect-content">
-                  We'll respond within 24 hours with a free consultation call to discuss your event goals and how we can help.
-                </p>
               </Card>
             </div>
           </div>
