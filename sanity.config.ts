@@ -7,7 +7,7 @@ export default defineConfig({
   title: "Impact Auctions",
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "z9la8qla",
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
-  plugins: [structureTool({ name: 'studio' })],
+  plugins: [structureTool()],
   schema: {
     types: schemaTypes,
   },
