@@ -13,21 +13,21 @@ export interface Testimonial {
 export const defaultTestimonials: Testimonial[] = [
   {
     quote:
-      "Impact Auctions brought the perfect mix of professionalism and warmth. Our donors stayed engaged all night.",
-    name: "Development Director",
-    org: "Regional Children's Nonprofit",
+      "We love working with Debbie and Ron! Their professionalism, energy, skill, and wit are extraordinary, and they have elevated the Ballantyne Ball charity auction experience from planning through execution. Yet, what we appreciate the most is their authenticity. They are good people who truly have a heart for building relationships and serving the community. We couldn't be happier to partner with Impact Auctions and are blessed to know Debbie and Ron.",
+    name: "Allen Starrett",
+    org: "Founder/Chair, Ballantyne Ball",
   },
   {
     quote:
-      "They guided our team with clarity and confidence. The Fund-A-Need was our best ever.",
-    name: "Event Chair",
-    org: "Community Foundation",
+      "Thank you to both you and Ron for helping us raise a significant portion of the overall funds – we've been receiving a lot of positive feedback, and I'm so glad we were able to partner with you. Goal: $3 Million | Achieved: $3.2 Million",
+    name: "Abbie Beltz",
+    org: "Manager of Special Events, Memorial Foundation / Joe DiMaggio Children's Hospital Foundation",
   },
   {
     quote:
-      "From planning to execution, they made the night feel seamless—and the results exceeded expectations.",
-    name: "Executive Director",
-    org: "Health & Wellness Charity",
+      "Coming soon...",
+    name: "Third Testimonial",
+    org: "Pending",
   },
 ];
 
