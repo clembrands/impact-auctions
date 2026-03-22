@@ -7,6 +7,7 @@ import {
   Coins,
   HandHeart,
   Megaphone,
+  Mic,
   Plane,
 } from "lucide-react";
 import SiteHeader from "@/components/site-header";
@@ -34,10 +35,16 @@ const services = [
     slug: "heads-or-tails",
   },
   {
-    title: "Event Planning & Emcee",
-    description: "Full run-of-show support, stage management, and professional emcee services to keep your night seamless so your team can focus on guests.",
+    title: "Event Planning",
+    description: "Strategic run-of-show development, vendor coordination, and backstage management so your event runs like clockwork.",
     icon: CalendarClock,
-    slug: "event-planning-emcee",
+    slug: "event-planning",
+  },
+  {
+    title: "Emcee Services",
+    description: "A professional host who commands the room, keeps transitions tight, and builds momentum toward your biggest fundraising moments.",
+    icon: Mic,
+    slug: "emcee",
   },
   {
     title: "Live Auction Packages",
