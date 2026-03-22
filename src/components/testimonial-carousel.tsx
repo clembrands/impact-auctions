@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Card } from "@/components/ui/card";
 
 export interface Testimonial {
   quote: string;
@@ -43,16 +42,28 @@ export default function TestimonialCarousel({
   className = "",
 }: TestimonialCarouselProps) {
   const [current, setCurrent] = useState(0);
+  const [animating, setAnimating] = useState(false);
 
-  const prev = () =>
-    setCurrent((c) => (c - 1 + testimonials.length) % testimonials.length);
-  const next = () =>
-    setCurrent((c) => (c + 1) % testimonials.length);
+  function go(idx: number) {
+    if (idx === current || animating) return;
+    setAnimating(true);
+    setTimeout(() => {
+      setCurrent(idx);
+      setAnimating(false);
+    }, 180);
+  }
+
+  const prev = () => go((current - 1 + testimonials.length) % testimonials.length);
+  const next = () => go((current + 1) % testimonials.length);
 
   const t = testimonials[current];
 
   return (
-    <div className={`w-full ${className}`} data-testid="testimonial-carousel">
+    <div
+      className={`w-full rounded-2xl py-12 px-4 md:px-10`}
+      style={{ backgroundColor: "rgba(212, 196, 168, 0.15)" }}
+      data-testid="testimonial-carousel"
+    >
       {title && (
         <div className="mx-auto max-w-2xl text-center mb-10">
           <h2
@@ -65,52 +76,69 @@ export default function TestimonialCarousel({
       )}
 
       <div className="relative mx-auto max-w-3xl">
-        <Card
-          className="flex min-h-[220px] flex-col rounded-xl border border-card-border bg-card p-8 md:p-10"
+        {/* Card */}
+        <div
+          className="rounded-2xl bg-white p-10 md:p-14 flex flex-col"
+          style={{
+            border: "1.5px solid rgba(212, 196, 168, 0.55)",
+            boxShadow: "0 8px 40px rgba(33, 45, 72, 0.10), 0 1px 4px rgba(212,196,168,0.18)",
+            opacity: animating ? 0 : 1,
+            transform: animating ? "scale(0.98)" : "scale(1)",
+            transition: "opacity 180ms ease, transform 180ms ease",
+          }}
           data-testid={`card-testimonial-${current}`}
         >
-          <div className="flex-1">
-            <div className="mb-4 flex items-start gap-4">
-              <span
-                aria-hidden="true"
-                className="display-font text-5xl font-extrabold leading-none text-primary/70 select-none"
-              >
-                "
-              </span>
-              <p
-                className="text-base/7 text-secondary md:text-lg/8"
-                data-testid={`text-testimonial-quote-${current}`}
-              >
-                {t.quote}
-              </p>
-            </div>
+          {/* Decorative quotation mark */}
+          <div
+            aria-hidden="true"
+            className="display-font leading-none select-none mb-4"
+            style={{
+              fontSize: "6rem",
+              lineHeight: "0.8",
+              color: "#D4C4A8",
+              fontWeight: 900,
+            }}
+          >
+            &ldquo;
           </div>
 
-          <div className="mt-5 border-t border-card-border pt-4">
+          <p
+            className="text-base/8 text-secondary md:text-lg/9 flex-1"
+            data-testid={`text-testimonial-quote-${current}`}
+          >
+            {t.quote}
+          </p>
+
+          <div
+            className="mt-8 pt-6"
+            style={{ borderTop: "1.5px solid rgba(212, 196, 168, 0.4)" }}
+          >
             <div
-              className="text-sm font-semibold text-primary"
+              className="display-font text-lg font-extrabold text-primary"
               data-testid={`text-testimonial-name-${current}`}
             >
               {t.name}
             </div>
             <div
-              className="text-sm text-secondary"
+              className="text-sm font-medium mt-0.5"
+              style={{ color: "#B5A48A" }}
               data-testid={`text-testimonial-org-${current}`}
             >
               {t.org}
             </div>
           </div>
-        </Card>
+        </div>
 
         {/* Navigation */}
-        <div className="flex items-center justify-center gap-4 mt-6">
+        <div className="flex items-center justify-center gap-5 mt-8">
           <button
             onClick={prev}
             aria-label="Previous testimonial"
-            className="h-9 w-9 rounded-full border border-card-border bg-card flex items-center justify-center text-primary hover:bg-muted transition-colors"
+            className="h-10 w-10 rounded-full flex items-center justify-center transition-opacity hover:opacity-80"
+            style={{ backgroundColor: "hsl(var(--primary))" }}
             data-testid="btn-testimonial-prev"
           >
-            <ChevronLeft className="h-4 w-4" />
+            <ChevronLeft className="h-5 w-5 text-white" />
           </button>
 
           {/* Dots */}
@@ -121,12 +149,12 @@ export default function TestimonialCarousel({
                 role="tab"
                 aria-selected={idx === current}
                 aria-label={`Go to testimonial ${idx + 1}`}
-                onClick={() => setCurrent(idx)}
-                className={`h-2 rounded-full transition-all ${
-                  idx === current
-                    ? "w-6 bg-primary"
-                    : "w-2 bg-primary/25 hover:bg-primary/50"
-                }`}
+                onClick={() => go(idx)}
+                className="h-2.5 rounded-full transition-all duration-300"
+                style={{
+                  width: idx === current ? "2rem" : "0.625rem",
+                  backgroundColor: idx === current ? "#D4C4A8" : "rgba(212,196,168,0.4)",
+                }}
                 data-testid={`btn-testimonial-dot-${idx}`}
               />
             ))}
@@ -135,10 +163,11 @@ export default function TestimonialCarousel({
           <button
             onClick={next}
             aria-label="Next testimonial"
-            className="h-9 w-9 rounded-full border border-card-border bg-card flex items-center justify-center text-primary hover:bg-muted transition-colors"
+            className="h-10 w-10 rounded-full flex items-center justify-center transition-opacity hover:opacity-80"
+            style={{ backgroundColor: "hsl(var(--primary))" }}
             data-testid="btn-testimonial-next"
           >
-            <ChevronRight className="h-4 w-4" />
+            <ChevronRight className="h-5 w-5 text-white" />
           </button>
         </div>
       </div>
