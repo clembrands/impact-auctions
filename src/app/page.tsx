@@ -11,10 +11,10 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import CtaBanner from "@/components/cta-banner";
+import TestimonialCarousel from "@/components/testimonial-carousel";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -47,27 +47,6 @@ const services = [
     icon: Plane,
     slug: "consignment-travel",
     externalHref: "https://www.myamoretravel.com/impact-auctions",
-  },
-];
-
-const testimonials = [
-  {
-    quote:
-      "Impact Auctions brought the perfect mix of professionalism and warmth. Our donors stayed engaged all night.",
-    name: "Development Director",
-    org: "Regional Children's Nonprofit",
-  },
-  {
-    quote:
-      "They guided our team with clarity and confidence. The Fund-A-Need was our best ever.",
-    name: "Event Chair",
-    org: "Community Foundation",
-  },
-  {
-    quote:
-      "From planning to execution, they made the night feel seamless—and the results exceeded expectations.",
-    name: "Executive Director",
-    org: "Health & Wellness Charity",
   },
 ];
 
@@ -450,53 +429,7 @@ export default function Home() {
       {/* Testimonials */}
       <section className="section-pad" data-testid="section-testimonials">
         <div className="container-tight">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="display-font text-3xl font-extrabold tracking-tight text-primary" data-testid="text-testimonials-title">
-              What Nonprofits Say
-            </h2>
-          </div>
-
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {testimonials.map((t, idx) => (
-              <Card
-                key={idx}
-                className="flex min-h-[220px] flex-col rounded-xl border border-card-border bg-card p-7"
-                data-testid={`card-testimonial-${idx}`}
-              >
-                <div className="flex-1">
-                  <div
-                    className="mb-4 flex items-start gap-4"
-                    data-testid={`wrap-testimonial-quote-${idx}`}
-                  >
-                    <div aria-hidden="true" data-testid={`icon-testimonial-quote-${idx}`}>
-                      <span className="display-font text-5xl font-extrabold leading-none text-primary/70">"</span>
-                    </div>
-                    <p
-                      className="text-base/7 text-secondary"
-                      data-testid={`text-testimonial-quote-${idx}`}
-                    >
-                      {t.quote}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-5 border-t border-card-border pt-4">
-                  <div
-                    className="text-sm font-semibold text-primary"
-                    data-testid={`text-testimonial-name-${idx}`}
-                  >
-                    {t.name}
-                  </div>
-                  <div
-                    className="text-sm text-secondary"
-                    data-testid={`text-testimonial-org-${idx}`}
-                  >
-                    {t.org}
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
+          <TestimonialCarousel />
         </div>
       </section>
 

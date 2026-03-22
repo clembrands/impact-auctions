@@ -5,6 +5,7 @@ import Link from "next/link";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import CtaBanner from "@/components/cta-banner";
+import TestimonialCarousel from "@/components/testimonial-carousel";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -376,16 +377,7 @@ export default function AuctionPackages() {
       {/* Testimonial Section */}
       <section className="section-pad bg-background" data-testid="section-testimonial">
         <div className="container-tight">
-          <div className="mx-auto max-w-4xl text-center">
-            <blockquote className="space-y-6">
-              <p className="display-font text-2xl md:text-3xl font-medium text-primary italic leading-relaxed">
-                "The travel packages were our top-selling auction items two years in a row. Our donors love them, and we love that there's no risk. Impact Auctions made it incredibly easy."
-              </p>
-              <footer className="text-base font-semibold text-secondary">
-                — Development Director, Regional Children's Nonprofit
-              </footer>
-            </blockquote>
-          </div>
+          <TestimonialCarousel />
         </div>
       </section>
 

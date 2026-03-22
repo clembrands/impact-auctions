@@ -5,6 +5,7 @@ import Link from "next/link";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import CtaBanner from "@/components/cta-banner";
+import TestimonialCarousel from "@/components/testimonial-carousel";
 import { Card } from "@/components/ui/card";
 import {
   Accordion,
@@ -278,18 +279,9 @@ export default function FundANeed() {
       </section>
 
       {/* Testimonial Section */}
-      <section className="section-pad bg-[#F5F5F1]" data-testid="section-testimonial">
+      <section className="section-pad bg-muted" data-testid="section-testimonial">
         <div className="container-tight">
-          <div className="mx-auto max-w-4xl text-center">
-            <blockquote className="space-y-6">
-              <p className="display-font text-2xl md:text-3xl font-medium text-primary italic leading-relaxed">
-                "From planning to execution, they made the night feel seamless—and the results exceeded expectations. Our Fund-A-Need alone raised more than our entire event did last year."
-              </p>
-              <footer className="text-base font-semibold text-secondary">
-                — Executive Director, Health & Wellness Charity
-              </footer>
-            </blockquote>
-          </div>
+          <TestimonialCarousel />
         </div>
       </section>
 
