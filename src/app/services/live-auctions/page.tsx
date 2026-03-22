@@ -254,10 +254,10 @@ export default function LiveAuctions() {
                  desc: "Maximize giving moments."
                },
                {
-                 title: "Silent Auctions",
-                 slug: "silent-auctions",
-                 icon: Megaphone,
-                 desc: "Strategic item displays."
+                 title: "Fund-A-Need",
+                 slug: "fund-a-need",
+                 icon: BadgeDollarSign,
+                 desc: "Maximize giving moments."
                },
                {
                  title: "Event Planning",

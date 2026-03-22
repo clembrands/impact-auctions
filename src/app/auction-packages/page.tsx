@@ -480,12 +480,6 @@ export default function AuctionPackages() {
                  desc: "High-energy bid calling."
                },
                {
-                 title: "Silent Auctions",
-                 slug: "silent-auctions",
-                 icon: BadgeDollarSign,
-                 desc: "Strategic item displays."
-               },
-               {
                  title: "Event Planning",
                  slug: "event-planning-emcee",
                  icon: Presentation,

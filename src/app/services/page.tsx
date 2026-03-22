@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import {
-  BadgeDollarSign,
   CalendarClock,
   Check,
   HandHeart,
@@ -20,12 +19,6 @@ const services = [
     description: "Licensed professional auctioneers who bring energy, expertise, and proven bid-calling techniques to keep your program moving and donors engaged all night.",
     icon: Megaphone,
     slug: "live-auctions",
-  },
-  {
-    title: "Silent Auctions",
-    description: "Strategic item display, bid sheet design, and pacing expertise to maximize participation and final bids—without the chaos.",
-    icon: BadgeDollarSign,
-    slug: "silent-auctions",
   },
   {
     title: "Fund-A-Need",

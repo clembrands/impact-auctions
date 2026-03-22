@@ -29,7 +29,7 @@ export default function About() {
 
       <PageHero
         title="About Impact Auctions"
-        subtitle="Experience. Reliability. Expertise in Live and Silent Auctions."
+        subtitle="Experience. Reliability. Expertise in Professional Auctioneering."
       />
 
       {/* Founders Section */}

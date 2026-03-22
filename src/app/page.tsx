@@ -30,12 +30,6 @@ const services = [
     slug: "live-auctions",
   },
   {
-    title: "Silent Auctions",
-    description: "Strategic silent auction setup and pacing to drive more bids—without chaos.",
-    icon: BadgeDollarSign,
-    slug: "silent-auctions",
-  },
-  {
     title: "Fund-A-Need",
     description: "A compelling moment that inspires donors to give at meaningful levels.",
     icon: HandHeart,
