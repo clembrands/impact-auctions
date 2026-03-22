@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,6 +22,7 @@ const schema = z.object({
   eventDate: z.string().min(1, "Please enter your event date"),
   howDidYouHear: z.string().optional(),
   message: z.string().min(10, "Please add a short message"),
+  honeypot: z.string().optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -43,6 +45,9 @@ function PageHero({ title, subtitle }: { title: string; subtitle: string }) {
 }
 
 export default function Contact() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -54,12 +59,39 @@ export default function Contact() {
       eventDate: "",
       howDidYouHear: "",
       message: "",
+      honeypot: "",
     },
   });
 
-  function onSubmit(values: FormValues) {
-    // Mockup mode: no backend submission
-    console.log("Contact form submitted", values);
+  async function onSubmit(values: FormValues) {
+    setIsSubmitting(true);
+    setSubmitMessage(null);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit form");
+      }
+
+      setSubmitMessage({
+        type: "success",
+        text: "Thank you! We've received your message and will be in touch soon.",
+      });
+      form.reset();
+    } catch (error) {
+      console.error("[v0] Form submission error:", error);
+      setSubmitMessage({
+        type: "error",
+        text: "There was an error submitting your form. Please try again or call Debbie at (407) 267-8988.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -77,6 +109,30 @@ export default function Contact() {
             <Card className="rounded-xl border border-card-border bg-card p-6 md:col-span-2" data-testid="card-contact-form">
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4" data-testid="form-contact">
+
+                  {submitMessage && (
+                    <div
+                      className={`rounded-lg p-4 ${
+                        submitMessage.type === "success"
+                          ? "bg-green-50 text-green-800 border border-green-200"
+                          : "bg-red-50 text-red-800 border border-red-200"
+                      }`}
+                      data-testid={`message-${submitMessage.type}`}
+                    >
+                      {submitMessage.text}
+                    </div>
+                  )}
+
+                  {/* Honeypot field - hidden from real users */}
+                  <div className="sr-only" aria-hidden="true">
+                    <input
+                      type="text"
+                      {...form.register("honeypot")}
+                      tabIndex={-1}
+                      autoComplete="off"
+                      data-testid="input-honeypot"
+                    />
+                  </div>
 
                   <FormField
                     control={form.control}
@@ -191,8 +247,13 @@ export default function Contact() {
                   />
 
                   <div className="pt-2">
-                    <Button className="rounded-lg bg-primary px-6" type="submit" data-testid="button-submit">
-                      Send Message
+                    <Button
+                      className="rounded-lg bg-primary px-6"
+                      type="submit"
+                      disabled={isSubmitting}
+                      data-testid="button-submit"
+                    >
+                      {isSubmitting ? "Sending..." : "Send Message"}
                     </Button>
                   </div>
                 </form>
