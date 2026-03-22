@@ -417,8 +417,7 @@ export default function Home() {
                 Meet Ron &amp; Debbie
               </h2>
               <p className="text-secondary" data-testid="text-about-body">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Debbie and Ron Hitzel bring over 20 years of dedicated fundraising experience to Impact Auctions, a full-service, licensed charity auctioneer brand based in North Carolina and Florida. As a dynamic husband-and-wife team, Ron leverages his unique background as a multilingual former US Navy Nuclear Submariner and global business manager, while Debbie draws on her nearly 30-year career as an educator to passionately support charitable causes. Together, they specialize in helping nonprofit organizations achieve record-breaking profits in a single night, seamlessly minimizing the workload for committee volunteers while maximizing the success of your next fundraising event.
               </p>
               <Link href="/about" data-testid="link-about-learn">
                 <Button
