@@ -67,8 +67,8 @@ export default function Contact() {
       <SiteHeader />
 
       <PageHero
-        title="Call Debbie at (407) 267-8988 or fill out the form below"
-        subtitle="Let's Get Started"
+        title="Get In Touch"
+        subtitle="Call Debbie at (407) 267-8988 or fill out the form below"
       />
 
       <section className="section-pad" data-testid="section-contact-form">
