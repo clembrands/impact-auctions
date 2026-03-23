@@ -15,7 +15,7 @@ const teamMembers = [
   },
   {
     name: "Stephen LaRaviere",
-    title: "Auctioneer",
+    title: "Auctioneer/Virginia State Auctioneer of the Year",
     image: "/images/headshot-stephen.jpg",
     bio: "An energetic and experienced auctioneer known for connecting with audiences and driving competitive bidding. Stephen adapts seamlessly to any crowd size or format.",
   },
