@@ -46,7 +46,7 @@ const services = [
   },
   {
     title: "Emcee Services",
-    description: "A professional host who commands the room, keeps transitions tight, and builds momentum toward your biggest fundraising moments.",
+    description: "A professional auctioneer who commands the room, keeps transitions tight, and builds momentum towards the biggest fundraising moments. ",
     icon: Mic,
     slug: "emcee",
   },
