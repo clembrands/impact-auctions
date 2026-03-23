@@ -111,7 +111,7 @@ export default function Services() {
               Our Core Services
             </h2>
             <p className="mt-3 text-secondary" data-testid="text-core-services-subtitle">
-              The revenue-driving services that make your event a success.
+              The revenue-driving services that make your event a success. Personalized for every size non-profit, big or small. 
             </p>
           </div>
 
