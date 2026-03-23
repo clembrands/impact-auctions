@@ -20,7 +20,7 @@ export default function CornerBanner() {
       }}
     >
       {/* Triangle fill */}
-      <span
+      <div
         aria-hidden="true"
         style={{
           position: "absolute",
@@ -30,35 +30,35 @@ export default function CornerBanner() {
           height: 0,
           borderStyle: "solid",
           borderWidth: "0 160px 160px 0",
-          borderColor: `transparent #212D48 transparent transparent`,
+          borderColor: `transparent hsl(var(--primary)) transparent transparent`,
           transition: "border-color 0.2s ease",
         }}
         className="hover-triangle"
       />
       {/* Label — rotated 45° and positioned in the triangle corner */}
-      <span
+      <div
         style={{
           position: "absolute",
-          top: "36px",
-          right: "-18px",
-          width: "140px",
+          top: "32px",
+          right: "-22px",
+          width: "160px",
           textAlign: "center",
           transform: "rotate(45deg)",
-          color: "#D4C4A8",
-          fontSize: "11px",
+          color: "hsl(var(--accent))",
+          fontSize: "12px",
           fontWeight: 700,
-          letterSpacing: "0.06em",
+          letterSpacing: "0.08em",
           textTransform: "uppercase",
-          lineHeight: 1.25,
+          lineHeight: 1.2,
           pointerEvents: "none",
           userSelect: "none",
-          fontFamily: "var(--font-display)",
+          fontFamily: "Montserrat, sans-serif",
         }}
       >
         Live Auction
         <br />
         Packages
-      </span>
+      </div>
     </Link>
   );
 }
