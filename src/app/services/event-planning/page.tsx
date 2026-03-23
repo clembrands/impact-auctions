@@ -170,7 +170,7 @@ export default function EventPlanning() {
               },
               {
                 step: "4-6 Weeks Out",
-                description: "Detailed planning. We finalize the run-of-show, coordinate with vendors, and prepare all speaker materials."
+                description: "Detailed planning. We finalize the run-of-show, coordinate with vendors, and help prepare speaker materials."
               },
               {
                 step: "1 Week Out",
