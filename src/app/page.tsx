@@ -22,7 +22,7 @@ import TestimonialCarousel from "@/components/testimonial-carousel";
 const services = [
   {
     title: "Fundraising Auctioneer",
-    description: "High-energy, professional live auctioneering that keeps the room engaged and giving.",
+    description: "High-energy, professional auctioneer that keeps the room engaged and entertained in surpassing goals.",
     icon: Megaphone,
     slug: "live-auctions",
   },
