@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
-import { Check, Megaphone } from "lucide-react";
+import { Check, Megaphone, Zap } from "lucide-react";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import CtaBanner from "@/components/cta-banner";
