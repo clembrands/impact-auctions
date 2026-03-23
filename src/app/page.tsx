@@ -27,8 +27,8 @@ const services = [
     slug: "live-auctions",
   },
   {
-    title: "Fund-A-Need",
-    description: "A compelling moment that inspires donors to give at meaningful levels.",
+    title: "Fund-A-Need (Appeal)",
+    description: "A compelling moment that inspires donors to give at meaningful levels; including a paddle drop.",
     icon: HandHeart,
     slug: "fund-a-need",
   },
