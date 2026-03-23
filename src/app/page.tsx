@@ -336,7 +336,7 @@ export default function Home() {
                 className="rounded-lg border-primary/30 text-primary hover:bg-primary/5"
                 data-testid="button-team-meet"
               >
-                Meet Everyone
+                Meet the Team
               </Button>
             </Link>
           </div>
