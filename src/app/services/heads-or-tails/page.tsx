@@ -90,7 +90,7 @@ export default function HeadsOrTails() {
               {
                 step: "03",
                 title: "Flip & Eliminate",
-                description: "The emcee flips the coin. Players who guessed wrong sit down. The tension builds round by round until only one player remains standing."
+                description: "The auctioneer flips the coin. Players who guessed wrong sit down. The tension builds round by round until only one player remains standing."
               },
               {
                 step: "04",
