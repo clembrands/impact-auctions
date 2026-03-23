@@ -287,10 +287,10 @@ export default function Contact() {
                       </div>
                     </Link>
 
-                    <Link href="mailto:Debbie@ImpactAuctions.org" data-testid="link-contact-email">
+                    <Link href="mailto:debbie@debbieimpactauctions.org" data-testid="link-contact-email">
                       <div className="flex items-center gap-3 text-secondary hover:text-primary transition-colors">
                         <Mail className="h-5 w-5 text-primary flex-shrink-0" />
-                        <span className="font-medium">Debbie@ImpactAuctions.org</span>
+                        <span className="font-medium">debbie@debbieimpactauctions.org</span>
                       </div>
                     </Link>
 
