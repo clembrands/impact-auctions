@@ -226,7 +226,7 @@ export default function Services() {
         <div className="container-tight">
           <div className="mx-auto max-w-4xl">
             <h2 className="display-font text-3xl font-extrabold text-center text-primary mb-12" data-testid="text-included-title">
-              Every Client Gets
+              Every Client Receives Personal Guidance
             </h2>
 
             <div className="flex flex-col md:flex-row justify-center gap-x-16 gap-y-4">
