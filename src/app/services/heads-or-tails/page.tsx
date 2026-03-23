@@ -166,7 +166,7 @@ export default function HeadsOrTails() {
               <ul className="space-y-5 flex-1">
                 {[
                   "Full game hosting and facilitation",
-                  "Ticket sales strategy and pricing guidance",
+                  "Token sales strategy and pricing guidance",
                   "Engaging, high-energy emcee delivery",
                   "Timing and placement in your program",
                   "Prize coordination and announcement"
@@ -184,7 +184,7 @@ export default function HeadsOrTails() {
                 {[
                   "Round-by-round crowd management",
                   "Dispute resolution and fair play",
-                  "Optional multiple-ticket upsell strategies",
+                  "Optional multiple-token upsell strategies",
                   "Integration with your event flow",
                   "Post-game transition to next program element"
                 ].map((item, i) => (
