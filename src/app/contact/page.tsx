@@ -90,7 +90,7 @@ export default function Contact() {
               Let's Plan Your Next Event
             </h1>
             <p className="mt-4 text-secondary text-lg" data-testid="text-page-subtitle">
-              Whether you're 6 months out or 6 weeks away, we'd love to hear about your fundraising goals.
+              Whether you're 12 months out or 12 weeks away, we'd love to hear about your fundraising goals.
             </p>
           </div>
         </div>
