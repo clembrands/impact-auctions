@@ -26,7 +26,7 @@ const coreServices = [
     slug: "live-auctions",
   },
   {
-    title: "Fund-A-Need",
+    title: "Fund-A-Need (Appeal)",
     description: "The most powerful fundraising moment of your night. We craft compelling appeals that inspire donors to give at meaningful levels for your mission.",
     icon: HandHeart,
     slug: "fund-a-need",
@@ -56,7 +56,7 @@ const supportingServices = [
   },
   {
     title: "Heads or Tails",
-    description: "A crowd-favorite fundraising game that gets every guest on their feet, builds excitement, and generates meaningful revenue in just minutes.",
+    description: "High-energy, professional auctioneer  that keeps the room engaged and entertained in surpassing goals. ",
     icon: Coins,
     slug: "heads-or-tails",
   },
