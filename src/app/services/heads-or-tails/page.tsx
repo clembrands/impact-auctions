@@ -51,7 +51,7 @@ export default function HeadsOrTails() {
               </h2>
               <div className="space-y-4 text-secondary text-lg leading-relaxed">
                 <p>
-                  Heads or Tails is a simple, high-energy fundraising game that generates real revenue while giving every guest a chance to win a fabulous prize. Players purchase a ticket, then survive each round by correctly guessing heads or tails on a coin flip — until one winner remains.
+                  Heads or Tails is a simple, high-energy fundraising game that generates real revenue while giving every guest a chance to win a fabulous prize. Players purchase a token, like a blinky ring, and then survive each round by correctly guessing heads or tails on a coin flip — until one winner remains.
                 </p>
                 <p>
                   It sounds simple, but the energy it creates is electric. Guests are on their feet, cheering each other on, and the suspense builds with every flip. It's one of the easiest ways to add excitement and significant revenue to your fundraising event.
