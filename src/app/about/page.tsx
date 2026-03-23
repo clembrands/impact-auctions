@@ -139,7 +139,7 @@ export default function About() {
               The Team
             </h2>
             <p className="mt-3 text-secondary" data-testid="text-team-subtitle">
-              Professional auctioneers and event experts
+              Professional auctioneers and bid spotters.
             </p>
           </div>
 
