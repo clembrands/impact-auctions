@@ -233,7 +233,7 @@ export default function Services() {
               <ul className="space-y-5">
                 {[
                   "Licensed Fundraising Auctioneer",
-                  "Silent Auction Expertise",
+                  "Team Bid Spotters",
                   "Fund Appeal Strategy",
                   "Run-of-Show Planning",
                   "Emcee Services"
