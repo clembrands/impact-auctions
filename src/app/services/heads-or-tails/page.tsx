@@ -79,8 +79,8 @@ export default function HeadsOrTails() {
             {[
               {
                 step: "01",
-                title: "Sell Tickets",
-                description: "Guests purchase Heads or Tails tickets before or during the event — typically $20–$50 each, or a bundle deal to maximize revenue."
+                title: "Sell Tokens",
+                description: "Guests purchase tokens, like blinky rings, before or during the event. Typically $25–$100 each."
               },
               {
                 step: "02",
