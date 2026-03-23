@@ -174,7 +174,7 @@ export default function EventPlanning() {
               },
               {
                 step: "1 Week Out",
-                description: "Final review. We do a walkthrough of the venue, confirm all details, and rehearse key moments."
+                description: "Final review. Confirming all the details, rehearsing key moments, and making sure the live auction items are in the correct order."
               },
               {
                 step: "Event Day",
