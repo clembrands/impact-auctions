@@ -1,5 +1,8 @@
-import { Check, Megaphone, Mic2, Clock, Zap } from "lucide-react";
+"use client";
+
+import { useEffect } from "react";
 import Link from "next/link";
+import { Check, Clock, Megaphone, Zap } from "lucide-react";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import CtaBanner from "@/components/cta-banner";

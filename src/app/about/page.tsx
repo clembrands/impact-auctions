@@ -15,7 +15,7 @@ const teamMembers = [
   },
   {
     name: "Stephen LaRaviere",
-    title: "Auctioneer",
+    title: "Auctioneer/Virginia State Auctioneer of the Year",
     image: "/images/headshot-stephen.jpg",
     bio: "An energetic and experienced auctioneer known for connecting with audiences and driving competitive bidding. Stephen adapts seamlessly to any crowd size or format.",
   },
@@ -139,7 +139,7 @@ export default function About() {
               The Team
             </h2>
             <p className="mt-3 text-secondary" data-testid="text-team-subtitle">
-              Professional auctioneers and event experts
+              Professional auctioneers and bid spotters.
             </p>
           </div>
 

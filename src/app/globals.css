@@ -114,6 +114,13 @@
   }
 }
 
+@layer base {
+  /* Corner banner triangle hover */
+  a:hover .hover-triangle {
+    border-color: transparent #2e3d60 transparent transparent !important;
+  }
+}
+
 @layer utilities {
   .section-pad {
     padding-block: 5rem;

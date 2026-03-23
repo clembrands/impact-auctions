@@ -165,16 +165,16 @@ export default function EventPlanning() {
 
             {[
               {
-                step: "3-6 Months Out",
+                step: "12 Months Out",
                 description: "Initial consultation. We learn about your event, goals, and vision. We start building the run-of-show framework."
               },
               {
                 step: "4-6 Weeks Out",
-                description: "Detailed planning. We finalize the run-of-show, coordinate with vendors, and prepare all speaker materials."
+                description: "Detailed planning. We finalize the run-of-show, coordinate with vendors, and help prepare speaker materials."
               },
               {
                 step: "1 Week Out",
-                description: "Final review. We do a walkthrough of the venue, confirm all details, and rehearse key moments."
+                description: "Final review. Confirming all the details, rehearsing key moments, and making sure the live auction items are in the correct order."
               },
               {
                 step: "Event Day",

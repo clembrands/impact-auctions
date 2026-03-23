@@ -51,7 +51,7 @@ export default function HeadsOrTails() {
               </h2>
               <div className="space-y-4 text-secondary text-lg leading-relaxed">
                 <p>
-                  Heads or Tails is a simple, high-energy fundraising game that generates real revenue while giving every guest a chance to win a fabulous prize. Players purchase a ticket, then survive each round by correctly guessing heads or tails on a coin flip — until one winner remains.
+                  Heads or Tails is a simple, high-energy fundraising game that generates real revenue while giving every guest a chance to win a fabulous prize. Players purchase a token, like a blinky ring, and then survive each round by correctly guessing heads or tails on a coin flip — until one winner remains.
                 </p>
                 <p>
                   It sounds simple, but the energy it creates is electric. Guests are on their feet, cheering each other on, and the suspense builds with every flip. It's one of the easiest ways to add excitement and significant revenue to your fundraising event.
@@ -79,8 +79,8 @@ export default function HeadsOrTails() {
             {[
               {
                 step: "01",
-                title: "Sell Tickets",
-                description: "Guests purchase Heads or Tails tickets before or during the event — typically $20–$50 each, or a bundle deal to maximize revenue."
+                title: "Sell Tokens",
+                description: "Guests purchase tokens, like blinky rings, before or during the event. Typically $25–$100 each."
               },
               {
                 step: "02",
@@ -90,7 +90,7 @@ export default function HeadsOrTails() {
               {
                 step: "03",
                 title: "Flip & Eliminate",
-                description: "The emcee flips the coin. Players who guessed wrong sit down. The tension builds round by round until only one player remains standing."
+                description: "The auctioneer flips the coin. Players who guessed wrong sit down. The tension builds round by round until only one player remains standing."
               },
               {
                 step: "04",
@@ -166,7 +166,7 @@ export default function HeadsOrTails() {
               <ul className="space-y-5 flex-1">
                 {[
                   "Full game hosting and facilitation",
-                  "Ticket sales strategy and pricing guidance",
+                  "Token sales strategy and pricing guidance",
                   "Engaging, high-energy emcee delivery",
                   "Timing and placement in your program",
                   "Prize coordination and announcement"
@@ -184,7 +184,7 @@ export default function HeadsOrTails() {
                 {[
                   "Round-by-round crowd management",
                   "Dispute resolution and fair play",
-                  "Optional multiple-ticket upsell strategies",
+                  "Optional multiple-token upsell strategies",
                   "Integration with your event flow",
                   "Post-game transition to next program element"
                 ].map((item, i) => (
@@ -262,6 +262,10 @@ export default function HeadsOrTails() {
                 {
                   q: "Can this be combined with other fundraising games?",
                   a: "Absolutely. Heads or Tails pairs naturally with a live auction, Fund-A-Need, or raffle. We can help you sequence multiple revenue elements for maximum impact."
+                },
+                {
+                  q: "Are there other games that we can do instead of heads or tails?",
+                  a: "Yes — other forms of revenue include things like last man standing, musical chairs, and lots of other ideas we will help guide you on."
                 }
               ].map((faq, i) => (
                 <AccordionItem key={i} value={`item-${i}`}>

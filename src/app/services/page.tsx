@@ -26,7 +26,7 @@ const coreServices = [
     slug: "live-auctions",
   },
   {
-    title: "Fund-A-Need",
+    title: "Fund-A-Need (Appeal)",
     description: "The most powerful fundraising moment of your night. We craft compelling appeals that inspire donors to give at meaningful levels for your mission.",
     icon: HandHeart,
     slug: "fund-a-need",
@@ -50,13 +50,13 @@ const supportingServices = [
   },
   {
     title: "Emcee Services",
-    description: "A professional host who commands the room, keeps transitions tight, and builds momentum toward your biggest fundraising moments.",
+    description: "A professional auctioneer who commands the room, keeps transitions tight, and builds momentum toward your biggest fundraising moments.",
     icon: Mic,
     slug: "emcee",
   },
   {
     title: "Heads or Tails",
-    description: "A crowd-favorite fundraising game that gets every guest on their feet, builds excitement, and generates meaningful revenue in just minutes.",
+    description: "High-energy, professional auctioneer  that keeps the room engaged and entertained in surpassing goals. ",
     icon: Coins,
     slug: "heads-or-tails",
   },
@@ -111,7 +111,7 @@ export default function Services() {
               Our Core Services
             </h2>
             <p className="mt-3 text-secondary" data-testid="text-core-services-subtitle">
-              The revenue-driving services that make your event a success.
+              The revenue-driving services that make your event a success. Personalized for every size non-profit, big or small. 
             </p>
           </div>
 
@@ -226,14 +226,14 @@ export default function Services() {
         <div className="container-tight">
           <div className="mx-auto max-w-4xl">
             <h2 className="display-font text-3xl font-extrabold text-center text-primary mb-12" data-testid="text-included-title">
-              Every Client Gets
+              Every Client Receives Personal Guidance
             </h2>
 
             <div className="flex flex-col md:flex-row justify-center gap-x-16 gap-y-4">
               <ul className="space-y-5">
                 {[
                   "Licensed Fundraising Auctioneer",
-                  "Silent Auction Expertise",
+                  "Team Bid Spotters",
                   "Fund Appeal Strategy",
                   "Run-of-Show Planning",
                   "Emcee Services"

@@ -77,7 +77,7 @@ export default function SiteFooter() {
             </h3>
             <div className="space-y-2 text-sm text-white/85">
               <p data-testid="text-footer-phone">407-267-8988</p>
-              <p data-testid="text-footer-email">Debbie@ImpactAuctions.org</p>
+              <p data-testid="text-footer-email">debbie@debbieimpactauctions.org</p>
             </div>
             <div className="flex gap-4 pt-2">
               <a href="#" className="text-white/70 hover:text-white transition-colors" aria-label="Facebook">

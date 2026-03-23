@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
-
 import {
   Award,
   BadgeDollarSign,
@@ -19,18 +17,18 @@ import { Card } from "@/components/ui/card";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import CtaBanner from "@/components/cta-banner";
-
+import TestimonialCarousel from "@/components/testimonial-carousel";
 
 const services = [
   {
     title: "Fundraising Auctioneer",
-    description: "High-energy, professional live auctioneering that keeps the room engaged and giving.",
+    description: "High-energy, professional auctioneer that keeps the room engaged and entertained in surpassing goals.",
     icon: Megaphone,
     slug: "live-auctions",
   },
   {
-    title: "Fund-A-Need",
-    description: "A compelling moment that inspires donors to give at meaningful levels.",
+    title: "Fund-A-Need (Appeal)",
+    description: "A compelling moment that inspires donors to give at meaningful levels; including a paddle drop.",
     icon: HandHeart,
     slug: "fund-a-need",
   },
@@ -48,7 +46,7 @@ const services = [
   },
   {
     title: "Emcee Services",
-    description: "A professional host who commands the room, keeps transitions tight, and builds momentum toward your biggest fundraising moments.",
+    description: "A professional auctioneer who commands the room, keeps transitions tight, and builds momentum towards the biggest fundraising moments. ",
     icon: Mic,
     slug: "emcee",
   },
@@ -98,12 +96,6 @@ function PhotoCard({
 }
 
 export default function Home() {
-  useEffect(() => {
-    // Load Elfsight platform script
-    if ((window as any).efsAPI) {
-      (window as any).efsAPI.load();
-    }
-  }, []);
   return (
     <div className="min-h-dvh bg-background" data-testid="page-home">
       <SiteHeader />
@@ -113,7 +105,7 @@ export default function Home() {
         className="relative isolate overflow-visible"
         data-testid="section-hero"
       >
-        <div className="relative min-h-[78vh] overflow-hidden">
+        <div className="relative min-h-[78vh] md:min-h-[86vh] overflow-hidden">
           <img
             src="/images/hero-auction.jpg"
             alt="Live fundraising auction in a ballroom"
@@ -123,7 +115,7 @@ export default function Home() {
           />
           <div aria-hidden="true" className="absolute inset-0 -z-10 bg-black/55" />
 
-          <div className="container-tight flex min-h-[78vh] items-center pb-28 pt-16">
+          <div className="container-tight flex min-h-[78vh] md:min-h-[86vh] items-center pb-28 pt-16">
             <div className="mx-auto w-full max-w-3xl text-center md:mx-0 md:text-left">
               <h1
                 className="display-font text-balance text-4xl font-extrabold tracking-tight text-white md:text-6xl"
@@ -261,22 +253,7 @@ export default function Home() {
       {/* Testimonials — Google Business Profile Reviews via Elfsight */}
       <section className="section-pad" style={{ backgroundColor: "rgba(212, 196, 168, 0.18)" }} data-testid="section-testimonials">
         <div className="container-tight">
-          <div className="mx-auto max-w-2xl text-center mb-12">
-            <h2 className="display-font text-3xl font-extrabold tracking-tight text-primary" data-testid="text-testimonials-title">
-              What Nonprofits Say
-            </h2>
-            <p className="mt-3 text-secondary" data-testid="text-testimonials-subtitle">
-              Real feedback from organizations we've helped
-            </p>
-          </div>
-          
-          {/* Elfsight Google Reviews Embed */}
-          <script src="https://elfsightcdn.com/platform.js" async></script>
-          <div 
-            className="elfsight-app-56714005-6595-4b9c-b595-6c4575ba3a0d" 
-            data-elfsight-app-lazy
-            data-testid="elfsight-google-reviews"
-          ></div>
+          <TestimonialCarousel />
         </div>
       </section>
 
@@ -359,7 +336,7 @@ export default function Home() {
                 className="rounded-lg border-primary/30 text-primary hover:bg-primary/5"
                 data-testid="button-team-meet"
               >
-                Meet Everyone
+                Meet the Team
               </Button>
             </Link>
           </div>
