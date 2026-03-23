@@ -262,6 +262,10 @@ export default function HeadsOrTails() {
                 {
                   q: "Can this be combined with other fundraising games?",
                   a: "Absolutely. Heads or Tails pairs naturally with a live auction, Fund-A-Need, or raffle. We can help you sequence multiple revenue elements for maximum impact."
+                },
+                {
+                  q: "Are there other games that we can do instead of heads or tails?",
+                  a: "Yes — other forms of revenue include things like last man standing, musical chairs, and lots of other ideas we will help guide you on."
                 }
               ].map((faq, i) => (
                 <AccordionItem key={i} value={`item-${i}`}>
