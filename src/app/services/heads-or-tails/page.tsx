@@ -17,7 +17,12 @@ import { useState } from "react";
 
 function YouTubeEmbed({ videoId }: { videoId: string }) {
   const [playing, setPlaying] = useState(false);
-  const thumbnail = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  const [thumbnailError, setThumbnailError] = useState(false);
+  
+  // Try maxresdefault first, fallback to high quality
+  const thumbnail = !thumbnailError 
+    ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
+    : `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
 
   return (
     <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-muted">
@@ -39,6 +44,7 @@ function YouTubeEmbed({ videoId }: { videoId: string }) {
           <img
             src={thumbnail}
             alt="Heads or Tails game in action"
+            onError={() => setThumbnailError(true)}
             className="absolute inset-0 w-full h-full object-cover"
           />
           {/* Dark overlay */}
