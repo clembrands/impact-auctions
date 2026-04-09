@@ -109,7 +109,8 @@ export default function Home() {
           <img
             src="/images/hero-auction.jpg"
             alt="Live fundraising auction in a ballroom"
-            className="absolute inset-0 -z-20 h-full w-full object-cover object-top"
+            className="absolute inset-0 -z-20 h-full w-full object-cover"
+            style={{ objectPosition: "center 30%" }}
             loading="eager"
             data-testid="img-hero-background"
           />
