@@ -50,8 +50,8 @@ export default function LiveAuctions() {
                 </p>
               </div>
             </div>
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-muted grid place-items-center">
-               <span className="text-muted-foreground font-medium">Photo: Auctioneer on stage</span>
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-muted">
+              <img src="/images/auctioneer-on-stage.jpg" alt="Professional auctioneer on stage commanding the room" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>

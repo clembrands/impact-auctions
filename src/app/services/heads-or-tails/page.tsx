@@ -13,6 +13,54 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useState } from "react";
+
+function YouTubeEmbed({ videoId }: { videoId: string }) {
+  const [playing, setPlaying] = useState(false);
+  const thumbnail = "/images/heads-or-tails-video-thumbnail.jpg";
+
+  return (
+    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-muted">
+      {playing ? (
+        <iframe
+          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
+          title="Heads or Tails game in action"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          className="absolute inset-0 w-full h-full border-0"
+        />
+      ) : (
+        <button
+          onClick={() => setPlaying(true)}
+          aria-label="Play video: Heads or Tails game in action"
+          className="group absolute inset-0 w-full h-full"
+        >
+          {/* Thumbnail */}
+          <img
+            src={thumbnail}
+            alt="Heads or Tails game in action"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          {/* Dark overlay */}
+          <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
+          {/* Play button */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="flex items-center justify-center w-20 h-20 rounded-full bg-white/90 group-hover:bg-white shadow-xl group-hover:scale-110 transition-all duration-200">
+              <svg
+                className="w-8 h-8 text-primary ml-1"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          </div>
+        </button>
+      )}
+    </div>
+  );
+}
 
 function PageHero({ title, subtitle }: { title: string; subtitle: string }) {
   return (
@@ -58,9 +106,7 @@ export default function HeadsOrTails() {
                 </p>
               </div>
             </div>
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-muted grid place-items-center">
-              <span className="text-muted-foreground font-medium">Photo: Heads or Tails game in action</span>
-            </div>
+            <YouTubeEmbed videoId="RRR4NfHof4Q" />
           </div>
         </div>
       </section>

@@ -58,8 +58,8 @@ export default function FundANeed() {
                 </p>
               </div>
             </div>
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-muted grid place-items-center">
-               <span className="text-muted-foreground font-medium">Photo: Paddle raise moment</span>
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-muted">
+              <img src="/images/fund-a-need-paddle-raise.jpg" alt="Guests celebrating during fund-a-need paddle raise moment" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
