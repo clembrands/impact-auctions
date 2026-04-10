@@ -250,9 +250,7 @@ export default function Home() {
               <img src="/images/event-photo-2.jpg" alt="Couple at elegant gala event with dramatic dry ice effects" className="absolute inset-0 w-full h-full object-cover" />
             </div>
             <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-muted" style={{ transform: "scale(0.8625)", transformOrigin: "center" }}>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-muted-foreground font-medium">Event Photo 3</span>
-              </div>
+              <img src="/images/event-photo-3.jpg" alt="Professional auctioneer commanding the room at elegant gala event" className="absolute inset-0 w-full h-full object-cover" />
             </div>
           </div>
         </div>
