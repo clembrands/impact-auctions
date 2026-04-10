@@ -132,7 +132,7 @@ export default function Home() {
               </p>
 
               <div
-                className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:items-center md:justify-start"
+                className="mt-8 hidden flex-col justify-center gap-3 sm:flex-row sm:items-center md:flex md:justify-start"
                 data-testid="group-hero-actions"
               >
                 <Link href="/contact" data-testid="link-hero-primary">
