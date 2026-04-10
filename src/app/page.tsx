@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  Award,
   BadgeDollarSign,
   CalendarClock,
   Coins,
@@ -153,17 +152,6 @@ export default function Home() {
                     Our Services
                   </Button>
                 </Link>
-              </div>
-
-              <div className="mt-7 flex items-center justify-center gap-3 text-sm text-white/80 md:justify-start">
-                <span
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/15"
-                  data-testid="icon-hero-trust"
-                  aria-hidden="true"
-                >
-                  <Award className="h-5 w-5 text-white" strokeWidth={1.8} />
-                </span>
-                <p data-testid="text-hero-trust">Trusted by nonprofits nationwide for high-touch events.</p>
               </div>
             </div>
           </div>
