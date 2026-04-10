@@ -242,18 +242,18 @@ export default function Home() {
       {/* Photo Gallery */}
       <section className="section-pad bg-background" data-testid="section-photo-gallery">
         <div className="container">
-          <div className="grid gap-6 md:grid-cols-3">
-            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-muted">
+          <div className="grid gap-6 md:grid-cols-3 mx-auto max-w-4xl">
+            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-muted" style={{ transform: "scale(0.75)", transformOrigin: "center" }}>
               <div className="absolute inset-0 flex items-center justify-center">
                 <span className="text-muted-foreground font-medium">Event Photo 1</span>
               </div>
             </div>
-            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-muted">
+            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-muted" style={{ transform: "scale(0.75)", transformOrigin: "center" }}>
               <div className="absolute inset-0 flex items-center justify-center">
                 <span className="text-muted-foreground font-medium">Event Photo 2</span>
               </div>
             </div>
-            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-muted">
+            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-muted" style={{ transform: "scale(0.75)", transformOrigin: "center" }}>
               <div className="absolute inset-0 flex items-center justify-center">
                 <span className="text-muted-foreground font-medium">Event Photo 3</span>
               </div>
