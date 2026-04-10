@@ -51,8 +51,8 @@ export default function EventPlanning() {
                 </p>
               </div>
             </div>
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-muted grid place-items-center">
-              <span className="text-muted-foreground font-medium">Photo: Event planning team at work</span>
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-muted">
+              <img src="/images/event-planning-gala.jpg" alt="Guests at elegant gala event with crystal chandeliers" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
