@@ -244,9 +244,7 @@ export default function Home() {
         <div className="container">
           <div className="grid gap-6 md:grid-cols-3 mx-auto max-w-4xl">
             <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-muted" style={{ transform: "scale(0.75)", transformOrigin: "center" }}>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-muted-foreground font-medium">Event Photo 1</span>
-              </div>
+              <img src="/images/event-photo-1.jpg" alt="Couple at gala event with elegant balloon installation" className="absolute inset-0 w-full h-full object-cover" />
             </div>
             <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-muted" style={{ transform: "scale(0.75)", transformOrigin: "center" }}>
               <div className="absolute inset-0 flex items-center justify-center">
