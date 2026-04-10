@@ -205,7 +205,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
+          <div className="mt-10 grid gap-6 md:grid-cols-3 md:auto-rows-fr">
             {services.map((s) => {
               const Icon = s.icon;
               return (
