@@ -51,7 +51,7 @@ export default function LiveAuctions() {
               </div>
             </div>
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-muted">
-              <img src="/images/auctioneer-on-stage.jpg" alt="Professional auctioneer on stage commanding the room" className="w-full h-full object-cover" />
+              <img src="/images/auctioneer-live-action.jpg" alt="Professional auctioneer conducting live auction with energized bidders" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
