@@ -14,6 +14,11 @@ if not SANITY_API_TOKEN:
     print("[v0] ERROR: SANITY_API_TOKEN environment variable is not set")
     exit(1)
 
+print(f"[v0] Token length: {len(SANITY_API_TOKEN)}")
+print(f"[v0] Token starts with: {SANITY_API_TOKEN[:10]}...")
+print(f"[v0] Project ID: {SANITY_PROJECT_ID}")
+print(f"[v0] Dataset: {SANITY_DATASET}")
+
 # WordPress posts data (parsed from XML)
 posts_data = [
     {
