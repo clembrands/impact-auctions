@@ -115,7 +115,7 @@ def import_to_sanity():
             ]
         }
         
-        url = f"https://{SANITY_PROJECT_ID}.api.sanity.io/v2025-01-01/data/mutate/{SANITY_DATASET}"
+        url = f"https://{SANITY_PROJECT_ID}.api.sanity.io/v2024-01-01/data/mutate/{SANITY_DATASET}"
         
         headers = {
             "Authorization": f"Bearer {SANITY_API_TOKEN}",
@@ -130,6 +130,10 @@ def import_to_sanity():
                 result = json.loads(response.read().decode('utf-8'))
                 print(f"[v0] Post {i}/{len(posts_data)}: '{post['title']}' - ✓ Imported")
                 
+        except urllib.error.HTTPError as e:
+            error_body = e.read().decode('utf-8')
+            print(f"[v0] Post {i}/{len(posts_data)}: '{post['title']}' - ✗ Error: HTTP {e.code}")
+            print(f"[v0] Response: {error_body}")
         except Exception as e:
             print(f"[v0] Post {i}/{len(posts_data)}: '{post['title']}' - ✗ Error: {str(e)}")
     
