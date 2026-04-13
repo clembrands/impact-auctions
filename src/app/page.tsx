@@ -239,20 +239,52 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Photo Gallery */}
-      <section className="section-pad bg-background" data-testid="section-photo-gallery">
-        <div className="container">
-          <div className="grid gap-6 md:grid-cols-3 mx-auto max-w-4xl">
-            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-muted" style={{ transform: "scale(0.8625)", transformOrigin: "center" }}>
-              <img src="/images/event-photo-1.jpg" alt="Couple at gala event with elegant balloon installation" className="absolute inset-0 w-full h-full object-cover" />
-            </div>
-            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-muted" style={{ transform: "scale(0.8625)", transformOrigin: "center" }}>
-              <img src="/images/event-photo-2.jpg" alt="Couple at elegant gala event with dramatic dry ice effects" className="absolute inset-0 w-full h-full object-cover" />
-            </div>
-            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-muted" style={{ transform: "scale(0.8625)", transformOrigin: "center" }}>
-              <img src="/images/event-photo-3.jpg" alt="Professional auctioneer commanding the room at elegant gala event" className="absolute inset-0 w-full h-full object-cover" />
-            </div>
-          </div>
+      {/* Photo Gallery — staggered 3-column full-height showcase */}
+      <section
+        className="relative w-full overflow-hidden flex flex-col md:flex-row"
+        style={{ height: "100svh" }}
+        data-testid="section-photo-gallery"
+      >
+        {/* Column 1 — shifted up */}
+        <div
+          className="relative flex-1 min-h-[40vh] md:min-h-0 overflow-hidden"
+          style={{ clipPath: "polygon(0 0, 97% 0, 100% 100%, 0 100%)" }}
+        >
+          <img
+            src="/images/event-photo-1.jpg"
+            alt="Couple at gala event with elegant balloon installation"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ transform: "translateY(-4%)" }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+        </div>
+
+        {/* Column 2 — shifted down */}
+        <div
+          className="relative flex-1 min-h-[40vh] md:min-h-0 overflow-hidden"
+          style={{ clipPath: "polygon(3% 0, 97% 0, 100% 100%, 0 100%)" }}
+        >
+          <img
+            src="/images/event-photo-2.jpg"
+            alt="Couple at elegant gala event with dramatic dry ice effects"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ transform: "translateY(4%)" }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+        </div>
+
+        {/* Column 3 — shifted up */}
+        <div
+          className="relative flex-1 min-h-[40vh] md:min-h-0 overflow-hidden"
+          style={{ clipPath: "polygon(3% 0, 100% 0, 100% 100%, 0 100%)" }}
+        >
+          <img
+            src="/images/event-photo-3.jpg"
+            alt="Professional auctioneer commanding the room at elegant gala event"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ transform: "translateY(-4%)" }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
         </div>
       </section>
 
