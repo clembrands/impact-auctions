@@ -218,7 +218,7 @@ function parseXml(xmlPath) {
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
-  const xmlPath = resolve(__dirname, "wordpress-export.xml");
+  const xmlPath = "/vercel/share/v0-project/scripts/wordpress-export.xml";
 
   console.log("Parsing WordPress XML export...");
   const items = parseXml(xmlPath);
