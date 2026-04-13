@@ -215,7 +215,7 @@ function parseXml(xmlPath) {
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
-  const xmlPath = resolve(__dirname, "../user_read_only_context/text_attachments/impactauctions.WordPress.2026-04-09-(1)-6pNyU.xml");
+  const xmlPath = resolve(__dirname, "wordpress-export.xml");
 
   console.log("Parsing WordPress XML export...");
   const items = parseXml(xmlPath);
