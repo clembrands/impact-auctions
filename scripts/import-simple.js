@@ -1,14 +1,18 @@
 import fs from 'fs';
 import { createClient } from '@sanity/client';
 
-const SANITY_PROJECT_ID = process.env.SANITY_PROJECT_ID;
-const SANITY_DATASET = process.env.SANITY_DATASET || 'production';
+const SANITY_PROJECT_ID = process.env.SANITY_PROJECT_ID || process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'z9la8qla';
+const SANITY_DATASET = process.env.SANITY_DATASET || process.env.NEXT_PUBLIC_SANITY_DATASET || 'production';
 const SANITY_API_TOKEN = process.env.SANITY_API_TOKEN;
 
-if (!SANITY_PROJECT_ID || !SANITY_API_TOKEN) {
-  console.error('[v0] Missing required environment variables');
+if (!SANITY_API_TOKEN) {
+  console.error('[v0] ERROR: SANITY_API_TOKEN environment variable is not set');
+  console.error('[v0] Please set SANITY_API_TOKEN in your environment');
   process.exit(1);
 }
+
+console.log('[v0] Using Sanity project:', SANITY_PROJECT_ID);
+console.log('[v0] Using dataset:', SANITY_DATASET);
 
 const client = createClient({
   projectId: SANITY_PROJECT_ID,
