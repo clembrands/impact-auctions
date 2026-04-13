@@ -249,7 +249,7 @@ export default function Home() {
           <div
             className="w-full max-w-sm md:w-72 lg:w-80 flex-shrink-0 overflow-hidden rounded-xl md:-mr-6"
             style={{
-              boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
+              boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
               transform: "rotate(0deg)",
               maxHeight: "500px",
             }}
@@ -266,7 +266,7 @@ export default function Home() {
           <div
             className="w-full max-w-sm md:w-80 lg:w-96 flex-shrink-0 overflow-hidden rounded-xl relative z-10 md:mb-[-40px]"
             style={{
-              boxShadow: "0 30px 80px rgba(0,0,0,0.6)",
+              boxShadow: "0 15px 40px rgba(0,0,0,0.35)",
               maxHeight: "540px",
             }}
           >
@@ -282,7 +282,7 @@ export default function Home() {
           <div
             className="w-full max-w-sm md:w-72 lg:w-80 flex-shrink-0 overflow-hidden rounded-xl md:-ml-6"
             style={{
-              boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
+              boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
               maxHeight: "500px",
             }}
           >
