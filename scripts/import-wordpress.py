@@ -24,11 +24,11 @@ xml_file = os.getenv('WORDPRESS_XML_PATH', '')
 
 if not xml_file or not os.path.exists(xml_file):
     possible_paths = [
-        '/vercel/share/v0-project/scripts/wordpress-export.xml',
-        './wordpress-export.xml',
-        '../scripts/wordpress-export.xml',
+        'scripts/wordpress-export.xml',
         './scripts/wordpress-export.xml',
-        os.path.expanduser('~/wordpress-export.xml')
+        'wordpress-export.xml',
+        './wordpress-export.xml',
+        '/vercel/share/v0-project/scripts/wordpress-export.xml',
     ]
     
     xml_file = None
