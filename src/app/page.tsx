@@ -241,8 +241,7 @@ export default function Home() {
 
       {/* Photo Gallery — staggered masonry-style */}
       <section
-        className="w-full py-20 px-6"
-        style={{ backgroundColor: "#1a1a1f" }}
+        className="w-full py-20 px-6 bg-white"
         data-testid="section-photo-gallery"
       >
         <div className="flex flex-col items-center gap-8 md:flex-row md:items-end md:justify-center md:gap-0">
