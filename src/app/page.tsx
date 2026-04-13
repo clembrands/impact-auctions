@@ -239,52 +239,61 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Photo Gallery — staggered 3-column full-height showcase */}
+      {/* Photo Gallery — staggered masonry-style */}
       <section
-        className="relative w-full overflow-hidden flex flex-col md:flex-row"
-        style={{ height: "100svh" }}
+        className="w-full py-20 px-6"
+        style={{ backgroundColor: "#1a1a1f" }}
         data-testid="section-photo-gallery"
       >
-        {/* Column 1 — shifted up */}
-        <div
-          className="relative flex-1 min-h-[40vh] md:min-h-0 overflow-hidden"
-          style={{ clipPath: "polygon(0 0, 97% 0, 100% 100%, 0 100%)" }}
-        >
-          <img
-            src="/images/event-photo-1.jpg"
-            alt="Couple at gala event with elegant balloon installation"
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ transform: "translateY(-4%)" }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-        </div>
+        <div className="flex flex-col items-center gap-8 md:flex-row md:items-end md:justify-center md:gap-0">
+          {/* Left image — tilted -2deg, raised */}
+          <div
+            className="w-full max-w-sm md:w-72 lg:w-80 flex-shrink-0 overflow-hidden rounded-xl md:-mr-6"
+            style={{
+              boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
+              transform: "rotate(0deg)",
+              maxHeight: "500px",
+            }}
+          >
+            <img
+              src="/images/event-photo-1.jpg"
+              alt="Couple at gala event with elegant balloon installation"
+              className="w-full h-full object-cover md:rotate-[-2deg] md:scale-105"
+              style={{ maxHeight: "500px", display: "block" }}
+            />
+          </div>
 
-        {/* Column 2 — shifted down */}
-        <div
-          className="relative flex-1 min-h-[40vh] md:min-h-0 overflow-hidden"
-          style={{ clipPath: "polygon(3% 0, 97% 0, 100% 100%, 0 100%)" }}
-        >
-          <img
-            src="/images/event-photo-2.jpg"
-            alt="Couple at elegant gala event with dramatic dry ice effects"
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ transform: "translateY(4%)" }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-        </div>
+          {/* Center image — larger, offset lower */}
+          <div
+            className="w-full max-w-sm md:w-80 lg:w-96 flex-shrink-0 overflow-hidden rounded-xl relative z-10 md:mb-[-40px]"
+            style={{
+              boxShadow: "0 30px 80px rgba(0,0,0,0.6)",
+              maxHeight: "540px",
+            }}
+          >
+            <img
+              src="/images/event-photo-2.jpg"
+              alt="Couple at elegant gala event with dramatic dry ice effects"
+              className="w-full h-full object-cover"
+              style={{ maxHeight: "540px", display: "block" }}
+            />
+          </div>
 
-        {/* Column 3 — shifted up */}
-        <div
-          className="relative flex-1 min-h-[40vh] md:min-h-0 overflow-hidden"
-          style={{ clipPath: "polygon(3% 0, 100% 0, 100% 100%, 0 100%)" }}
-        >
-          <img
-            src="/images/event-photo-3.jpg"
-            alt="Professional auctioneer commanding the room at elegant gala event"
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ transform: "translateY(-4%)" }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+          {/* Right image — tilted +2deg, raised */}
+          <div
+            className="w-full max-w-sm md:w-72 lg:w-80 flex-shrink-0 overflow-hidden rounded-xl md:-ml-6"
+            style={{
+              boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
+              maxHeight: "500px",
+            }}
+          >
+            <img
+              src="/images/event-photo-3.jpg"
+              alt="Professional auctioneer commanding the room at elegant gala event"
+              className="w-full h-full object-cover md:rotate-[2deg] md:scale-105"
+              style={{ maxHeight: "500px", display: "block" }}
+            />
+          </div>
         </div>
       </section>
 
