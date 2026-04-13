@@ -19,7 +19,7 @@ print(f"[v0] Dataset: {DATASET}")
 print(f"[v0] Token present: {bool(API_TOKEN)}")
 
 # Use absolute path to XML file
-xml_file = 'scripts/wordpress-export.xml'
+xml_file = '/vercel/share/v0-project/scripts/wordpress-export.xml'
 
 if not os.path.exists(xml_file):
     print(f"[v0] Error: Could not find {xml_file}")
