@@ -1,7 +1,10 @@
-const { createClient } = require("@sanity/client");
-const { XMLParser } = require("fast-xml-parser");
-const { readFileSync } = require("fs");
-const { resolve, dirname } = require("path");
+import { createClient } from "@sanity/client";
+import { XMLParser } from "fast-xml-parser";
+import { readFileSync } from "fs";
+import { resolve, dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const PROJECT_ID = "z9la8qla";
 const DATASET = "production";
