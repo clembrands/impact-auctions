@@ -239,19 +239,59 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Photo Gallery */}
-      <section className="section-pad bg-background" data-testid="section-photo-gallery">
-        <div className="container">
-          <div className="grid gap-6 md:grid-cols-3 mx-auto max-w-4xl">
-            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-muted" style={{ transform: "scale(0.8625)", transformOrigin: "center" }}>
-              <img src="/images/event-photo-1.jpg" alt="Couple at gala event with elegant balloon installation" className="absolute inset-0 w-full h-full object-cover" />
-            </div>
-            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-muted" style={{ transform: "scale(0.8625)", transformOrigin: "center" }}>
-              <img src="/images/event-photo-2.jpg" alt="Couple at elegant gala event with dramatic dry ice effects" className="absolute inset-0 w-full h-full object-cover" />
-            </div>
-            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-muted" style={{ transform: "scale(0.8625)", transformOrigin: "center" }}>
-              <img src="/images/event-photo-3.jpg" alt="Professional auctioneer commanding the room at elegant gala event" className="absolute inset-0 w-full h-full object-cover" />
-            </div>
+      {/* Photo Gallery — staggered masonry-style */}
+      <section
+        className="w-full pt-20 pb-32 px-6 bg-white"
+        data-testid="section-photo-gallery"
+      >
+        <div className="flex flex-col items-center gap-8 md:flex-row md:items-end md:justify-center md:gap-0">
+          {/* Left image — tilted -2deg, raised */}
+          <div
+            className="w-full max-w-sm md:w-72 lg:w-80 flex-shrink-0 overflow-hidden rounded-xl md:-mr-6"
+            style={{
+              boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
+              transform: "rotate(0deg)",
+              maxHeight: "500px",
+            }}
+          >
+            <img
+              src="/images/event-photo-1.jpg"
+              alt="Couple at gala event with elegant balloon installation"
+              className="w-full h-full object-cover md:rotate-[-2deg] md:scale-105"
+              style={{ maxHeight: "500px", display: "block" }}
+            />
+          </div>
+
+          {/* Center image — larger, offset lower */}
+          <div
+            className="w-full max-w-sm md:w-80 lg:w-96 flex-shrink-0 overflow-hidden rounded-xl relative z-10 md:mb-[-40px]"
+            style={{
+              boxShadow: "0 15px 40px rgba(0,0,0,0.35)",
+              maxHeight: "540px",
+            }}
+          >
+            <img
+              src="/images/event-photo-2.jpg"
+              alt="Couple at elegant gala event with dramatic dry ice effects"
+              className="w-full h-full object-cover"
+              style={{ maxHeight: "540px", display: "block" }}
+            />
+          </div>
+
+          {/* Right image — tilted +2deg, raised */}
+          <div
+            className="w-full max-w-sm md:w-72 lg:w-80 flex-shrink-0 overflow-hidden rounded-xl md:-ml-6"
+            style={{
+              boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
+              maxHeight: "500px",
+            }}
+          >
+            <img
+              src="/images/event-photo-3.jpg"
+              alt="Professional auctioneer commanding the room at elegant gala event"
+              className="w-full h-full object-cover md:rotate-[2deg] md:scale-105"
+              style={{ maxHeight: "500px", display: "block" }}
+            />
           </div>
         </div>
       </section>

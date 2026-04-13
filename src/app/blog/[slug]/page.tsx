@@ -53,6 +53,11 @@ const portableTextComponents = {
       );
     },
   },
+  // Handle unknown block types gracefully
+  unknownType: ({ value }: any) => {
+    // Skip undefined or unknown block types silently
+    return null;
+  },
   block: {
     h2: ({ children }: any) => (
       <h2 className="display-font mt-10 mb-4 text-2xl font-bold text-primary">
@@ -148,10 +153,14 @@ export default async function BlogPostPage({
             )}
 
             <div className="mt-10 prose-impact">
-              <PortableText
-                value={post.content}
-                components={portableTextComponents}
-              />
+              {post.content && Array.isArray(post.content) && post.content.length > 0 ? (
+                <PortableText
+                  value={post.content.filter((block: any) => block && block._type)}
+                  components={portableTextComponents}
+                />
+              ) : (
+                <p className="text-secondary">No content available.</p>
+              )}
             </div>
           </div>
         </div>
