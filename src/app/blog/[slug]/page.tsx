@@ -112,7 +112,7 @@ export default async function BlogPostPage({
   const post = await getPostBySlug(slug);
   if (!post) notFound();
 
-  const related = await getRelatedPosts(slug, post.category);
+  const related = await getRelatedPosts(slug);
 
   return (
     <div className="min-h-dvh bg-background">
@@ -122,10 +122,6 @@ export default async function BlogPostPage({
         <div className="container-tight">
           <div className="mx-auto max-w-3xl">
             <div className="flex items-center gap-2 text-xs font-medium text-secondary">
-              {post.category && (
-                <span className="uppercase tracking-wider">{post.category}</span>
-              )}
-              {post.category && post.date && <span>&bull;</span>}
               {post.date && (
                 <span>
                   {new Date(post.date).toLocaleDateString("en-US", {

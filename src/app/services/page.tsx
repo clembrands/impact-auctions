@@ -56,7 +56,7 @@ const supportingServices = [
   },
   {
     title: "Heads or Tails",
-    description: "High-energy, professional auctioneer  that keeps the room engaged and entertained in surpassing goals. ",
+    description: "High-energy, professional auctioneer that keeps the room engaged and entertained with surpassing goals.",
     icon: Coins,
     slug: "heads-or-tails",
   },

@@ -1,57 +1,28 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { urlFor } from "@/lib/sanity.client";
-
-const categories = ["All", "Planning", "Strategy", "Donors", "Run of Show"];
 
 interface Post {
   title: string;
   slug: string;
   date: string;
-  category: string;
   thumbnail?: any;
   excerpt?: string;
 }
 
 export default function BlogFilters({ posts }: { posts: Post[] }) {
-  const [active, setActive] = useState("All");
-
-  const visible =
-    active === "All" ? posts : posts.filter((p) => p.category === active);
-
   return (
     <>
-      <div className="flex flex-wrap items-center justify-center gap-2">
-        {categories.map((c) => {
-          const selected = c === active;
-          return (
-            <button
-              key={c}
-              onClick={() => setActive(c)}
-              className={
-                "rounded-full border px-4 py-2 text-sm transition-colors " +
-                (selected
-                  ? "border-primary bg-primary text-white"
-                  : "border-card-border bg-background text-secondary hover:bg-muted")
-              }
-            >
-              {c}
-            </button>
-          );
-        })}
-      </div>
-
-      {visible.length === 0 && (
+      {posts.length === 0 && (
         <div className="mt-10 text-center text-secondary py-12">
-          <p>No blog posts found for this category.</p>
+          <p>No blog posts found.</p>
         </div>
       )}
 
       <div className="mt-10 grid gap-6 md:grid-cols-2">
-        {visible.map((p) => (
+        {posts.map((p) => (
           <Link key={p.slug} href={`/blog/${p.slug}`}>
             <Card className="overflow-hidden rounded-xl border border-card-border bg-card transition-all hover:shadow-md cursor-pointer h-full">
               {p.thumbnail ? (
@@ -71,12 +42,8 @@ export default function BlogFilters({ posts }: { posts: Post[] }) {
               )}
 
               <div className="p-6">
-                <div className="flex items-center gap-2 text-xs font-medium text-secondary">
-                  {p.category && (
-                    <span className="uppercase tracking-wider">{p.category}</span>
-                  )}
-                  {p.category && p.date && <span>&bull;</span>}
-                  {p.date && (
+                {p.date && (
+                  <div className="text-xs font-medium text-secondary">
                     <span>
                       {new Date(p.date).toLocaleDateString("en-US", {
                         year: "numeric",
@@ -84,8 +51,8 @@ export default function BlogFilters({ posts }: { posts: Post[] }) {
                         day: "numeric",
                       })}
                     </span>
-                  )}
-                </div>
+                  </div>
+                )}
                 <h3 className="mt-2 display-font text-lg font-semibold text-primary">
                   {p.title}
                 </h3>

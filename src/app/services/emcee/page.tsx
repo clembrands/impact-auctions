@@ -50,8 +50,8 @@ export default function EmceeServices() {
                 </p>
               </div>
             </div>
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-muted grid place-items-center">
-               <span className="text-muted-foreground font-medium">Photo: Emcee on stage</span>
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-muted">
+              <img src="/images/emcee-on-stage.jpg" alt="Professional emcees commanding the stage at elegant gala event" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>

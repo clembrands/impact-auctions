@@ -28,20 +28,6 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "category",
-      title: "Category",
-      type: "string",
-      options: {
-        list: [
-          { title: "Planning", value: "Planning" },
-          { title: "Strategy", value: "Strategy" },
-          { title: "Donors", value: "Donors" },
-          { title: "Run of Show", value: "Run of Show" },
-        ],
-      },
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
       name: "thumbnail",
       title: "Thumbnail Image",
       type: "image",
@@ -126,7 +112,7 @@ export default defineType({
   preview: {
     select: {
       title: "title",
-      subtitle: "category",
+      subtitle: "date",
       media: "thumbnail",
     },
   },
