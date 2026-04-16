@@ -7,11 +7,9 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const schema = z.object({
   name: z.string().min(1),
   organization: z.string().min(1),
-  address: z.string().min(1),
   email: z.string().email(),
   telephone: z.string().min(1),
   eventDate: z.string().min(1),
-  howDidYouHear: z.string().optional(),
   message: z.string().min(10),
   honeypot: z.string().optional(),
 });
@@ -42,11 +40,9 @@ export async function POST(request: NextRequest) {
         <h2>New Contact Form Submission</h2>
         <p><strong>Name:</strong> ${escapeHtml(formData.name)}</p>
         <p><strong>Organization:</strong> ${escapeHtml(formData.organization)}</p>
-        <p><strong>Address:</strong> ${escapeHtml(formData.address)}</p>
         <p><strong>Email:</strong> ${escapeHtml(formData.email)}</p>
         <p><strong>Telephone:</strong> ${escapeHtml(formData.telephone)}</p>
         <p><strong>Event Date:</strong> ${escapeHtml(formData.eventDate)}</p>
-        ${formData.howDidYouHear ? `<p><strong>How did you hear about us:</strong> ${escapeHtml(formData.howDidYouHear)}</p>` : ""}
         <p><strong>Message:</strong></p>
         <p>${escapeHtml(formData.message).replace(/\n/g, "<br>")}</p>
       `,
