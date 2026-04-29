@@ -69,7 +69,7 @@ function VideoCard({ video }: { video: (typeof videos)[number] }) {
   );
 }
 
-function BlobVideoCard({ title, src, id }: { title: string; src: string; id: number }) {
+function BlobVideoCard({ title, src, id, thumbnail }: { title: string; src: string; id: number; thumbnail?: string }) {
   const [modalOpen, setModalOpen] = useState(false);
 
   // Close on Escape key
@@ -97,15 +97,25 @@ function BlobVideoCard({ title, src, id }: { title: string; src: string; id: num
             aria-label={`Play ${title}`}
             data-testid={`btn-play-video-${id}`}
           >
-            {/* First-frame thumbnail */}
-            <video
-              src={src}
-              className="h-full w-full object-cover"
-              muted
-              playsInline
-              preload="metadata"
-              aria-hidden="true"
-            />
+            {/* Custom thumbnail or video first frame */}
+            {thumbnail ? (
+              <Image
+                src={thumbnail}
+                alt={title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              />
+            ) : (
+              <video
+                src={src}
+                className="h-full w-full object-cover"
+                muted
+                playsInline
+                preload="metadata"
+                aria-hidden="true"
+              />
+            )}
             <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
             <div className="absolute inset-0 flex items-center justify-center">
               <PlayIcon />
@@ -198,6 +208,7 @@ export default function Videos() {
               id={5}
               title="Brilora Fertility Foundation LA Gala 2026"
               src="/api/video/brilora-fertility-gala-2026"
+              thumbnail="/images/brilora-gala-thumbnail.jpg"
             />
           </div>
         </div>
