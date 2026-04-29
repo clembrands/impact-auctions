@@ -14,6 +14,14 @@ const videos = [
   { id: 4, title: "Client Testimonial", youtubeId: "2enkSJpsTuw" },
 ];
 
+const PlayIcon = () => (
+  <div className="w-16 h-16 md:w-20 md:h-20 bg-primary rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+    <svg className="w-6 h-6 md:w-8 md:h-8 text-primary-foreground ml-1" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M8 5v14l11-7z" />
+    </svg>
+  </div>
+);
+
 function VideoCard({ video }: { video: (typeof videos)[number] }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const thumbnailUrl = `https://img.youtube.com/vi/${video.youtubeId}/maxresdefault.jpg`;
@@ -49,21 +57,56 @@ function VideoCard({ video }: { video: (typeof videos)[number] }) {
             />
             <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-primary rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                <svg
-                  className="w-6 h-6 md:w-8 md:h-8 text-primary-foreground ml-1"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </div>
+              <PlayIcon />
             </div>
           </button>
         )}
       </div>
       <h3 className="display-font text-lg font-semibold text-primary" data-testid={`text-video-title-${video.id}`}>
         {video.title}
+      </h3>
+    </div>
+  );
+}
+
+function BlobVideoCard({ title, src, id }: { title: string; src: string; id: number }) {
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  return (
+    <div className="space-y-3" data-testid={`video-card-${id}`}>
+      <div className="aspect-video w-full overflow-hidden rounded-xl bg-black relative">
+        {isPlaying ? (
+          <video
+            src={src}
+            className="h-full w-full object-cover"
+            controls
+            autoPlay
+            data-testid={`video-blob-${id}`}
+          />
+        ) : (
+          <button
+            onClick={() => setIsPlaying(true)}
+            className="w-full h-full relative group cursor-pointer"
+            aria-label={`Play ${title}`}
+            data-testid={`btn-play-video-${id}`}
+          >
+            <video
+              src={src}
+              className="h-full w-full object-cover"
+              muted
+              playsInline
+              preload="metadata"
+              aria-hidden="true"
+            />
+            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <PlayIcon />
+            </div>
+          </button>
+        )}
+      </div>
+      <h3 className="display-font text-lg font-semibold text-primary" data-testid={`text-video-title-${id}`}>
+        {title}
       </h3>
     </div>
   );
@@ -107,6 +150,11 @@ export default function Videos() {
             {videos.map((video) => (
               <VideoCard key={video.id} video={video} />
             ))}
+            <BlobVideoCard
+              id={5}
+              title="California, You Were a Dream Come True"
+              src="https://l9jfvjfwkmkpfpni.private.blob.vercel-storage.com/California%2C%20you%20were%20a%20DREAM%20come%20true%E2%80%A6%20%E2%9C%A8This%20night%20wasn%E2%80%99t%20about%20the%20numbers%2C%20it%20was%20about%20the%20i.mp4"
+            />
           </div>
         </div>
       </section>
