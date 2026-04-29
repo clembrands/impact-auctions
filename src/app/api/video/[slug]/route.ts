@@ -22,11 +22,6 @@ export async function GET(
       headers: {
         "x-vercel-blob-token": process.env.BLOB_READ_WRITE_TOKEN || "",
       },
-      // Allow streaming without buffering
-      cf: {
-        cacheTtl: 31536000,
-        cacheEverything: true,
-      } as any,
     });
 
     if (!response.ok) {
