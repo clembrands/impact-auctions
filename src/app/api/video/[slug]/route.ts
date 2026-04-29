@@ -17,15 +17,22 @@ export async function GET(
   }
 
   try {
+    // For private blob URLs, we need to use the Vercel Blob API with authentication
     const response = await fetch(videoUrl, {
       headers: {
-        Authorization: `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}`,
+        "x-vercel-blob-token": process.env.BLOB_READ_WRITE_TOKEN || "",
       },
+      // Allow streaming without buffering
+      cf: {
+        cacheTtl: 31536000,
+        cacheEverything: true,
+      } as any,
     });
 
     if (!response.ok) {
+      console.error("[v0] Failed to fetch video:", response.status, response.statusText);
       return NextResponse.json(
-        { error: "Failed to fetch video" },
+        { error: `Failed to fetch video: ${response.statusText}` },
         { status: response.status }
       );
     }
@@ -35,6 +42,7 @@ export async function GET(
 
     const headers: HeadersInit = {
       "Content-Type": contentType,
+      "Accept-Ranges": "bytes",
       "Cache-Control": "public, max-age=31536000, immutable",
     };
 
@@ -42,9 +50,9 @@ export async function GET(
       headers["Content-Length"] = contentLength;
     }
 
-    return new NextResponse(response.body, { headers });
+    return new NextResponse(response.body, { headers, status: 200 });
   } catch (error) {
-    console.error("Error streaming video:", error);
+    console.error("[v0] Error streaming video:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
