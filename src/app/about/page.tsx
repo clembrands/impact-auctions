@@ -73,7 +73,7 @@ export default function About() {
               </div>
 
               <div className="flex flex-col gap-3 sm:flex-row pt-2">
-                <Link href="/testimonials" data-testid="link-founders-testimonials">
+                <Link href="/videos" data-testid="link-founders-testimonials">
                   <Button variant="outline" className="rounded-lg border-primary/30 text-primary hover:bg-primary/5 px-6">
                     Hear From Our Clients
                   </Button>
