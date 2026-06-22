@@ -16,16 +16,18 @@ export async function GET(
     return NextResponse.json({ error: "Video not found" }, { status: 404 });
   }
 
-  try {
-    // For private blob URLs, we need to use the Vercel Blob API with authentication
-    const response = await fetch(videoUrl, {
-      headers: {
-        "x-vercel-blob-token": process.env.BLOB_READ_WRITE_TOKEN || "",
-      },
-    });
+  const rangeHeader = request.headers.get("range");
 
-    if (!response.ok) {
-      console.error("[v0] Failed to fetch video:", response.status, response.statusText);
+  try {
+    const fetchHeaders: HeadersInit = {};
+    if (rangeHeader) {
+      fetchHeaders["Range"] = rangeHeader;
+    }
+
+    const response = await fetch(videoUrl, { headers: fetchHeaders });
+
+    if (!response.ok && response.status !== 206) {
+      console.error("Failed to fetch video:", response.status, response.statusText);
       return NextResponse.json(
         { error: `Failed to fetch video: ${response.statusText}` },
         { status: response.status }
@@ -34,23 +36,23 @@ export async function GET(
 
     const contentType = response.headers.get("content-type") || "video/mp4";
     const contentLength = response.headers.get("content-length");
+    const contentRange = response.headers.get("content-range");
 
     const headers: HeadersInit = {
       "Content-Type": contentType,
       "Accept-Ranges": "bytes",
-      "Cache-Control": "public, max-age=31536000, immutable",
+      "Cache-Control": "public, max-age=3600",
     };
 
-    if (contentLength) {
-      headers["Content-Length"] = contentLength;
-    }
+    if (contentLength) headers["Content-Length"] = contentLength;
+    if (contentRange) headers["Content-Range"] = contentRange;
 
-    return new NextResponse(response.body, { headers, status: 200 });
+    return new NextResponse(response.body, {
+      status: rangeHeader ? 206 : 200,
+      headers,
+    });
   } catch (error) {
-    console.error("[v0] Error streaming video:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    console.error("Error streaming video:", error);
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

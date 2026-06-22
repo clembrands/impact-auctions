@@ -207,8 +207,7 @@ export default function Videos() {
             <BlobVideoCard
               id={5}
               title="Brilora Fertility Foundation LA Gala 2026"
-              src="https://l9jfvjfwkmkpfpni.private.blob.vercel-storage.com/California,%20you%20were%20a%20DREAM%20come%20true%E2%80%A6%20%E2%9C%A8This%20night%20wasn%E2%80%99t%20about%20the%20numbers,%20it%20was%20about%20the%20i.mp4?vercel-blob-valid-until=1782149942160&vercel-blob-delegation=eyJzdG9yZUlkIjoic3RvcmVfbDlqRlZKRldLTUtQZlBuaSIsIm93bmVySWQiOiJ0ZWFtX1VVQWNBR3lpaTMwRlpkUHgzaHJ3VVJ0UCIsInBhdGhuYW1lIjoiKiIsIm9wZXJhdGlvbnMiOlsiZ2V0IiwiaGVhZCJdLCJ2YWxpZFVudGlsIjoxNzgyMTkzMDczMjU4LCJpYXQiOjE3ODIxNDk4NzMzMDd9.nmxHJITiJwV1VlizTvZaT8320DOd-MCQegLVtIMUvMY&vercel-blob-signature=FROwzO5xs31U0PPo4uHv-ShJD0S0ARGCgSYCGUmCn_4"
-              thumbnail="/images/brilora-gala-thumbnail.jpg"
+              src="/api/video/brilora-fertility-gala-2026"
             />
           </div>
         </div>
