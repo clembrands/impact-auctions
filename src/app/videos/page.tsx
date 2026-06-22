@@ -114,6 +114,7 @@ function BlobVideoCard({ title, src, id, thumbnail }: { title: string; src: stri
                 playsInline
                 preload="metadata"
                 aria-hidden="true"
+                onLoadedMetadata={(e) => { (e.target as HTMLVideoElement).currentTime = 1; }}
               />
             )}
             <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
