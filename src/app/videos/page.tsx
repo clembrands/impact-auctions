@@ -2,16 +2,33 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import CtaBanner from "@/components/cta-banner";
 
 
-const videos = [
+type Video = {
+  id: number;
+  title: string;
+  youtubeId: string;
+  caption?: string;
+  href?: string;
+};
+
+const videos: Video[] = [
   { id: 1, title: "Impact Auctions Overview", youtubeId: "nCZ2Q8G_c68" },
   { id: 2, title: "Live Auction Highlight", youtubeId: "PIp9e0mYu9c" },
   { id: 3, title: "Fund-A-Need Strategy", youtubeId: "tKbbwtWI2go" },
   { id: 4, title: "Client Testimonial", youtubeId: "2enkSJpsTuw" },
+  {
+    id: 6,
+    title: "Tandem Skydiving Auction Package",
+    youtubeId: "7jKS7lJp_G8",
+    href: "https://www.myamoretravel.com/impact-auctions",
+    caption:
+      "Charles and Grace Thurman purchased a tandem experience at a Boys and Girls Club through Impact Auctions. What a great father and daughter experience it was, especially since Grace turns 22 tomorrow.",
+  },
 ];
 
 const PlayIcon = () => (
@@ -22,7 +39,7 @@ const PlayIcon = () => (
   </div>
 );
 
-function VideoCard({ video }: { video: (typeof videos)[number] }) {
+function VideoCard({ video }: { video: Video }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const thumbnailUrl = `https://img.youtube.com/vi/${video.youtubeId}/maxresdefault.jpg`;
 
@@ -63,8 +80,25 @@ function VideoCard({ video }: { video: (typeof videos)[number] }) {
         )}
       </div>
       <h3 className="display-font text-lg font-semibold text-primary" data-testid={`text-video-title-${video.id}`}>
-        {video.title}
+        {video.href ? (
+          <Link
+            href={video.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline"
+            data-testid={`link-video-title-${video.id}`}
+          >
+            {video.title}
+          </Link>
+        ) : (
+          video.title
+        )}
       </h3>
+      {video.caption && (
+        <p className="text-sm text-secondary" data-testid={`text-video-caption-${video.id}`}>
+          {video.caption}
+        </p>
+      )}
     </div>
   );
 }
@@ -195,7 +229,7 @@ export default function Videos() {
     <div className="min-h-dvh bg-background" data-testid="page-videos">
       <SiteHeader />
       <PageHero
-        title="Event Highlights"
+        title="Videos"
         subtitle="See our team in action and learn more about our fundraising strategies."
       />
 
