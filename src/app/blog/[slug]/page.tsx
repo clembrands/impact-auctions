@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { PortableText } from "@portabletext/react";
 import { getPostBySlug, getRelatedPosts, getAllSlugs } from "@/lib/sanity.queries";
+import { getContent } from "@/lib/content";
 import { urlFor } from "@/lib/sanity.client";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
@@ -23,7 +24,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
-  if (!post) return { title: "Post Not Found" };
+  if (!post) {
+    const { postPage } = await getContent("blogPage");
+    return { title: postPage.postNotFoundTitle };
+  }
   return {
     title: post.title,
     description: post.excerpt || "",
@@ -117,7 +121,7 @@ export default async function BlogPostPage({
   const post = await getPostBySlug(slug);
   if (!post) notFound();
 
-  const related = await getRelatedPosts(slug);
+  const [related, content] = await Promise.all([getRelatedPosts(slug), getContent("blogPage")]);
 
   return (
     <div className="min-h-dvh bg-background">
@@ -159,7 +163,7 @@ export default async function BlogPostPage({
                   components={portableTextComponents}
                 />
               ) : (
-                <p className="text-secondary">No content available.</p>
+                <p className="text-secondary">{content.postPage.noContentMessage}</p>
               )}
             </div>
           </div>
@@ -170,7 +174,7 @@ export default async function BlogPostPage({
         <section className="section-pad bg-muted">
           <div className="container-tight">
             <h2 className="display-font mb-8 text-2xl font-bold text-primary">
-              Related Posts
+              {content.postPage.relatedPostsHeading}
             </h2>
             <div className="grid gap-6 md:grid-cols-3">
               {related.map((r: any) => (
@@ -186,7 +190,7 @@ export default async function BlogPostPage({
                       </div>
                     ) : (
                       <div className="grid aspect-[16/9] place-items-center bg-muted">
-                        <div className="text-sm font-medium text-secondary">Image</div>
+                        <div className="text-sm font-medium text-secondary">{content.imagePlaceholder}</div>
                       </div>
                     )}
                     <div className="p-4">
@@ -202,7 +206,7 @@ export default async function BlogPostPage({
         </section>
       )}
 
-      <CtaBanner />
+      <CtaBanner {...content.ctaBanner} />
       <SiteFooter />
     </div>
   );

@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useSiteContent } from "@/components/site-content-provider";
 import { Facebook, Instagram, Linkedin } from "lucide-react";
 
 function FooterLink({
@@ -18,6 +21,7 @@ function FooterLink({
 }
 
 export default function SiteFooter() {
+  const t = useSiteContent().footer;
   return (
     <footer className="bg-primary text-primary-foreground" data-testid="footer-site">
       <div className="container-tight section-pad">
@@ -32,24 +36,23 @@ export default function SiteFooter() {
               />
             </div>
             <p className="max-w-xs text-sm/6 text-white/80" data-testid="text-footer-about">
-              Professional fundraising auctioneers based in North Carolina, serving nonprofits
-              nationwide.
+              {t.about}
             </p>
           </div>
 
           <div className="space-y-3">
             <h3 className="display-font text-sm font-semibold" data-testid="text-footer-links">
-              Quick Links
+              {t.quickLinksHeading}
             </h3>
             <ul className="space-y-2 text-sm text-white/85">
               <li>
-                <FooterLink href="/" label="Home" testId="link-footer-home" />
+                <FooterLink href="/" label={t.linkHome} testId="link-footer-home" />
               </li>
               <li>
-                <FooterLink href="/about" label="About" testId="link-footer-about" />
+                <FooterLink href="/about" label={t.linkAbout} testId="link-footer-about" />
               </li>
               <li>
-                <FooterLink href="/services" label="Services" testId="link-footer-services" />
+                <FooterLink href="/services" label={t.linkServices} testId="link-footer-services" />
               </li>
               <li>
                 <a
@@ -59,25 +62,25 @@ export default function SiteFooter() {
                   data-testid="link-footer-packages"
                   className="cursor-pointer hover:text-white"
                 >
-                  Live Auction Packages
+                  {t.linkLiveAuctionPackages}
                 </a>
               </li>
               <li>
-                <FooterLink href="/videos" label="Videos" testId="link-footer-videos" />
+                <FooterLink href="/videos" label={t.linkVideos} testId="link-footer-videos" />
               </li>
               <li>
-                <FooterLink href="/contact" label="Contact" testId="link-footer-contact" />
+                <FooterLink href="/contact" label={t.linkContact} testId="link-footer-contact" />
               </li>
             </ul>
           </div>
 
           <div className="space-y-3">
             <h3 className="display-font text-sm font-semibold" data-testid="text-footer-contact">
-              Contact
+              {t.contactHeading}
             </h3>
             <div className="space-y-2 text-sm text-white/85">
-              <p data-testid="text-footer-phone">407-267-8988</p>
-              <p data-testid="text-footer-email">debbie@debbieimpactauctions.org</p>
+              <p data-testid="text-footer-phone">{t.phone}</p>
+              <p data-testid="text-footer-email">{t.email}</p>
             </div>
             <div className="flex gap-4 pt-2">
               <a href="#" className="text-white/70 hover:text-white transition-colors" aria-label="Facebook">
@@ -95,7 +98,7 @@ export default function SiteFooter() {
 
         <div className="mt-12 border-t border-white/15 pt-6 text-sm text-white/70">
           <p data-testid="text-footer-copyright">
-            © {new Date().getFullYear()} Impact Auctions. All rights reserved.
+            © {new Date().getFullYear()} {t.copyright}
           </p>
         </div>
       </div>

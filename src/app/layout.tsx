@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+import { getContent } from "@/lib/content";
+import { SiteContentProvider } from "@/components/site-content-provider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -13,23 +15,27 @@ const montserrat = Montserrat({
   variable: "--font-display",
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "Impact Auctions | Professional Fundraising Auctioneers",
-    template: "%s | Impact Auctions",
-  },
-  description:
-    "Professional fundraising auctioneers based in North Carolina, serving nonprofits nationwide. Live auctions, silent auctions, fund-a-need, and event planning.",
-  openGraph: {
-    images: ["/opengraph.jpg"],
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { seo } = await getContent("siteSettings");
+  return {
+    title: {
+      default: seo.defaultTitle,
+      template: "%s | Impact Auctions",
+    },
+    description: seo.description,
+    openGraph: {
+      images: ["/opengraph.jpg"],
+    },
+  };
+}
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const siteContent = await getContent("siteSettings");
+
   return (
     <html lang="en">
       <head>
@@ -47,7 +53,7 @@ export default function RootLayout({
         </Script>
       </head>
       <body className={`${inter.variable} ${montserrat.variable} font-sans antialiased`}>
-        {children}
+        <SiteContentProvider value={siteContent}>{children}</SiteContentProvider>
       </body>
     </html>
   );

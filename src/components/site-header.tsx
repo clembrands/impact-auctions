@@ -6,24 +6,33 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { X, Menu, ChevronDown } from "lucide-react";
+import { useSiteContent } from "@/components/site-content-provider";
 
-const servicesDropdownItems = [
-  { href: "/services/live-auctions", label: "Fundraising Auctioneer" },
-  { href: "/services/fund-a-need", label: "Fund-A-Need" },
-  { href: "/services/heads-or-tails", label: "Heads or Tails" },
-  { href: "/services/event-planning", label: "Event Planning" },
-  { href: "/services/emcee", label: "Emcee" },
-  { href: "https://www.myamoretravel.com/impact-auctions", label: "Live Auction Packages", external: true },
-] as const;
+type HeaderText = ReturnType<typeof useSiteContent>["header"];
 
-const navItems = [
-  { href: "/", label: "Home", testId: "link-nav-home" },
-  { href: "/about", label: "About", testId: "link-nav-about" },
-  { href: "/services", label: "Services", testId: "link-nav-services", hasDropdown: true },
-  { href: "/videos", label: "Videos", testId: "link-nav-videos" },
-  { href: "/blog", label: "Blog", testId: "link-nav-blog" },
-  { href: "/contact", label: "Contact", testId: "link-nav-contact" },
-];
+type DropdownItem = { href: string; label: string; external?: boolean };
+
+function getServicesDropdownItems(t: HeaderText): DropdownItem[] {
+  return [
+    { href: "/services/live-auctions", label: t.servicesMenu.liveAuctions },
+    { href: "/services/fund-a-need", label: t.servicesMenu.fundANeed },
+    { href: "/services/heads-or-tails", label: t.servicesMenu.headsOrTails },
+    { href: "/services/event-planning", label: t.servicesMenu.eventPlanning },
+    { href: "/services/emcee", label: t.servicesMenu.emcee },
+    { href: "https://www.myamoretravel.com/impact-auctions", label: t.servicesMenu.liveAuctionPackages, external: true },
+  ];
+}
+
+function getNavItems(t: HeaderText) {
+  return [
+    { href: "/", label: t.navHome, testId: "link-nav-home", slug: "home" },
+    { href: "/about", label: t.navAbout, testId: "link-nav-about", slug: "about" },
+    { href: "/services", label: t.navServices, testId: "link-nav-services", slug: "services", hasDropdown: true },
+    { href: "/videos", label: t.navVideos, testId: "link-nav-videos", slug: "videos" },
+    { href: "/blog", label: t.navBlog, testId: "link-nav-blog", slug: "blog" },
+    { href: "/contact", label: t.navContact, testId: "link-nav-contact", slug: "contact" },
+  ];
+}
 
 function DesktopNavLink({
   href,
@@ -39,6 +48,7 @@ function DesktopNavLink({
   pathname: string;
 }) {
   const [isHovered, setIsHovered] = useState(false);
+  const servicesDropdownItems = getServicesDropdownItems(useSiteContent().header);
   const active = pathname === href || (hasDropdown && pathname.startsWith(href)) || (hasDropdown && pathname === "/auction-packages");
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -91,8 +101,8 @@ function DesktopNavLink({
               <Link
                 key={item.href}
                 href={item.href}
-                target={"external" in item && item.external ? "_blank" : undefined}
-                rel={"external" in item && item.external ? "noopener noreferrer" : undefined}
+                target={item.external ? "_blank" : undefined}
+                rel={item.external ? "noopener noreferrer" : undefined}
               >
                 <div
                   className={cn(
@@ -134,11 +144,14 @@ function DesktopNavLink({
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const t = useSiteContent().header;
+  const navItems = useMemo(() => getNavItems(t), [t]);
+  const servicesDropdownItems = useMemo(() => getServicesDropdownItems(t), [t]);
 
   const activeLabel = useMemo(() => {
     const match = navItems.find((i) => i.href === pathname);
-    return match?.label ?? "Menu";
-  }, [pathname]);
+    return match?.label ?? t.mobileMenuButtonFallback;
+  }, [pathname, navItems, t]);
 
   const leftNavItems = navItems.slice(0, 3);
   const rightNavItems = navItems.slice(3);
@@ -238,7 +251,7 @@ export default function SiteHeader() {
           >
             <div className="flex h-16 items-center justify-between border-b border-card-border px-4">
               <div className="display-font text-sm font-semibold text-primary" data-testid="text-mobile-menu-title">
-                Navigation
+                {t.mobileMenuTitle}
               </div>
               <button
                 type="button"
@@ -275,8 +288,8 @@ export default function SiteHeader() {
                           <Link
                             key={subItem.href}
                             href={subItem.href}
-                            target={"external" in subItem && subItem.external ? "_blank" : undefined}
-                            rel={"external" in subItem && subItem.external ? "noopener noreferrer" : undefined}
+                            target={subItem.external ? "_blank" : undefined}
+                            rel={subItem.external ? "noopener noreferrer" : undefined}
                           >
                             <button
                               type="button"
@@ -301,7 +314,7 @@ export default function SiteHeader() {
                   <Link
                     key={i.href}
                     href={i.href}
-                    data-testid={`link-mobile-${i.label.toLowerCase()}`}
+                    data-testid={`link-mobile-${i.slug}`}
                   >
                     <button
                       type="button"

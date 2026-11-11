@@ -1,0 +1,293 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import SiteHeader from "@/components/site-header";
+import SiteFooter from "@/components/site-footer";
+import CtaBanner from "@/components/cta-banner";
+import type { ContentFor } from "@/content";
+
+type VideosContent = ContentFor<"videosPage">;
+
+
+type Video = {
+  id: number;
+  title: string;
+  youtubeId: string;
+  caption?: string;
+  href?: string;
+};
+
+// Non-text data stays in code and is matched to the Sanity-editable text by position.
+const videoMeta: { id: number; youtubeId: string; href?: string }[] = [
+  { id: 1, youtubeId: "nCZ2Q8G_c68" },
+  { id: 2, youtubeId: "PIp9e0mYu9c" },
+  { id: 3, youtubeId: "tKbbwtWI2go" },
+  { id: 4, youtubeId: "2enkSJpsTuw" },
+  { id: 6, youtubeId: "7jKS7lJp_G8", href: "https://www.myamoretravel.com/impact-auctions" },
+];
+
+const PlayIcon = () => (
+  <div className="w-16 h-16 md:w-20 md:h-20 bg-primary rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+    <svg className="w-6 h-6 md:w-8 md:h-8 text-primary-foreground ml-1" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M8 5v14l11-7z" />
+    </svg>
+  </div>
+);
+
+function VideoCard({ video, playLabel }: { video: Video; playLabel: string }) {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const thumbnailUrl = `https://img.youtube.com/vi/${video.youtubeId}/maxresdefault.jpg`;
+
+  return (
+    <div className="space-y-3" data-testid={`video-card-${video.id}`}>
+      <div className="aspect-video w-full overflow-hidden rounded-xl bg-black relative">
+        {isPlaying ? (
+          <iframe
+            width="100%"
+            height="100%"
+            src={`https://www.youtube.com/embed/${video.youtubeId}?autoplay=1`}
+            title={video.title}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="h-full w-full"
+            data-testid={`iframe-video-${video.id}`}
+          />
+        ) : (
+          <button
+            onClick={() => setIsPlaying(true)}
+            className="w-full h-full relative group cursor-pointer"
+            aria-label={`${playLabel} ${video.title}`}
+            data-testid={`btn-play-video-${video.id}`}
+          >
+            <Image
+              src={thumbnailUrl}
+              alt={video.title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            />
+            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <PlayIcon />
+            </div>
+          </button>
+        )}
+      </div>
+      <h3 className="display-font text-lg font-semibold text-primary" data-testid={`text-video-title-${video.id}`}>
+        {video.href ? (
+          <Link
+            href={video.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline"
+            data-testid={`link-video-title-${video.id}`}
+          >
+            {video.title}
+          </Link>
+        ) : (
+          video.title
+        )}
+      </h3>
+      {video.caption && (
+        <p className="text-sm text-secondary" data-testid={`text-video-caption-${video.id}`}>
+          {video.caption}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function BlobVideoCard({
+  title,
+  src,
+  id,
+  thumbnail,
+  playLabel,
+  closeLabel,
+}: {
+  title: string;
+  src: string;
+  id: number;
+  thumbnail?: string;
+  playLabel: string;
+  closeLabel: string;
+}) {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  // Close on Escape key
+  useEffect(() => {
+    if (!modalOpen) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setModalOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [modalOpen]);
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    document.body.style.overflow = modalOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [modalOpen]);
+
+  return (
+    <>
+      {/* Card thumbnail — landscape like the rest */}
+      <div className="space-y-3" data-testid={`video-card-${id}`}>
+        <div className="aspect-video w-full overflow-hidden rounded-xl bg-black relative">
+          <button
+            onClick={() => setModalOpen(true)}
+            className="w-full h-full relative group cursor-pointer"
+            aria-label={`${playLabel} ${title}`}
+            data-testid={`btn-play-video-${id}`}
+          >
+            {/* Custom thumbnail or video first frame */}
+            {thumbnail ? (
+              <Image
+                src={thumbnail}
+                alt={title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              />
+            ) : (
+              <video
+                src={src}
+                className="h-full w-full object-cover"
+                muted
+                playsInline
+                preload="metadata"
+                aria-hidden="true"
+                onLoadedMetadata={(e) => { (e.target as HTMLVideoElement).currentTime = 1; }}
+              />
+            )}
+            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <PlayIcon />
+            </div>
+          </button>
+        </div>
+        <h3 className="display-font text-lg font-semibold text-primary" data-testid={`text-video-title-${id}`}>
+          {title}
+        </h3>
+      </div>
+
+      {/* Portrait modal */}
+      {modalOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
+          onClick={() => setModalOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={title}
+          data-testid={`modal-video-${id}`}
+        >
+          {/* Stop click propagation so clicking the video doesn't close the modal */}
+          <div
+            className="relative flex items-center justify-center w-full h-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <video
+              src={src}
+              className="max-h-[90vh] max-w-[calc(90vh*9/16)] w-auto rounded-xl shadow-2xl"
+              controls
+              autoPlay
+              playsInline
+              data-testid={`video-blob-${id}`}
+            />
+            <button
+              onClick={() => setModalOpen(false)}
+              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black/80 transition-colors"
+              aria-label={closeLabel}
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+function PageHero({ title, subtitle }: { title: string; subtitle: string }) {
+  return (
+    <section className="section-pad bg-muted" data-testid="section-page-hero">
+      <div className="container-tight">
+        <div className="mx-auto max-w-3xl text-center">
+          <h1 className="display-font text-4xl font-extrabold tracking-tight text-primary md:text-5xl" data-testid="text-page-title">
+            {title}
+          </h1>
+          <p className="mt-4 text-secondary" data-testid="text-page-subtitle">
+            {subtitle}
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default function VideosView({ content }: { content: VideosContent }) {
+  // Text rows beyond the videos defined in code have no video to show, so they are skipped.
+  const videos: Video[] = content.videos.flatMap((v, i) => {
+    const meta = videoMeta[i];
+    return meta ? [{ ...meta, title: v.title, caption: v.caption || undefined }] : [];
+  });
+
+  useEffect(() => {
+    if ((window as any).efsAPI) {
+      (window as any).efsAPI.load();
+    }
+  }, []);
+
+  return (
+    <div className="min-h-dvh bg-background" data-testid="page-videos">
+      <SiteHeader />
+      <PageHero title={content.hero.title} subtitle={content.hero.subtitle} />
+
+      <section className="section-pad" data-testid="section-videos-grid">
+        <div className="container-tight">
+          <div className="grid gap-8 md:grid-cols-2">
+            {videos.map((video) => (
+              <VideoCard key={video.id} video={video} playLabel={content.playButtonLabel} />
+            ))}
+            <BlobVideoCard
+              id={5}
+              title={content.galaVideoTitle}
+              src="/api/video/brilora-fertility-gala-2026"
+              playLabel={content.playButtonLabel}
+              closeLabel={content.closeVideoLabel}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials — Google Business Profile Reviews via Elfsight */}
+      <section className="section-pad" style={{ backgroundColor: "rgba(212, 196, 168, 0.18)" }} data-testid="section-testimonials">
+        <div className="container-tight">
+          <div className="mx-auto max-w-2xl text-center mb-12">
+            <h2 className="display-font text-3xl font-extrabold tracking-tight text-primary" data-testid="text-testimonials-title">
+              {content.testimonials.heading}
+            </h2>
+            <p className="mt-3 text-secondary" data-testid="text-testimonials-subtitle">
+              {content.testimonials.subheading}
+            </p>
+          </div>
+          
+          {/* Elfsight Google Reviews Embed */}
+          <script src="https://elfsightcdn.com/platform.js" async></script>
+          <div 
+            className="elfsight-app-56714005-6595-4b9c-b595-6c4575ba3a0d" 
+            data-elfsight-app-lazy
+            data-testid="elfsight-google-reviews"
+          ></div>
+        </div>
+      </section>
+
+      <CtaBanner {...content.ctaBanner} />
+      <SiteFooter />
+    </div>
+  );
+}
