@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useSiteContent } from "@/components/site-content-provider";
 
 interface TestimonialCarouselProps {
   title?: string;
@@ -8,9 +9,11 @@ interface TestimonialCarouselProps {
 }
 
 export default function TestimonialCarousel({
-  title = "What Nonprofits Say",
+  title,
   className = "",
 }: TestimonialCarouselProps) {
+  const defaultTitle = useSiteContent().testimonials.defaultTitle;
+  if (title === undefined) title = defaultTitle;
   useEffect(() => {
     if ((window as any).efsAPI) {
       (window as any).efsAPI.load();

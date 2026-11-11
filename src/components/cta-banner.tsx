@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useSiteContent } from "@/components/site-content-provider";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -9,12 +12,20 @@ interface CtaBannerProps {
   className?: string;
 }
 
+/**
+ * Wording defaults to Sanity "Site Settings › CTA Banner"; individual pages
+ * can pass their own (also Sanity-editable) title/subtitle/buttonText.
+ */
 export default function CtaBanner({
-  title = "Ready to exceed your fundraising goals?",
-  subtitle = "Get a free consultation for your next event.",
-  buttonText = "Get a Quote",
+  title,
+  subtitle,
+  buttonText,
   className
 }: CtaBannerProps) {
+  const defaults = useSiteContent().ctaBanner;
+  title = title || defaults.title;
+  subtitle = subtitle || defaults.subtitle;
+  buttonText = buttonText || defaults.buttonText;
   return (
     <section className={cn("bg-[#E7E3DD]", className)} data-testid="section-cta-banner">
       <div className="container-tight section-pad">

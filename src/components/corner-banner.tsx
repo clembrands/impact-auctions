@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { useSiteContent } from "@/components/site-content-provider";
 
 export default function CornerBanner() {
+  const t = useSiteContent().cornerBanner;
   return (
     <Link
       href="/auction-packages"
@@ -55,9 +57,9 @@ export default function CornerBanner() {
           fontFamily: "Montserrat, sans-serif",
         }}
       >
-        Live Auction
+        {t.line1}
         <br />
-        Packages
+        {t.line2}
       </div>
     </Link>
   );
