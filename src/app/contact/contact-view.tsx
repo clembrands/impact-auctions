@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -13,20 +13,33 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from "@/component
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import type { ContentFor } from "@/content";
 
-const schema = z.object({
-  name: z.string().min(1, "Please enter your name"),
-  organization: z.string().min(1, "Please enter your organization"),
-  email: z.string().email("Please enter a valid email address"),
-  telephone: z.string().min(1, "Please enter your telephone number"),
-  eventDate: z.string().min(1, "Please enter your event date"),
-  message: z.string().min(10, "Please add a short message"),
-  honeypot: z.string().optional(),
-});
+type ContactContent = ContentFor<"contactPage">;
 
-type FormValues = z.infer<typeof schema>;
+function buildSchema(messages: ContactContent["validationMessages"]) {
+  return z.object({
+    name: z.string().min(1, messages.nameRequired),
+    organization: z.string().min(1, messages.organizationRequired),
+    email: z.string().email(messages.emailInvalid),
+    telephone: z.string().min(1, messages.phoneRequired),
+    eventDate: z.string().min(1, messages.eventDateRequired),
+    message: z.string().min(10, messages.messageTooShort),
+    honeypot: z.string().optional(),
+  });
+}
 
-export default function Contact() {
+type FormValues = z.infer<ReturnType<typeof buildSchema>>;
+
+/** "(407) 267-8988" -> "tel:+14072678988" */
+function toTelHref(phone: string) {
+  const digits = phone.replace(/\D/g, "");
+  return `tel:+${digits.length === 10 ? `1${digits}` : digits}`;
+}
+
+export default function ContactView({ content }: { content: ContactContent }) {
+  const { hero, form: formText, validationMessages, contactInfo, whatToExpect } = content;
+  const schema = useMemo(() => buildSchema(validationMessages), [validationMessages]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
@@ -60,14 +73,14 @@ export default function Contact() {
 
       setSubmitMessage({
         type: "success",
-        text: "Thank you! We've received your message and will be in touch soon.",
+        text: formText.successMessage,
       });
       form.reset();
     } catch (error) {
       console.error("[v0] Form submission error:", error);
       setSubmitMessage({
         type: "error",
-        text: "There was an error submitting your form. Please try again or call Debbie at (407) 267-8988.",
+        text: formText.errorMessage,
       });
     } finally {
       setIsSubmitting(false);
@@ -87,10 +100,10 @@ export default function Contact() {
         <div className="container-tight">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="display-font text-4xl font-extrabold tracking-tight text-primary md:text-5xl" data-testid="text-page-title">
-              Let's Plan Your Next Event
+              {hero.title}
             </h1>
             <p className="mt-4 text-secondary text-lg" data-testid="text-page-subtitle">
-              Whether you're 12 months out or 12 weeks away, we'd love to hear about your fundraising goals.
+              {hero.subtitle}
             </p>
           </div>
         </div>
@@ -139,7 +152,7 @@ export default function Contact() {
                       <FormItem>
                         <FormControl>
                           <Input
-                            placeholder="Your Name"
+                            placeholder={formText.namePlaceholder}
                             {...field}
                             className="rounded-lg border border-card-border bg-white placeholder:text-secondary/60"
                             data-testid="input-name"
@@ -157,7 +170,7 @@ export default function Contact() {
                       <FormItem>
                         <FormControl>
                           <Input
-                            placeholder="Organization Name"
+                            placeholder={formText.organizationPlaceholder}
                             {...field}
                             className="rounded-lg border border-card-border bg-white placeholder:text-secondary/60"
                             data-testid="input-organization"
@@ -176,7 +189,7 @@ export default function Contact() {
                         <FormControl>
                           <Input
                             type="email"
-                            placeholder="Email Address"
+                            placeholder={formText.emailPlaceholder}
                             {...field}
                             className="rounded-lg border border-card-border bg-white placeholder:text-secondary/60"
                             data-testid="input-email"
@@ -195,7 +208,7 @@ export default function Contact() {
                         <FormControl>
                           <Input
                             type="tel"
-                            placeholder="Phone Number"
+                            placeholder={formText.phonePlaceholder}
                             {...field}
                             className="rounded-lg border border-card-border bg-white placeholder:text-secondary/60"
                             data-testid="input-telephone"
@@ -213,7 +226,7 @@ export default function Contact() {
                       <FormItem>
                         <FormControl>
                           <Input
-                            placeholder="Event Date (MM/DD/YYYY)"
+                            placeholder={formText.eventDatePlaceholder}
                             {...field}
                             className="rounded-lg border border-card-border bg-white placeholder:text-secondary/60"
                             data-testid="input-event-date"
@@ -231,7 +244,7 @@ export default function Contact() {
                       <FormItem>
                         <FormControl>
                           <Textarea
-                            placeholder="Tell us about your event goals..."
+                            placeholder={formText.messagePlaceholder}
                             rows={5}
                             {...field}
                             className="rounded-lg border border-card-border bg-white placeholder:text-secondary/60"
@@ -249,7 +262,7 @@ export default function Contact() {
                     disabled={isSubmitting}
                     data-testid="button-submit"
                   >
-                    {isSubmitting ? "Sending..." : "Submit Info"}
+                    {isSubmitting ? formText.submittingButton : formText.submitButton}
                   </Button>
                 </form>
               </Form>
@@ -266,7 +279,7 @@ export default function Contact() {
                 <div className="aspect-[16/9] w-full overflow-hidden bg-muted">
                   <img
                     src="/images/about-ron-debbie.jpg"
-                    alt="Ron and Debbie Hitzel"
+                    alt={contactInfo.imageAlt}
                     className="h-full w-full object-cover object-center"
                     data-testid="img-debbie-headshot"
                   />
@@ -275,28 +288,28 @@ export default function Contact() {
                 <div className="p-8">
                   {/* Contact heading */}
                   <h2 className="display-font text-2xl font-extrabold text-primary mb-6" data-testid="text-contact-heading">
-                    Talk to Debbie
+                    {contactInfo.heading}
                   </h2>
 
                   {/* Contact details */}
                   <div className="space-y-4">
-                    <Link href="tel:+14072678988" data-testid="link-contact-phone">
+                    <Link href={toTelHref(contactInfo.phone)} data-testid="link-contact-phone">
                       <div className="flex items-center gap-3 text-secondary hover:text-primary transition-colors">
                         <Phone className="h-5 w-5 text-primary flex-shrink-0" />
-                        <span className="font-medium">(407) 267-8988</span>
+                        <span className="font-medium">{contactInfo.phone}</span>
                       </div>
                     </Link>
 
-                    <Link href="mailto:debbie@debbieimpactauctions.org" data-testid="link-contact-email">
+                    <Link href={`mailto:${contactInfo.email}`} data-testid="link-contact-email">
                       <div className="flex items-center gap-3 text-secondary hover:text-primary transition-colors">
                         <Mail className="h-5 w-5 text-primary flex-shrink-0" />
-                        <span className="font-medium">debbie@debbieimpactauctions.org</span>
+                        <span className="font-medium">{contactInfo.email}</span>
                       </div>
                     </Link>
 
                     <div className="flex items-center gap-3 text-secondary">
                       <MapPin className="h-5 w-5 text-primary flex-shrink-0" />
-                      <span className="font-medium text-sm">Based in North Carolina • Serving nationwide</span>
+                      <span className="font-medium text-sm">{contactInfo.location}</span>
                     </div>
                   </div>
 
@@ -322,10 +335,10 @@ export default function Contact() {
                   {/* What to Expect — merged into this card */}
                   <div data-testid="card-what-to-expect">
                     <h3 className="display-font font-semibold text-primary mb-2" data-testid="text-expect-title">
-                      What to Expect
+                      {whatToExpect.heading}
                     </h3>
                     <p className="text-sm text-secondary leading-relaxed" data-testid="text-expect-content">
-                      We'll respond within 24 hours with a free consultation call to discuss your event goals and how we can help.
+                      {whatToExpect.body}
                     </p>
                   </div>
                 </div>
