@@ -12,6 +12,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import type { ContentFor } from "@/content";
+
+type VirtualEventsContent = ContentFor<"virtualEventsPage">;
+
+// Non-text data stays in code and is matched to the Sanity-editable text by position.
+const challengeIcons = [MonitorPlay, AlertTriangle, LinkIcon];
+const whatChangesIcons = [FastForward, ImageIcon, Smartphone, DollarSign];
+const relatedServiceSlugs = ["live-auctions", "fund-a-need", "event-planning", "emcee"];
 
 function PageHero({ title, subtitle }: { title: string; subtitle: string }) {
   return (
@@ -30,14 +38,15 @@ function PageHero({ title, subtitle }: { title: string; subtitle: string }) {
   );
 }
 
-export default function VirtualEvents() {
+export default function VirtualEventsView({ content }: { content: VirtualEventsContent }) {
+  const { hero, intro, challenge, whatYouGet, virtualVsHybrid, whatChanges, preparationProcess, results, testimonial, faq, relatedServices } = content;
   return (
     <div className="min-h-dvh bg-background" data-testid="page-virtual-events">
       <SiteHeader />
 
       <PageHero
-        title="Virtual Events"
-        subtitle="Confident hosting for livestream and hybrid events"
+        title={hero.title}
+        subtitle={hero.subtitle}
       />
 
       {/* Intro Section */}
@@ -46,19 +55,16 @@ export default function VirtualEvents() {
           <div className="grid gap-12 lg:grid-cols-2 items-center">
             <div className="space-y-6">
               <h2 className="display-font text-3xl font-bold text-primary">
-                Keep the Energy High—Even Through a Screen
+                {intro.heading}
               </h2>
               <div className="space-y-4 text-secondary text-lg leading-relaxed">
-                <p>
-                  Virtual and hybrid fundraising events are here to stay. Whether your donors are gathered in a ballroom, watching from their living rooms, or a mix of both, you need a team that knows how to engage audiences through a camera.
-                </p>
-                <p>
-                  The biggest challenge with virtual events? Keeping people engaged when they're one click away from distraction. Our team has hosted dozens of successful virtual and hybrid fundraisers, and we know how to make remote attendees feel like they're in the room.
-                </p>
+                {intro.paragraphs.map((paragraph, i) => (
+                  <p key={i}>{paragraph}</p>
+                ))}
               </div>
             </div>
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-muted grid place-items-center">
-               <span className="text-muted-foreground font-medium">Photo: Virtual event setup</span>
+               <span className="text-muted-foreground font-medium">{intro.photoPlaceholderLabel}</span>
             </div>
           </div>
         </div>
@@ -69,29 +75,13 @@ export default function VirtualEvents() {
         <div className="container-tight">
           <div className="text-center mb-12">
              <h2 className="display-font text-3xl font-extrabold text-primary">
-              The Virtual Event Challenge
+              {challenge.heading}
             </h2>
           </div>
           
           <div className="grid gap-8 md:grid-cols-3">
-            {[
-              {
-                title: "Attention Is Fragile",
-                icon: MonitorPlay,
-                description: "Remote viewers can tune out, mute, or leave at any moment. You need dynamic pacing and constant engagement to keep them watching and giving."
-              },
-              {
-                title: "Technology Can Fail",
-                icon: AlertTriangle,
-                description: "Glitchy streams, audio issues, and platform confusion can derail your event. You need a team that's handled it all and knows how to recover."
-              },
-              {
-                title: "Connection Feels Distant",
-                icon: LinkIcon,
-                description: "It's harder to create emotional moments through a screen. You need intentional storytelling and production choices that translate to virtual audiences."
-              }
-            ].map((feature, i) => {
-              const Icon = feature.icon;
+            {challenge.cards.map((feature, i) => {
+              const Icon = challengeIcons[i] ?? MonitorPlay;
               return (
                 <Card key={i} className="p-8 border-none shadow-sm bg-muted h-full">
                   <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-6 text-primary">
@@ -113,18 +103,12 @@ export default function VirtualEvents() {
         <div className="container-tight">
           <div className="mx-auto max-w-4xl">
             <h2 className="display-font text-3xl font-extrabold text-center text-primary mb-12">
-              What You Get With Our Virtual Event Services
+              {whatYouGet.heading}
             </h2>
             
             <div className="flex flex-col md:flex-row justify-center gap-x-16 gap-y-8">
               <ul className="space-y-5 flex-1">
-                {[
-                  "Pre-event technology planning and testing",
-                  "Platform selection guidance (Zoom, YouTube, custom)",
-                  "Run-of-show designed for virtual pacing",
-                  "On-camera hosting and emcee services",
-                  "Real-time chat and audience engagement"
-                ].map((item, i) => (
+                {whatYouGet.leftColumnItems.map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <div className="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-[#D4C4A8] text-white mt-0.5">
                       <Check className="h-4 w-4" strokeWidth={4} />
@@ -135,13 +119,7 @@ export default function VirtualEvents() {
               </ul>
 
               <ul className="space-y-5 flex-1">
-                {[
-                  "Live auction bid-calling adapted for virtual",
-                  "Fund-A-Need execution for remote audiences",
-                  "Hybrid event coordination (in-person + virtual)",
-                  "Technical director coordination",
-                  "Backup plans for technology issues"
-                ].map((item, i) => (
+                {whatYouGet.rightColumnItems.map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <div className="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-[#D4C4A8] text-white mt-0.5">
                       <Check className="h-4 w-4" strokeWidth={4} />
@@ -159,25 +137,25 @@ export default function VirtualEvents() {
       <section className="section-pad bg-background" data-testid="section-virtual-vs-hybrid">
         <div className="container-tight">
           <h2 className="display-font text-3xl font-extrabold text-center text-primary mb-12">
-            Virtual vs. Hybrid: We Do Both
+            {virtualVsHybrid.heading}
           </h2>
           <div className="grid gap-8 md:grid-cols-2 max-w-5xl mx-auto">
             <Card className="p-8 border border-card-border shadow-sm bg-white">
-              <h3 className="display-font text-2xl font-bold text-primary mb-4">Fully Virtual</h3>
+              <h3 className="display-font text-2xl font-bold text-primary mb-4">{virtualVsHybrid.fullyVirtual.title}</h3>
               <p className="text-secondary leading-relaxed mb-6">
-                Your entire audience joins online. We help you create a broadcast-quality experience with professional hosting, strategic pacing, and seamless bid collection.
+                {virtualVsHybrid.fullyVirtual.description}
               </p>
               <div className="bg-muted p-4 rounded-lg">
-                <span className="font-semibold text-primary">Best for:</span> geographically dispersed donors, ongoing pandemic concerns, or cost-conscious events.
+                <span className="font-semibold text-primary">{virtualVsHybrid.fullyVirtual.bestForLabel}</span> {virtualVsHybrid.fullyVirtual.bestForText}
               </div>
             </Card>
             <Card className="p-8 border border-card-border shadow-sm bg-white">
-              <h3 className="display-font text-2xl font-bold text-primary mb-4">Hybrid Events</h3>
+              <h3 className="display-font text-2xl font-bold text-primary mb-4">{virtualVsHybrid.hybrid.title}</h3>
               <p className="text-secondary leading-relaxed mb-6">
-                Some guests in the room, others watching from home. This is the most complex format—but also the most flexible. We coordinate both audiences so no one feels like an afterthought.
+                {virtualVsHybrid.hybrid.description}
               </p>
               <div className="bg-muted p-4 rounded-lg">
-                <span className="font-semibold text-primary">Best for:</span> maximizing attendance, accommodating travel limitations, or testing virtual before going all-in.
+                <span className="font-semibold text-primary">{virtualVsHybrid.hybrid.bestForLabel}</span> {virtualVsHybrid.hybrid.bestForText}
               </div>
             </Card>
           </div>
@@ -188,39 +166,18 @@ export default function VirtualEvents() {
       <section className="section-pad bg-muted" data-testid="section-whats-different">
         <div className="container-tight">
           <h2 className="display-font text-3xl font-extrabold text-center text-primary mb-12">
-            What Changes for Virtual
+            {whatChanges.heading}
           </h2>
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              {
-                title: "Pacing",
-                icon: FastForward,
-                desc: "Virtual events need to move faster. Attention spans are shorter online, so we tighten the program and eliminate dead air."
-              },
-              {
-                title: "Visuals",
-                icon: ImageIcon,
-                desc: "We help you think through camera angles, graphics, and on-screen elements that keep the broadcast visually engaging."
-              },
-              {
-                title: "Bidding",
-                icon: Smartphone,
-                desc: "We coordinate with mobile bidding platforms so virtual attendees can bid in real-time during live and silent auctions."
-              },
-              {
-                title: "Giving",
-                icon: DollarSign,
-                desc: "Fund-A-Need works virtually—but the approach is different. We use on-screen giving levels, countdown timers, and real-time donation tracking to build momentum."
-              }
-            ].map((item, i) => {
-              const Icon = item.icon;
+            {whatChanges.cards.map((item, i) => {
+              const Icon = whatChangesIcons[i] ?? FastForward;
               return (
                 <div key={i} className="bg-background p-6 rounded-xl border border-card-border shadow-sm">
                   <div className="h-10 w-10 rounded-full bg-[#D4C4A8]/20 flex items-center justify-center mb-4 text-[#D4C4A8]">
                     <Icon className="h-5 w-5" />
                   </div>
                   <h3 className="display-font text-xl font-bold text-primary mb-3">{item.title}</h3>
-                  <p className="text-secondary text-sm leading-relaxed">{item.desc}</p>
+                  <p className="text-secondary text-sm leading-relaxed">{item.description}</p>
                 </div>
               )
             })}
@@ -233,7 +190,7 @@ export default function VirtualEvents() {
         <div className="container-tight">
           <div className="text-center mb-16">
             <h2 className="display-font text-3xl font-extrabold text-primary">
-              How We Prepare for Virtual
+              {preparationProcess.heading}
             </h2>
           </div>
 
@@ -241,31 +198,10 @@ export default function VirtualEvents() {
              {/* Connector Line (Desktop) */}
             <div className="hidden md:block absolute top-6 left-0 w-full h-0.5 bg-muted -z-10" />
 
-            {[
-              {
-                step: "01",
-                title: "Technology Consultation",
-                description: "We review your platform options, audience size, and technical capabilities to recommend the right setup."
-              },
-              {
-                step: "02",
-                title: "Run-of-Show Planning",
-                description: "We build a detailed program designed for virtual pacing—tighter segments, more visuals, strategic breaks."
-              },
-              {
-                step: "03",
-                title: "Rehearsal",
-                description: "We do a full tech rehearsal before event day. No surprises. We test every transition, every video, every handoff."
-              },
-              {
-                step: "04",
-                title: "Live Execution",
-                description: "On event day, we host with energy and confidence, managing the technology and keeping your virtual audience engaged from start to finish."
-              }
-            ].map((item, i) => (
+            {preparationProcess.steps.map((item, i) => (
               <div key={i} className="relative bg-background pt-4 md:pt-0">
                 <div className="w-12 h-12 rounded-full bg-primary text-white font-bold flex items-center justify-center text-lg mb-6 mx-auto md:mx-0 relative z-10 ring-4 ring-background">
-                  {item.step}
+                  {item.number}
                 </div>
                 <h3 className="display-font text-lg font-bold text-primary mb-3 text-center md:text-left">{item.title}</h3>
                 <p className="text-secondary text-center md:text-left text-sm leading-relaxed">{item.description}</p>
@@ -280,28 +216,22 @@ export default function VirtualEvents() {
         <div className="container-tight">
           <div className="mx-auto max-w-4xl">
             <h2 className="display-font text-3xl font-extrabold text-center text-primary mb-8">
-               Virtual Events That Delivered
+               {results.heading}
             </h2>
             <p className="text-center text-lg text-secondary mb-12 max-w-3xl mx-auto leading-relaxed">
-              When the world went virtual in 2020, many organizations saw their fundraising collapse. Our clients didn't. We helped nonprofits pivot to virtual and hybrid formats that maintained—and in some cases exceeded—their in-person results.
+              {results.description}
             </p>
             <div className="grid gap-10 text-center md:grid-cols-2 max-w-2xl mx-auto">
-              <div className="space-y-2">
-                <div className="display-font text-4xl font-extrabold text-primary">
-                  Dozens
+              {results.stats.map((stat, i) => (
+                <div key={i} className="space-y-2">
+                  <div className="display-font text-4xl font-extrabold text-primary">
+                    {stat.value}
+                  </div>
+                  <div className="text-sm font-medium text-secondary">
+                    {stat.label}
+                  </div>
                 </div>
-                <div className="text-sm font-medium text-secondary">
-                  Of Virtual Events Hosted Since 2020
-                </div>
-              </div>
-              <div className="space-y-2">
-                <div className="display-font text-4xl font-extrabold text-primary">
-                  Record-Breaking
-                </div>
-                <div className="text-sm font-medium text-secondary">
-                  Results Achieved Without an In-Person Audience
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -313,10 +243,10 @@ export default function VirtualEvents() {
           <div className="mx-auto max-w-4xl text-center">
             <blockquote className="space-y-6">
               <p className="display-font text-2xl md:text-3xl font-medium text-primary italic leading-relaxed">
-                "We were terrified to go virtual, but Impact Auctions made it seamless. Our donors stayed engaged the entire broadcast, and we raised more than we expected. They made us feel like pros."
+                "{testimonial.quote}"
               </p>
               <footer className="text-base font-semibold text-secondary">
-                — Events Manager, Education Scholarship Organization
+                — {testimonial.attribution}
               </footer>
             </blockquote>
           </div>
@@ -328,37 +258,16 @@ export default function VirtualEvents() {
         <div className="container-tight">
           <div className="mx-auto max-w-3xl">
             <h2 className="display-font text-3xl font-extrabold text-center text-primary mb-10">
-              Common Questions About Virtual Events
+              {faq.heading}
             </h2>
             <Accordion type="single" collapsible className="w-full">
-              {[
-                {
-                  q: "What platform should we use?",
-                  a: "It depends on your audience size, budget, and technical comfort. We've worked with Zoom, YouTube Live, Vimeo, and custom platforms. We'll help you choose the right fit."
-                },
-                {
-                  q: "Can we still do a live auction virtually?",
-                  a: "Absolutely. We adapt our bid-calling for the camera and coordinate with mobile bidding platforms so remote viewers can participate in real-time."
-                },
-                {
-                  q: "How do we collect donations from virtual attendees?",
-                  a: "We integrate with mobile giving platforms that allow real-time donations. Guests can give via their phones or computers while watching the stream."
-                },
-                {
-                  q: "What if something goes wrong technically?",
-                  a: "We always have backup plans—backup internet, backup audio, backup hosts. And we've been through enough tech hiccups to know how to recover gracefully without killing the energy."
-                },
-                {
-                  q: "Is hybrid harder than fully virtual?",
-                  a: "Yes, hybrid is the most complex format because you're essentially running two events at once. But we've done it many times and know how to make both audiences feel included."
-                }
-              ].map((faq, i) => (
+              {faq.items.map((item, i) => (
                 <AccordionItem key={i} value={`item-${i}`}>
                   <AccordionTrigger className="text-left font-semibold text-primary hover:text-accent">
-                    {faq.q}
+                    {item.question}
                   </AccordionTrigger>
                   <AccordionContent className="text-secondary leading-relaxed">
-                    {faq.a}
+                    {item.answer}
                   </AccordionContent>
                 </AccordionItem>
               ))}
@@ -371,37 +280,17 @@ export default function VirtualEvents() {
       <section className="section-pad bg-background" data-testid="section-related">
         <div className="container-tight">
           <h2 className="display-font text-2xl font-bold text-center text-primary mb-10">
-            Often Paired With
+            {relatedServices.heading}
           </h2>
           <div className="grid gap-6 md:grid-cols-3 max-w-5xl mx-auto">
-             {[
-               {
-                 title: "Live Auctions",
-                 slug: "live-auctions",
-                 desc: "Adapted for the camera."
-               },
-               {
-                 title: "Fund-A-Need",
-                 slug: "fund-a-need",
-                 desc: "Real-time giving tracking."
-               },
-               {
-                 title: "Event Planning",
-                 slug: "event-planning",
-                 desc: "Run-of-show coordination."
-               },
-               {
-                 title: "Emcee Services",
-                 slug: "emcee",
-                 desc: "Professional event hosting."
-               }
-             ].map((service, i) => {
+             {relatedServices.cards.map((service, i) => {
+                const slug = relatedServiceSlugs[i];
                 return (
-                  <Link key={i} href={`/services/${service.slug}`}>
+                  <Link key={i} href={slug ? `/services/${slug}` : "/services"}>
                     <Card className="p-6 hover:shadow-md transition-shadow cursor-pointer border-card-border shadow-sm flex items-center gap-4">
                       <div>
                         <h3 className="font-bold text-primary">{service.title}</h3>
-                        <p className="text-sm text-secondary">{service.desc}</p>
+                        <p className="text-sm text-secondary">{service.description}</p>
                       </div>
                     </Card>
                   </Link>
@@ -411,12 +300,7 @@ export default function VirtualEvents() {
         </div>
       </section>
 
-      <CtaBanner 
-        title="Planning a virtual or hybrid event?" 
-        subtitle="Get a free consultation and let's make sure your remote audience stays engaged." 
-        buttonText="Contact Us"
-        className="bg-primary"
-      />
+      <CtaBanner {...content.ctaBanner} className="bg-primary" />
       <SiteFooter />
     </div>
   );

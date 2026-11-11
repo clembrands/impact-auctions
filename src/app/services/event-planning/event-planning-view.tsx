@@ -6,6 +6,16 @@ import CtaBanner from "@/components/cta-banner";
 import TestimonialCarousel from "@/components/testimonial-carousel";
 import { Card } from "@/components/ui/card";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+import type { ContentFor } from "@/content";
+
+type EventPlanningContent = ContentFor<"eventPlanningPage">;
+
+// Non-text data stays in code and is matched to the Sanity-editable text by position.
+const relatedServiceMeta = [
+  { slug: "live-auctions", icon: Megaphone },
+  { slug: "fund-a-need", icon: BadgeDollarSign },
+  { slug: "emcee", icon: Mic },
+];
 
 function PageHero({ title, subtitle }: { title: string; subtitle: string }) {
   return (
@@ -24,14 +34,15 @@ function PageHero({ title, subtitle }: { title: string; subtitle: string }) {
   );
 }
 
-export default function EventPlanning() {
+export default function EventPlanningView({ content }: { content: EventPlanningContent }) {
+  const { hero, intro, challenges, whatYouGet, planningTimeline, sampleRunOfShow, faq, relatedServices } = content;
   return (
     <div className="min-h-dvh bg-background" data-testid="page-event-planning">
       <SiteHeader />
 
       <PageHero
-        title="Event Planning"
-        subtitle="Strategic planning that turns your vision into a flawless fundraising night"
+        title={hero.title}
+        subtitle={hero.subtitle}
       />
 
       {/* Intro Section */}
@@ -40,19 +51,18 @@ export default function EventPlanning() {
           <div className="grid gap-12 lg:grid-cols-2 items-center">
             <div className="space-y-6">
               <h2 className="display-font text-3xl font-bold text-primary">
-                Great Events Don't Happen by Accident
+                {intro.heading}
               </h2>
               <div className="space-y-4 text-secondary text-lg leading-relaxed">
-                <p>
-                  Behind every successful gala is months of strategic planning—coordinating vendors, building the program, preparing speakers, and anticipating problems before they happen. Most nonprofit teams are stretched thin. You're managing a full-time job on top of planning a major event. That's where we come in.
-                </p>
-                <p>
-                  We handle the program planning so your team can focus on donor relationships, sponsorships, and the things only you can do.
-                </p>
+                {intro.paragraphs.map((paragraph, i) => (
+                  <p key={i}>
+                    {paragraph}
+                  </p>
+                ))}
               </div>
             </div>
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-muted">
-              <img src="/images/event-planning-gala.jpg" alt="Guests at elegant gala event with crystal chandeliers" className="w-full h-full object-cover" />
+              <img src="/images/event-planning-gala.jpg" alt={intro.imageAlt} className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
@@ -63,25 +73,12 @@ export default function EventPlanning() {
         <div className="container-tight">
           <div className="text-center mb-12">
             <h2 className="display-font text-3xl font-extrabold text-primary">
-              Common Event Planning Challenges
+              {challenges.heading}
             </h2>
           </div>
 
           <div className="grid gap-8 md:grid-cols-3">
-            {[
-              {
-                title: "No Clear Timeline",
-                description: "Without a structured plan, details slip through the cracks. Vendors don't know their cues, speakers aren't prepped, and your team is scrambling the week before the event."
-              },
-              {
-                title: "Program Runs Too Long",
-                description: "We've seen 90-minute programs stretch to three hours. Donors leave early, energy dies, and your biggest fundraising moments happen to a half-empty room."
-              },
-              {
-                title: "Staff Burnout",
-                description: "Your board members and staff spend the entire event running around backstage instead of connecting with donors. By the time the paddle raise happens, they're exhausted."
-              }
-            ].map((problem, i) => (
+            {challenges.cards.map((problem, i) => (
               <Card key={i} className="p-8 border-none shadow-sm bg-white h-full">
                 <h3 className="display-font text-xl font-bold text-primary mb-4">{problem.title}</h3>
                 <p className="text-secondary leading-relaxed">
@@ -98,18 +95,12 @@ export default function EventPlanning() {
         <div className="container-tight">
           <div className="mx-auto max-w-4xl">
             <h2 className="display-font text-3xl font-extrabold text-center text-primary mb-12">
-              What You Get
+              {whatYouGet.heading}
             </h2>
 
             <div className="flex flex-col md:flex-row justify-center gap-x-16 gap-y-8">
               <ul className="space-y-5 flex-1">
-                {[
-                  "Detailed run-of-show development",
-                  "Timeline planning with realistic pacing",
-                  "Vendor and AV coordination",
-                  "Speaker preparation and cue cards",
-                  "Pre-event venue walkthrough"
-                ].map((item, i) => (
+                {whatYouGet.leftColumnItems.map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <div className="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-[#D4C4A8] text-white mt-0.5">
                       <Check className="h-4 w-4" strokeWidth={4} />
@@ -120,13 +111,7 @@ export default function EventPlanning() {
               </ul>
 
               <ul className="space-y-5 flex-1">
-                {[
-                  "Backstage management on event night",
-                  "Real-time adjustments to keep on schedule",
-                  "Contingency planning for common issues",
-                  "Post-event debrief and recommendations",
-                  "Unlimited strategy calls leading up to the event"
-                ].map((item, i) => (
+                {whatYouGet.rightColumnItems.map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <div className="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-[#D4C4A8] text-white mt-0.5">
                       <Check className="h-4 w-4" strokeWidth={4} />
@@ -143,7 +128,7 @@ export default function EventPlanning() {
       {/* Testimonial Section */}
       <section className="section-pad" style={{ backgroundColor: "rgba(212, 196, 168, 0.18)" }} data-testid="section-testimonial">
         <div className="container-tight">
-          <TestimonialCarousel title="What Nonprofits Say" />
+          <TestimonialCarousel title={content.testimonials.heading} />
         </div>
       </section>
 
@@ -152,10 +137,10 @@ export default function EventPlanning() {
         <div className="container-tight">
           <div className="mx-auto max-w-4xl text-center mb-12">
             <h2 className="display-font text-3xl font-extrabold text-primary mb-6">
-              When to Bring Us In
+              {planningTimeline.heading}
             </h2>
             <p className="text-lg text-secondary leading-relaxed">
-              The earlier we're involved, the more we can help. Here's a typical planning timeline:
+              {planningTimeline.intro}
             </p>
           </div>
 
@@ -163,27 +148,10 @@ export default function EventPlanning() {
             {/* Connector Line (Desktop) */}
             <div className="hidden lg:block absolute top-6 left-0 w-full h-0.5 bg-card-border -z-10" />
 
-            {[
-              {
-                step: "12 Months Out",
-                description: "Initial consultation. We learn about your event, goals, and vision. We start building the run-of-show framework."
-              },
-              {
-                step: "4-6 Weeks Out",
-                description: "Detailed planning. We finalize the run-of-show, coordinate with vendors, and help prepare speaker materials."
-              },
-              {
-                step: "1 Week Out",
-                description: "Final review. Confirming all the details, rehearsing key moments, and making sure the live auction items are in the correct order."
-              },
-              {
-                step: "Event Day",
-                description: "We arrive early, manage backstage, and execute the run-of-show from start to finish."
-              }
-            ].map((item, i) => (
+            {planningTimeline.steps.map((item, i) => (
               <Card key={i} className="relative bg-muted border-card-border p-6 shadow-sm flex flex-col items-center text-center">
                 <div className="w-4 h-4 rounded-full bg-[#D4C4A8] mb-4 ring-4 ring-background" />
-                <h3 className="display-font text-lg font-bold text-primary mb-3">{item.step}</h3>
+                <h3 className="display-font text-lg font-bold text-primary mb-3">{item.when}</h3>
                 <p className="text-secondary text-sm leading-relaxed">{item.description}</p>
               </Card>
             ))}
@@ -196,28 +164,18 @@ export default function EventPlanning() {
         <div className="container-tight">
           <div className="mx-auto max-w-5xl">
             <h2 className="display-font text-3xl font-extrabold text-center text-primary mb-10">
-              Sample Run-of-Show Timeline
+              {sampleRunOfShow.heading}
             </h2>
             <p className="text-center text-secondary mb-8 leading-relaxed">
-              Here's an example of what a typical gala event timeline looks like. We customize every run-of-show to your specific event, venue, and fundraising goals.
+              {sampleRunOfShow.intro}
             </p>
             
             <div className="overflow-hidden rounded-xl border border-card-border shadow-sm bg-white">
               <div className="bg-primary text-white px-6 py-4 font-semibold">
-                Example Gala Timeline
+                {sampleRunOfShow.tableTitle}
               </div>
               <div className="divide-y divide-card-border">
-                {[
-                  { time: "6:00 PM", activity: "Guest Arrival & Cocktail Reception", notes: "Background music, silent auction opens" },
-                  { time: "6:45 PM", activity: "Guests Transition to Ballroom", notes: "Assigned seating, table info cards out" },
-                  { time: "7:00 PM", activity: "Welcome by Board Chair", notes: "2-3 minutes, sets tone for evening" },
-                  { time: "7:05 PM", activity: "Mission Moment / Beneficiary Story", notes: "Emotional, inspire giving" },
-                  { time: "7:15 PM", activity: "Dinner Service Begins", notes: "AV runs during dinner" },
-                  { time: "7:45 PM", activity: "Live Auction - 8 Items", notes: "High-energy, professional auctioneer" },
-                  { time: "8:45 PM", activity: "Fund-A-Need Paddle Raise", notes: "Peak fundraising moment" },
-                  { time: "9:15 PM", activity: "Closing Remarks & Thank You", notes: "Celebrate results, inspire future giving" },
-                  { time: "9:30 PM", activity: "Event Concludes / Networking", notes: "Post-event connections" }
-                ].map((row, i) => (
+                {sampleRunOfShow.rows.map((row, i) => (
                   <div key={i} className="grid grid-cols-12 items-center">
                     <div className="col-span-2 px-6 py-4 font-bold text-primary border-r border-card-border bg-muted/30">
                       {row.time}
@@ -232,7 +190,7 @@ export default function EventPlanning() {
                 ))}
               </div>
               <div className="bg-muted/50 px-6 py-4 text-sm text-secondary text-center border-t border-card-border">
-                We customize every run-of-show to your event, venue, and goals. No two galas are the same.
+                {sampleRunOfShow.tableFooter}
               </div>
             </div>
           </div>
@@ -244,37 +202,16 @@ export default function EventPlanning() {
         <div className="container-tight">
           <div className="mx-auto max-w-3xl">
             <h2 className="display-font text-3xl font-extrabold text-center text-primary mb-10">
-              Common Questions
+              {faq.heading}
             </h2>
             <Accordion type="single" collapsible className="w-full">
-              {[
-                {
-                  q: "How early should we bring you in?",
-                  a: "The earlier the better. Ideally 3-6 months before your event. But we've helped organizations with as little as 6 weeks of lead time."
-                },
-                {
-                  q: "Can you work with our existing event planner?",
-                  a: "Absolutely. We collaborate well with event planners, coordinators, and venue staff. We focus on the program and stage while they handle logistics like catering and decor."
-                },
-                {
-                  q: "What does the run-of-show include?",
-                  a: "A minute-by-minute plan for your entire event—every segment, transition, speaker cue, AV cue, and contingency. It's the blueprint your whole team works from on event night."
-                },
-                {
-                  q: "Do you attend the event?",
-                  a: "Yes. We're there from setup through teardown, managing backstage and making real-time adjustments to keep everything on track."
-                },
-                {
-                  q: "What if we already have a program outline?",
-                  a: "Great—we'll refine it. We'll tighten the pacing, fill in gaps, add contingencies, and make sure it's structured to maximize your fundraising moments."
-                }
-              ].map((faq, i) => (
+              {faq.items.map((item, i) => (
                 <AccordionItem key={i} value={`item-${i}`}>
                   <AccordionTrigger className="text-left font-semibold text-primary hover:text-accent">
-                    {faq.q}
+                    {item.question}
                   </AccordionTrigger>
                   <AccordionContent className="text-secondary leading-relaxed">
-                    {faq.a}
+                    {item.answer}
                   </AccordionContent>
                 </AccordionItem>
               ))}
@@ -287,39 +224,21 @@ export default function EventPlanning() {
       <section className="section-pad bg-muted" data-testid="section-related">
         <div className="container-tight">
           <h2 className="display-font text-2xl font-bold text-center text-primary mb-10">
-            Often Paired With
+            {relatedServices.heading}
           </h2>
           <div className="grid gap-6 md:grid-cols-3 max-w-5xl mx-auto">
-            {[
-              {
-                title: "Live Auctions",
-                slug: "live-auctions",
-                icon: Megaphone,
-                desc: "Professional bid-calling expertise."
-              },
-              {
-                title: "Fund-A-Need",
-                slug: "fund-a-need",
-                icon: BadgeDollarSign,
-                desc: "Maximize giving moments."
-              },
-              {
-                title: "Emcee Services",
-                slug: "emcee",
-                icon: Mic,
-                desc: "Energetic event hosting."
-              }
-            ].map((service, i) => {
-              const Icon = service.icon;
+            {relatedServices.cards.map((service, i) => {
+              const meta = relatedServiceMeta[i];
+              const Icon = meta?.icon ?? CalendarClock;
               return (
-                <Link key={i} href={`/services/${service.slug}`}>
+                <Link key={i} href={meta ? `/services/${meta.slug}` : "/services"}>
                   <Card className="p-6 hover:shadow-md transition-shadow cursor-pointer border-none shadow-sm flex items-center gap-4">
                     <div className="h-10 w-10 rounded-full bg-primary/5 grid place-items-center text-primary">
                       <Icon className="h-5 w-5" />
                     </div>
                     <div>
                       <h3 className="font-bold text-primary">{service.title}</h3>
-                      <p className="text-sm text-secondary">{service.desc}</p>
+                      <p className="text-sm text-secondary">{service.description}</p>
                     </div>
                   </Card>
                 </Link>
@@ -330,9 +249,7 @@ export default function EventPlanning() {
       </section>
 
       <CtaBanner
-        title="Ready for a stress-free event night?"
-        subtitle="Get a free consultation and let's start planning your run-of-show."
-        buttonText="Contact Us"
+        {...content.ctaBanner}
         className="bg-primary"
       />
       <SiteFooter />
