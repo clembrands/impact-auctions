@@ -18,7 +18,8 @@ export function humanize(key: string): string {
     .replace(/([A-Z])([A-Z][a-z])/g, "$1 $2")
     .replace(/[_-]+/g, " ")
     .trim();
-  return spaced.charAt(0).toUpperCase() + spaced.slice(1);
+  const titled = spaced.charAt(0).toUpperCase() + spaced.slice(1);
+  return titled.replace(/\b(Cta|Faq|Seo|Url)\b/gi, (w) => w.toUpperCase());
 }
 
 function isPlainObject(v: unknown): v is Record<string, Json> {

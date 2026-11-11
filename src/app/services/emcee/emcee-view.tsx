@@ -8,6 +8,16 @@ import SiteFooter from "@/components/site-footer";
 import CtaBanner from "@/components/cta-banner";
 import TestimonialCarousel from "@/components/testimonial-carousel";
 import { Card } from "@/components/ui/card";
+import type { ContentFor } from "@/content";
+
+type EmceeContent = ContentFor<"emceePage">;
+
+// Non-text data stays in code and is matched to the Sanity-editable text by position.
+const relatedServiceMeta = [
+  { slug: "live-auctions", icon: Megaphone },
+  { slug: "fund-a-need", icon: Zap },
+  { slug: "event-planning", icon: Clock },
+];
 
 function PageHero({ title, subtitle }: { title: string; subtitle: string }) {
   return (
@@ -26,14 +36,15 @@ function PageHero({ title, subtitle }: { title: string; subtitle: string }) {
   );
 }
 
-export default function EmceeServices() {
+export default function EmceeView({ content }: { content: EmceeContent }) {
+  const { hero, intro, whyItMatters, whatYouGet, eventNight, testimonials, faq, relatedServices } = content;
   return (
     <div className="min-h-dvh bg-background" data-testid="page-emcee-services">
       <SiteHeader />
 
       <PageHero
-        title="Emcee Services"
-        subtitle="A professional host who commands the room and keeps your audience engaged"
+        title={hero.title}
+        subtitle={hero.subtitle}
       />
 
       {/* Intro Section */}
@@ -42,16 +53,18 @@ export default function EmceeServices() {
           <div className="grid gap-12 lg:grid-cols-2 items-center">
             <div className="space-y-6">
               <h2 className="display-font text-3xl font-bold text-primary">
-                More Than an Announcer—A Professional Host
+                {intro.heading}
               </h2>
               <div className="space-y-4 text-secondary text-lg leading-relaxed">
-                <p>
-                  A great emcee doesn't just read from a script. They command the room, read the audience, and adjust on the fly to keep energy high. Our emcees are experienced performers who know how to warm up a crowd, introduce speakers with impact, keep transitions tight, and build momentum toward your biggest fundraising moments. We're not just announcing—we're hosting your entire evening.
-                </p>
+                {intro.paragraphs.map((paragraph, i) => (
+                  <p key={i}>
+                    {paragraph}
+                  </p>
+                ))}
               </div>
             </div>
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-muted">
-              <img src="/images/emcee-on-stage.jpg" alt="Professional emcees commanding the stage at elegant gala event" className="w-full h-full object-cover" />
+              <img src="/images/emcee-on-stage.jpg" alt={intro.imageAlt} className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
@@ -62,25 +75,12 @@ export default function EmceeServices() {
         <div className="container-tight">
           <div className="text-center mb-12">
              <h2 className="display-font text-3xl font-extrabold text-primary">
-              Why a Professional Emcee Matters
+              {whyItMatters.heading}
             </h2>
           </div>
 
           <div className="grid gap-8 md:grid-cols-3">
-            {[
-              {
-                title: "Awkward Transitions",
-                description: "Dead air between segments. Confused speakers waiting for cues. Guests checking their phones while nothing happens on stage. Energy dies and never comes back."
-              },
-              {
-                title: "Board Member as Emcee",
-                description: "Asking a board member to host sounds like a good idea until they freeze on stage, run long on remarks, or can't recover when something goes off-script."
-              },
-              {
-                title: "Low Energy at Key Moments",
-                description: "Your Fund-A-Need and live auction need peak energy. Without a professional building momentum throughout the night, donors aren't primed to give."
-              }
-            ].map((problem, i) => (
+            {whyItMatters.cards.map((problem, i) => (
               <Card key={i} className="p-8 border-none shadow-sm bg-white h-full">
                 <h3 className="display-font text-xl font-bold text-primary mb-4">{problem.title}</h3>
                 <p className="text-secondary leading-relaxed">
@@ -97,18 +97,12 @@ export default function EmceeServices() {
         <div className="container-tight">
           <div className="mx-auto max-w-4xl">
             <h2 className="display-font text-3xl font-extrabold text-center text-primary mb-12">
-              What You Get With Our Emcee Services
+              {whatYouGet.heading}
             </h2>
 
             <div className="flex flex-col md:flex-row justify-center gap-x-16 gap-y-8">
               <ul className="space-y-5 flex-1">
-                {[
-                  "Professional emcee for the entire event",
-                  "Welcome guests and set the tone",
-                  "Introduce speakers, honorees, and VIPs",
-                  "Seamless transitions between segments",
-                  "Energy management throughout the night"
-                ].map((item, i) => (
+                {whatYouGet.leftColumnItems.map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <div className="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-[#D4C4A8] text-white mt-0.5">
                       <Check className="h-4 w-4" strokeWidth={4} />
@@ -119,13 +113,7 @@ export default function EmceeServices() {
               </ul>
 
               <ul className="space-y-5 flex-1">
-                {[
-                  "Build excitement leading into auction and Fund-A-Need",
-                  "Manage timing and cues backstage",
-                  "Adapt to real-time changes and surprises",
-                  "Work with your AV team on mic and lighting cues",
-                  "Post-event debrief on what worked"
-                ].map((item, i) => (
+                {whatYouGet.rightColumnItems.map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <div className="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-[#D4C4A8] text-white mt-0.5">
                       <Check className="h-4 w-4" strokeWidth={4} />
@@ -143,32 +131,11 @@ export default function EmceeServices() {
       <section className="section-pad bg-muted" data-testid="section-event-night">
         <div className="container-tight">
           <h2 className="display-font text-3xl font-extrabold text-center text-primary mb-12">
-            What It Looks Like on Event Night
+            {eventNight.heading}
           </h2>
 
           <div className="space-y-6 max-w-3xl mx-auto">
-            {[
-              {
-                title: "Before Doors Open",
-                description: "We arrive early, review the run-of-show with your team, meet speakers, test AV, and do a final walkthrough."
-              },
-              {
-                title: "Cocktail Hour",
-                description: "We're backstage preparing, reviewing last-minute changes, and making sure every speaker is ready."
-              },
-              {
-                title: "Program Begins",
-                description: "We welcome the room, set the tone, and take control of the evening's pace and energy."
-              },
-              {
-                title: "Key Fundraising Moments",
-                description: "We build momentum throughout the night so donors are emotionally primed for the Fund-A-Need and live auction."
-              },
-              {
-                title: "Closing",
-                description: "We bring the evening to a strong close, thank sponsors and donors, and leave guests feeling inspired."
-              }
-            ].map((moment, i) => (
+            {eventNight.moments.map((moment, i) => (
               <div key={i} className="flex gap-6 items-start">
                 <div className="flex-shrink-0">
                   <div className="flex items-center justify-center h-10 w-10 rounded-full bg-primary text-white font-bold">
@@ -188,7 +155,7 @@ export default function EmceeServices() {
       {/* Testimonial Section */}
       <section className="section-pad" style={{ backgroundColor: "rgba(212, 196, 168, 0.18)" }} data-testid="section-testimonial">
         <div className="container-tight">
-          <TestimonialCarousel />
+          <TestimonialCarousel title={testimonials.heading} />
         </div>
       </section>
 
@@ -196,35 +163,14 @@ export default function EmceeServices() {
       <section className="section-pad bg-muted" data-testid="section-faq">
         <div className="container-tight">
           <h2 className="display-font text-3xl font-extrabold text-center text-primary mb-12">
-            Common Questions
+            {faq.heading}
           </h2>
 
           <div className="space-y-6 max-w-3xl mx-auto">
-            {[
-              {
-                q: "Can we use our own emcee and have you support them?",
-                a: "Absolutely. We can handle backstage management and cue your host throughout the night so they look polished without needing to know every detail."
-              },
-              {
-                q: "What if we have a celebrity or VIP host?",
-                a: "We love working with VIP hosts. We prep them beforehand and manage all the backstage logistics so they can focus on being great on stage."
-              },
-              {
-                q: "Is the emcee also the auctioneer?",
-                a: "They can be. Ron serves as both emcee and auctioneer for many events. Or we can split the roles if you prefer a different dynamic."
-              },
-              {
-                q: "How does the emcee prepare?",
-                a: "We study your organization, your donors, your honorees, and your program. We don't show up cold—we show up ready to tell your story."
-              },
-              {
-                q: "What style of emcee are you?",
-                a: "Warm, professional, and high-energy—but we read the room. We match the tone of your event, whether it's a formal black-tie gala or a casual outdoor fundraiser."
-              }
-            ].map((faq, i) => (
+            {faq.questions.map((item, i) => (
               <Card key={i} className="p-6 border-none shadow-sm bg-white">
-                <h3 className="display-font text-lg font-bold text-primary mb-2">{faq.q}</h3>
-                <p className="text-secondary leading-relaxed">{faq.a}</p>
+                <h3 className="display-font text-lg font-bold text-primary mb-2">{item.question}</h3>
+                <p className="text-secondary leading-relaxed">{item.answer}</p>
               </Card>
             ))}
           </div>
@@ -235,39 +181,21 @@ export default function EmceeServices() {
       <section className="section-pad bg-background" data-testid="section-related">
         <div className="container-tight">
           <h2 className="display-font text-2xl font-bold text-center text-primary mb-10">
-            Often Paired With
+            {relatedServices.heading}
           </h2>
           <div className="grid gap-6 md:grid-cols-3 max-w-5xl mx-auto">
-             {[
-               {
-                 title: "Live Auctions",
-                 slug: "live-auctions",
-                 icon: Megaphone,
-                 desc: "High-energy bidding."
-               },
-               {
-                 title: "Fund-A-Need",
-                 slug: "fund-a-need",
-                 icon: Zap,
-                 desc: "Maximize giving moments."
-               },
-               {
-                 title: "Event Planning",
-                 slug: "event-planning",
-                 icon: Clock,
-                 desc: "Seamless run-of-show."
-               }
-             ].map((service, i) => {
-                const Icon = service.icon;
+             {relatedServices.cards.map((service, i) => {
+                const meta = relatedServiceMeta[i];
+                const Icon = meta?.icon ?? Megaphone;
                 return (
-                  <Link key={i} href={`/services/${service.slug}`}>
+                  <Link key={i} href={meta ? `/services/${meta.slug}` : "/services"}>
                     <Card className="p-6 hover:shadow-md transition-shadow cursor-pointer border-none shadow-sm flex items-center gap-4">
                       <div className="h-10 w-10 rounded-full bg-primary/5 grid place-items-center text-primary">
                          <Icon className="h-5 w-5" />
                       </div>
                       <div>
                         <h3 className="font-bold text-primary">{service.title}</h3>
-                        <p className="text-sm text-secondary">{service.desc}</p>
+                        <p className="text-sm text-secondary">{service.description}</p>
                       </div>
                     </Card>
                   </Link>
@@ -278,9 +206,7 @@ export default function EmceeServices() {
       </section>
 
       <CtaBanner
-        title="Want a host who elevates your entire evening?"
-        subtitle="Get a free consultation and let's talk about your next event."
-        buttonText="Contact Us"
+        {...content.ctaBanner}
         className="bg-primary"
       />
       <SiteFooter />

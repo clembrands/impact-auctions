@@ -5,6 +5,17 @@ import SiteFooter from "@/components/site-footer";
 import CtaBanner from "@/components/cta-banner";
 import TestimonialCarousel from "@/components/testimonial-carousel";
 import { Card } from "@/components/ui/card";
+import type { ContentFor } from "@/content";
+
+type LiveAuctionsContent = ContentFor<"liveAuctionsPage">;
+
+// Non-text data stays in code and is matched to the Sanity-editable text by position.
+const relatedServiceMeta = [
+  { slug: "fund-a-need", icon: BadgeDollarSign },
+  { slug: "heads-or-tails", icon: Coins },
+  { slug: "event-planning", icon: CalendarClock },
+  { slug: "emcee", icon: Mic },
+];
 
 function PageHero({ title, subtitle }: { title: string; subtitle: string }) {
   return (
@@ -23,14 +34,15 @@ function PageHero({ title, subtitle }: { title: string; subtitle: string }) {
   );
 }
 
-export default function LiveAuctions() {
+export default function LiveAuctionsView({ content }: { content: LiveAuctionsContent }) {
+  const { hero, intro, whatYouGet, whyItMatters, howItWorks, results, testimonials, relatedServices } = content;
   return (
     <div className="min-h-dvh bg-background" data-testid="page-live-auctions">
       <SiteHeader />
 
       <PageHero
-        title="Fundraising Auctioneer"
-        subtitle="High-energy bidding that keeps donors engaged all night"
+        title={hero.title}
+        subtitle={hero.subtitle}
       />
 
       {/* Intro Section */}
@@ -39,19 +51,18 @@ export default function LiveAuctions() {
           <div className="grid gap-12 lg:grid-cols-2 items-center">
             <div className="space-y-6">
               <h2 className="display-font text-3xl font-bold text-primary">
-                A Professional Auctioneer Makes All the Difference
+                {intro.heading}
               </h2>
               <div className="space-y-4 text-secondary text-lg leading-relaxed">
-                <p>
-                  Your live auction is the centerpiece of your fundraising gala—and the right auctioneer can double your results. Our licensed fundraising auctioneers bring energy, expertise, and proven bid-calling techniques that keep your program moving and maximize every item's potential.
-                </p>
-                <p>
-                  We don't just call bids—we read the room, build excitement, and create moments that inspire generosity. With 20+ years of experience and over $20 million raised for nonprofits nationwide, we know how to turn a good auction into a record-breaking night.
-                </p>
+                {intro.paragraphs.map((paragraph, i) => (
+                  <p key={i}>
+                    {paragraph}
+                  </p>
+                ))}
               </div>
             </div>
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-muted">
-              <img src="/images/auctioneer-live-action.jpg" alt="Professional auctioneer conducting live auction with energized bidders" className="w-full h-full object-cover" />
+              <img src="/images/auctioneer-live-action.jpg" alt={intro.imageAlt} className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
@@ -62,18 +73,12 @@ export default function LiveAuctions() {
         <div className="container-tight">
           <div className="mx-auto max-w-4xl">
             <h2 className="display-font text-3xl font-extrabold text-center text-primary mb-12">
-              What You Get With Our Fundraising Auctioneer Services
+              {whatYouGet.heading}
             </h2>
 
             <div className="flex flex-col md:flex-row justify-center gap-x-16 gap-y-8">
               <ul className="space-y-5 flex-1">
-                {[
-                  "Licensed, professional charity auctioneer",
-                  "Pre-event strategy call to review items and goals",
-                  "Item sequencing recommendations for maximum impact",
-                  "Bid spotters and ringmen coordination",
-                  "Sound system and AV coordination"
-                ].map((item, i) => (
+                {whatYouGet.leftColumnItems.map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <div className="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-[#D4C4A8] text-white mt-0.5">
                       <Check className="h-4 w-4" strokeWidth={4} />
@@ -84,13 +89,7 @@ export default function LiveAuctions() {
               </ul>
 
               <ul className="space-y-5 flex-1">
-                {[
-                  "High-energy bid calling that builds momentum",
-                  "Crowd engagement and entertainment",
-                  "Real-time adjustments based on room energy",
-                  "Post-auction recap and recommendations",
-                  "Unlimited strategy calls leading up to your event"
-                ].map((item, i) => (
+                {whatYouGet.rightColumnItems.map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <div className="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-[#D4C4A8] text-white mt-0.5">
                       <Check className="h-4 w-4" strokeWidth={4} />
@@ -109,25 +108,12 @@ export default function LiveAuctions() {
         <div className="container-tight">
           <div className="text-center mb-12">
              <h2 className="display-font text-3xl font-extrabold text-primary">
-              Why a Professional Auctioneer Matters
+              {whyItMatters.heading}
             </h2>
           </div>
 
           <div className="grid gap-8 md:grid-cols-3">
-            {[
-              {
-                title: "Build Momentum",
-                description: "Amateur auctioneers often lose the room. Our professionals know how to build energy item by item, keeping guests engaged and bidding throughout the night."
-              },
-              {
-                title: "Maximize Every Item",
-                description: "We use proven techniques—strategic pacing, compelling item descriptions, and competitive bid increments—to get top dollar for every item in your lineup."
-              },
-              {
-                title: "Keep Guests in the Room",
-                description: "A great auctioneer is an entertainer. We keep your audience laughing, engaged, and most importantly—present and bidding instead of heading to the bar."
-              }
-            ].map((feature, i) => (
+            {whyItMatters.cards.map((feature, i) => (
               <Card key={i} className="p-8 border-none shadow-sm bg-white h-full">
                 <h3 className="display-font text-xl font-bold text-primary mb-4">{feature.title}</h3>
                 <p className="text-secondary leading-relaxed">
@@ -144,7 +130,7 @@ export default function LiveAuctions() {
         <div className="container-tight">
           <div className="text-center mb-16">
             <h2 className="display-font text-3xl font-extrabold text-primary">
-              How It Works
+              {howItWorks.heading}
             </h2>
           </div>
 
@@ -152,31 +138,10 @@ export default function LiveAuctions() {
              {/* Connector Line (Desktop) */}
             <div className="hidden md:block absolute top-6 left-0 w-full h-0.5 bg-muted -z-10" />
 
-            {[
-              {
-                step: "01",
-                title: "Free Consultation",
-                description: "We learn about your organization, your event, and your fundraising goals."
-              },
-              {
-                step: "02",
-                title: "Pre-Event Planning",
-                description: "We review your auction items, recommend sequencing, and develop a strategy for your night."
-              },
-              {
-                step: "03",
-                title: "Event Night",
-                description: "Our auctioneer arrives early, coordinates with your team, and delivers a high-energy performance that drives results."
-              },
-              {
-                step: "04",
-                title: "Post-Event Recap",
-                description: "We review what worked, what we can improve, and help you plan for next year."
-              }
-            ].map((item, i) => (
+            {howItWorks.steps.map((item, i) => (
               <div key={i} className="relative bg-background pt-4 md:pt-0">
                 <div className="w-12 h-12 rounded-full bg-primary text-white font-bold flex items-center justify-center text-lg mb-6 mx-auto md:mx-0 relative z-10 ring-4 ring-background">
-                  {item.step}
+                  {item.stepNumber}
                 </div>
                 <h3 className="display-font text-lg font-bold text-primary mb-3 text-center md:text-left">{item.title}</h3>
                 <p className="text-secondary text-center md:text-left text-sm leading-relaxed">{item.description}</p>
@@ -190,36 +155,24 @@ export default function LiveAuctions() {
       <section className="section-pad bg-[#F5F5F1]" data-testid="section-results">
         <div className="container-tight">
           <h2 className="display-font text-3xl font-extrabold text-center text-primary mb-12">
-             Results That Speak for Themselves
+             {results.heading}
           </h2>
           <div className="grid gap-10 text-center md:grid-cols-3">
-            <div className="space-y-2">
-              <div className="display-font text-4xl font-extrabold text-primary">
-                $20M+
+            {results.stats.map((stat, i) => (
+              <div key={i} className="space-y-2">
+                <div className="display-font text-4xl font-extrabold text-primary">
+                  {stat.value}
+                </div>
+                <div className="text-sm font-medium text-secondary">
+                  {stat.label}
+                </div>
+                {stat.note && (
+                  <div className="text-xs text-muted-foreground mt-1">
+                    {stat.note}
+                  </div>
+                )}
               </div>
-              <div className="text-sm font-medium text-secondary">
-                Raised for Nonprofits
-              </div>
-            </div>
-            <div className="space-y-2">
-              <div className="display-font text-4xl font-extrabold text-primary">
-                $3.2M
-              </div>
-              <div className="text-sm font-medium text-secondary">
-                Raised in One Night
-              </div>
-              <div className="text-xs text-muted-foreground mt-1">
-                Joe DiMaggio Children's Hospital
-              </div>
-            </div>
-            <div className="space-y-2">
-              <div className="display-font text-4xl font-extrabold text-primary">
-                20+ Years
-              </div>
-              <div className="text-sm font-medium text-secondary">
-                Professional Experience
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -227,7 +180,7 @@ export default function LiveAuctions() {
       {/* Testimonial Section */}
       <section className="section-pad" style={{ backgroundColor: "rgba(212, 196, 168, 0.18)" }} data-testid="section-testimonial">
         <div className="container-tight">
-          <TestimonialCarousel />
+          <TestimonialCarousel title={testimonials.heading} />
         </div>
       </section>
 
@@ -235,45 +188,21 @@ export default function LiveAuctions() {
       <section className="section-pad bg-muted" data-testid="section-related">
         <div className="container-tight">
           <h2 className="display-font text-2xl font-bold text-center text-primary mb-10">
-            Often Paired With
+            {relatedServices.heading}
           </h2>
           <div className="grid gap-6 md:grid-cols-3 max-w-5xl mx-auto">
-             {[
-               {
-                 title: "Fund-A-Need",
-                 slug: "fund-a-need",
-                 icon: BadgeDollarSign,
-                 desc: "Maximize giving moments."
-               },
-               {
-                 title: "Heads or Tails",
-                 slug: "heads-or-tails",
-                 icon: Coins,
-                 desc: "Crowd-favorite fundraising game."
-               },
-               {
-                 title: "Event Planning",
-                 slug: "event-planning",
-                 icon: CalendarClock,
-                 desc: "Seamless run-of-show."
-               },
-               {
-                 title: "Emcee Services",
-                 slug: "emcee",
-                 icon: Mic,
-                 desc: "Professional event hosting."
-               }
-             ].map((service, i) => {
-                const Icon = service.icon;
+             {relatedServices.cards.map((service, i) => {
+                const meta = relatedServiceMeta[i];
+                const Icon = meta?.icon ?? Megaphone;
                 return (
-                  <Link key={i} href={`/services/${service.slug}`}>
+                  <Link key={i} href={meta ? `/services/${meta.slug}` : "/services"}>
                     <Card className="p-6 hover:shadow-md transition-shadow cursor-pointer border-none shadow-sm flex items-center gap-4">
                       <div className="h-10 w-10 rounded-full bg-primary/5 grid place-items-center text-primary">
                          <Icon className="h-5 w-5" />
                       </div>
                       <div>
                         <h3 className="font-bold text-primary">{service.title}</h3>
-                        <p className="text-sm text-secondary">{service.desc}</p>
+                        <p className="text-sm text-secondary">{service.description}</p>
                       </div>
                     </Card>
                   </Link>
@@ -284,9 +213,7 @@ export default function LiveAuctions() {
       </section>
 
       <CtaBanner
-        title="Ready to energize your next auction?"
-        subtitle="Get a free consultation and let's discuss your event."
-        buttonText="Contact Us"
+        {...content.ctaBanner}
         className="bg-primary"
       />
       <SiteFooter />

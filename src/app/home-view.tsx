@@ -31,6 +31,8 @@ const serviceMeta = [
   { icon: Plane, slug: "consignment-travel", externalHref: "https://www.myamoretravel.com/impact-auctions" },
 ] as { icon: typeof Megaphone; slug: string; externalHref?: string }[];
 
+const statTestIds = ["stat-raised", "stat-years", "stat-record"];
+
 const teamImages = [
   "/images/headshot-ron.jpg",
   "/images/headshot-debbie.jpg",
@@ -139,8 +141,8 @@ export default function HomeView({ content }: { content: HomeContent }) {
             <div className="grid gap-6 text-center md:grid-cols-3 md:divide-x md:divide-[rgba(212,196,168,0.4)]">
               {stats.map((stat, i) => (
                 <div key={i} className={i === 0 ? "space-y-1" : "space-y-1 md:pl-6"}>
-                  <div className="display-font text-3xl font-extrabold text-primary" data-testid={`stat-${i}`}>{stat.value}</div>
-                  <div className="text-sm text-secondary" data-testid={`stat-${i}-sub`}>{stat.label}</div>
+                  <div className="display-font text-3xl font-extrabold text-primary" data-testid={statTestIds[i] ?? `stat-${i}`}>{stat.value}</div>
+                  <div className="text-sm text-secondary" data-testid={`${statTestIds[i] ?? `stat-${i}`}-sub`}>{stat.label}</div>
                 </div>
               ))}
             </div>
