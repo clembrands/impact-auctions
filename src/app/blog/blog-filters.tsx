@@ -12,12 +12,20 @@ interface Post {
   excerpt?: string;
 }
 
-export default function BlogFilters({ posts }: { posts: Post[] }) {
+export default function BlogFilters({
+  posts,
+  noPostsMessage,
+  imagePlaceholder,
+}: {
+  posts: Post[];
+  noPostsMessage: string;
+  imagePlaceholder: string;
+}) {
   return (
     <>
       {posts.length === 0 && (
         <div className="mt-10 text-center text-secondary py-12">
-          <p>No blog posts found.</p>
+          <p>{noPostsMessage}</p>
         </div>
       )}
 
@@ -36,7 +44,7 @@ export default function BlogFilters({ posts }: { posts: Post[] }) {
               ) : (
                 <div className="grid aspect-[16/9] place-items-center bg-muted">
                   <div className="text-sm font-medium text-secondary">
-                    Image
+                    {imagePlaceholder}
                   </div>
                 </div>
               )}

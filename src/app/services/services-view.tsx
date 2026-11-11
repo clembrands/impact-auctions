@@ -17,52 +17,32 @@ import CtaBanner from "@/components/cta-banner";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
+import type { ContentFor } from "@/content";
+
+type ServicesContent = ContentFor<"servicesPage">;
+
+type ServiceMeta = { icon: typeof Megaphone; slug: string; externalHref?: string };
+
+// Non-text data stays in code and is matched to the Sanity-editable text by position.
 // Core revenue-driving services
-const coreServices = [
-  {
-    title: "Fundraising Auctioneer",
-    description: "Licensed professional auctioneers who bring energy, expertise, and proven bid-calling techniques to keep your program moving and donors engaged all night.",
-    icon: Megaphone,
-    slug: "live-auctions",
-  },
-  {
-    title: "Fund-A-Need (Appeal)",
-    description: "The most powerful fundraising moment of your night. We craft compelling appeals that inspire donors to give at meaningful levels for your mission.",
-    icon: HandHeart,
-    slug: "fund-a-need",
-  },
-  {
-    title: "Live Auction Packages",
-    description: "Curated travel and experience packages that add excitement to your auction and increase overall proceeds—with no upfront cost to your organization.",
-    icon: Plane,
-    slug: "auction-packages",
-    externalHref: "https://www.myamoretravel.com/impact-auctions",
-  },
+const coreServiceMeta: ServiceMeta[] = [
+  { icon: Megaphone, slug: "live-auctions" },
+  { icon: HandHeart, slug: "fund-a-need" },
+  { icon: Plane, slug: "auction-packages", externalHref: "https://www.myamoretravel.com/impact-auctions" },
 ];
 
 // Supporting services
-const supportingServices = [
-  {
-    title: "Event Planning",
-    description: "Strategic run-of-show development, vendor coordination, and backstage management so your event runs like clockwork.",
-    icon: CalendarClock,
-    slug: "event-planning",
-  },
-  {
-    title: "Emcee Services",
-    description: "A professional auctioneer who commands the room, keeps transitions tight, and builds momentum toward your biggest fundraising moments.",
-    icon: Mic,
-    slug: "emcee",
-  },
-  {
-    title: "Heads or Tails",
-    description: "High-energy, professional auctioneer that keeps the room engaged and entertained with surpassing goals.",
-    icon: Coins,
-    slug: "heads-or-tails",
-  },
+const supportingServiceMeta: ServiceMeta[] = [
+  { icon: CalendarClock, slug: "event-planning" },
+  { icon: Mic, slug: "emcee" },
+  { icon: Coins, slug: "heads-or-tails" },
 ];
 
-export default function Services() {
+// Fixed test ids for the stats bar, matched by position.
+const statTestIds = ["stat-raised", "stat-years", "stat-record"];
+
+export default function ServicesView({ content }: { content: ServicesContent }) {
+  const { hero, stats, coreServices, supportingServices, whatsIncluded, ctaBanner } = content;
   return (
     <div className="min-h-dvh bg-background" data-testid="page-services">
       <SiteHeader />
@@ -72,10 +52,10 @@ export default function Services() {
         <div className="container-tight py-16 md:py-20 pb-24">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="display-font text-4xl font-extrabold tracking-tight text-white md:text-5xl" data-testid="text-services-hero-title">
-              Services
+              {hero.title}
             </h1>
             <p className="mt-4 text-white/90 text-lg" data-testid="text-services-hero-subtitle">
-              From pre-event strategy to the final paddle raise, we handle every element that drives fundraising results.
+              {hero.subtitle}
             </p>
           </div>
         </div>
@@ -86,18 +66,15 @@ export default function Services() {
         <div className="container-tight">
           <div className="rounded-2xl bg-white px-8 py-7 shadow-lg" style={{ border: "1px solid rgba(212,196,168,0.35)" }}>
             <div className="grid gap-6 text-center md:grid-cols-3 md:divide-x md:divide-[rgba(212,196,168,0.4)]">
-              <div className="space-y-1">
-                <div className="display-font text-3xl font-extrabold text-primary" data-testid="stat-raised">$20M+</div>
-                <div className="text-sm text-secondary" data-testid="stat-raised-sub">For nonprofits nationwide</div>
-              </div>
-              <div className="space-y-1 md:pl-6">
-                <div className="display-font text-3xl font-extrabold text-primary" data-testid="stat-years">20+ Years</div>
-                <div className="text-sm text-secondary" data-testid="stat-years-sub">Fundraising experience</div>
-              </div>
-              <div className="space-y-1 md:pl-6">
-                <div className="display-font text-3xl font-extrabold text-primary" data-testid="stat-record">$3.2M</div>
-                <div className="text-sm text-secondary" data-testid="stat-record-sub">In one night — Joe DiMaggio Children's Hospital</div>
-              </div>
+              {stats.map((stat, idx) => {
+                const testId = statTestIds[idx] ?? `stat-${idx + 1}`;
+                return (
+                  <div key={idx} className={idx === 0 ? "space-y-1" : "space-y-1 md:pl-6"}>
+                    <div className="display-font text-3xl font-extrabold text-primary" data-testid={testId}>{stat.value}</div>
+                    <div className="text-sm text-secondary" data-testid={`${testId}-sub`}>{stat.label}</div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -108,15 +85,17 @@ export default function Services() {
         <div className="container-tight">
           <div className="mx-auto max-w-2xl text-center mb-12">
             <h2 className="display-font text-3xl font-extrabold tracking-tight text-primary" data-testid="text-core-services-title">
-              Our Core Services
+              {coreServices.heading}
             </h2>
             <p className="mt-3 text-secondary" data-testid="text-core-services-subtitle">
-              The revenue-driving services that make your event a success. Personalized for every size non-profit, big or small. 
+              {coreServices.subheading}
             </p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
-            {coreServices.map((s) => {
+            {coreServices.cards.map((card, i) => {
+              const meta: ServiceMeta = coreServiceMeta[i] ?? { icon: Megaphone, slug: `core-service-${i + 1}` };
+              const s = { ...meta, ...card };
               const Icon = s.icon;
               return (
                 <Link
@@ -153,7 +132,7 @@ export default function Services() {
                         </p>
                       </div>
                       <div className="flex items-center gap-2 text-primary font-semibold text-sm mt-4">
-                        Learn More
+                        {coreServices.learnMoreLabel}
                         <ArrowRight className="h-4 w-4" />
                       </div>
                     </div>
@@ -170,15 +149,17 @@ export default function Services() {
         <div className="container-tight">
           <div className="mx-auto max-w-2xl text-center mb-12">
             <h2 className="display-font text-3xl font-extrabold tracking-tight text-primary" data-testid="text-supporting-services-title">
-              Everything Around the Auction
+              {supportingServices.heading}
             </h2>
             <p className="mt-3 text-secondary" data-testid="text-supporting-services-subtitle">
-              Supporting services that complete your event.
+              {supportingServices.subheading}
             </p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
-            {supportingServices.map((s) => {
+            {supportingServices.cards.map((card, i) => {
+              const meta: ServiceMeta = supportingServiceMeta[i] ?? { icon: CalendarClock, slug: `supporting-service-${i + 1}` };
+              const s = { ...meta, ...card };
               const Icon = s.icon;
               return (
                 <Link
@@ -226,18 +207,12 @@ export default function Services() {
         <div className="container-tight">
           <div className="mx-auto max-w-4xl">
             <h2 className="display-font text-3xl font-extrabold text-center text-primary mb-12" data-testid="text-included-title">
-              Every Client Receives Personal Guidance
+              {whatsIncluded.heading}
             </h2>
 
             <div className="flex flex-col md:flex-row justify-center gap-x-16 gap-y-4">
               <ul className="space-y-5">
-                {[
-                  "Licensed Fundraising Auctioneer",
-                  "Team Bid Spotters",
-                  "Fund Appeal Strategy",
-                  "Run-of-Show Planning",
-                  "Emcee Services"
-                ].map((item, i) => (
+                {whatsIncluded.leftColumnItems.map((item, i) => (
                   <li key={i} className="flex items-center gap-3">
                     <div className="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-[#D4C4A8] text-white">
                       <Check className="h-4 w-4" strokeWidth={4} />
@@ -248,13 +223,7 @@ export default function Services() {
               </ul>
 
               <ul className="space-y-5">
-                {[
-                  "Marketing Assistance",
-                  "Sponsorship Strategies",
-                  "Innovative Theme Ideas",
-                  "Social Media Support",
-                  "Unlimited Strategy Calls"
-                ].map((item, i) => (
+                {whatsIncluded.rightColumnItems.map((item, i) => (
                   <li key={i} className="flex items-center gap-3">
                     <div className="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-[#D4C4A8] text-white">
                       <Check className="h-4 w-4" strokeWidth={4} />
@@ -268,7 +237,7 @@ export default function Services() {
         </div>
       </section>
 
-      <CtaBanner />
+      <CtaBanner {...ctaBanner} />
       <SiteFooter />
     </div>
   );

@@ -6,6 +6,9 @@ import Link from "next/link";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import CtaBanner from "@/components/cta-banner";
+import type { ContentFor } from "@/content";
+
+type VideosContent = ContentFor<"videosPage">;
 
 
 type Video = {
@@ -16,19 +19,13 @@ type Video = {
   href?: string;
 };
 
-const videos: Video[] = [
-  { id: 1, title: "Impact Auctions Overview", youtubeId: "nCZ2Q8G_c68" },
-  { id: 2, title: "Live Auction Highlight", youtubeId: "PIp9e0mYu9c" },
-  { id: 3, title: "Fund-A-Need Strategy", youtubeId: "tKbbwtWI2go" },
-  { id: 4, title: "Client Testimonial", youtubeId: "2enkSJpsTuw" },
-  {
-    id: 6,
-    title: "Tandem Skydiving Auction Package",
-    youtubeId: "7jKS7lJp_G8",
-    href: "https://www.myamoretravel.com/impact-auctions",
-    caption:
-      "Charles and Grace Thurman purchased a tandem experience at a Boys and Girls Club through Impact Auctions. What a great father and daughter experience it was, especially since Grace turns 22 tomorrow.",
-  },
+// Non-text data stays in code and is matched to the Sanity-editable text by position.
+const videoMeta: { id: number; youtubeId: string; href?: string }[] = [
+  { id: 1, youtubeId: "nCZ2Q8G_c68" },
+  { id: 2, youtubeId: "PIp9e0mYu9c" },
+  { id: 3, youtubeId: "tKbbwtWI2go" },
+  { id: 4, youtubeId: "2enkSJpsTuw" },
+  { id: 6, youtubeId: "7jKS7lJp_G8", href: "https://www.myamoretravel.com/impact-auctions" },
 ];
 
 const PlayIcon = () => (
@@ -39,7 +36,7 @@ const PlayIcon = () => (
   </div>
 );
 
-function VideoCard({ video }: { video: Video }) {
+function VideoCard({ video, playLabel }: { video: Video; playLabel: string }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const thumbnailUrl = `https://img.youtube.com/vi/${video.youtubeId}/maxresdefault.jpg`;
 
@@ -62,7 +59,7 @@ function VideoCard({ video }: { video: Video }) {
           <button
             onClick={() => setIsPlaying(true)}
             className="w-full h-full relative group cursor-pointer"
-            aria-label={`Play ${video.title}`}
+            aria-label={`${playLabel} ${video.title}`}
             data-testid={`btn-play-video-${video.id}`}
           >
             <Image
@@ -103,7 +100,21 @@ function VideoCard({ video }: { video: Video }) {
   );
 }
 
-function BlobVideoCard({ title, src, id, thumbnail }: { title: string; src: string; id: number; thumbnail?: string }) {
+function BlobVideoCard({
+  title,
+  src,
+  id,
+  thumbnail,
+  playLabel,
+  closeLabel,
+}: {
+  title: string;
+  src: string;
+  id: number;
+  thumbnail?: string;
+  playLabel: string;
+  closeLabel: string;
+}) {
   const [modalOpen, setModalOpen] = useState(false);
 
   // Close on Escape key
@@ -128,7 +139,7 @@ function BlobVideoCard({ title, src, id, thumbnail }: { title: string; src: stri
           <button
             onClick={() => setModalOpen(true)}
             className="w-full h-full relative group cursor-pointer"
-            aria-label={`Play ${title}`}
+            aria-label={`${playLabel} ${title}`}
             data-testid={`btn-play-video-${id}`}
           >
             {/* Custom thumbnail or video first frame */}
@@ -188,7 +199,7 @@ function BlobVideoCard({ title, src, id, thumbnail }: { title: string; src: stri
             <button
               onClick={() => setModalOpen(false)}
               className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black/80 transition-colors"
-              aria-label="Close video"
+              aria-label={closeLabel}
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -218,7 +229,13 @@ function PageHero({ title, subtitle }: { title: string; subtitle: string }) {
   );
 }
 
-export default function Videos() {
+export default function VideosView({ content }: { content: VideosContent }) {
+  // Text rows beyond the videos defined in code have no video to show, so they are skipped.
+  const videos: Video[] = content.videos.flatMap((v, i) => {
+    const meta = videoMeta[i];
+    return meta ? [{ ...meta, title: v.title, caption: v.caption || undefined }] : [];
+  });
+
   useEffect(() => {
     if ((window as any).efsAPI) {
       (window as any).efsAPI.load();
@@ -228,21 +245,20 @@ export default function Videos() {
   return (
     <div className="min-h-dvh bg-background" data-testid="page-videos">
       <SiteHeader />
-      <PageHero
-        title="Videos"
-        subtitle="See our team in action and learn more about our fundraising strategies."
-      />
+      <PageHero title={content.hero.title} subtitle={content.hero.subtitle} />
 
       <section className="section-pad" data-testid="section-videos-grid">
         <div className="container-tight">
           <div className="grid gap-8 md:grid-cols-2">
             {videos.map((video) => (
-              <VideoCard key={video.id} video={video} />
+              <VideoCard key={video.id} video={video} playLabel={content.playButtonLabel} />
             ))}
             <BlobVideoCard
               id={5}
-              title="Brilora Fertility Foundation LA Gala 2026"
+              title={content.galaVideoTitle}
               src="/api/video/brilora-fertility-gala-2026"
+              playLabel={content.playButtonLabel}
+              closeLabel={content.closeVideoLabel}
             />
           </div>
         </div>
@@ -253,10 +269,10 @@ export default function Videos() {
         <div className="container-tight">
           <div className="mx-auto max-w-2xl text-center mb-12">
             <h2 className="display-font text-3xl font-extrabold tracking-tight text-primary" data-testid="text-testimonials-title">
-              What Nonprofits Say
+              {content.testimonials.heading}
             </h2>
             <p className="mt-3 text-secondary" data-testid="text-testimonials-subtitle">
-              Real feedback from organizations we've helped
+              {content.testimonials.subheading}
             </p>
           </div>
           
@@ -270,7 +286,7 @@ export default function Videos() {
         </div>
       </section>
 
-      <CtaBanner />
+      <CtaBanner {...content.ctaBanner} />
       <SiteFooter />
     </div>
   );
